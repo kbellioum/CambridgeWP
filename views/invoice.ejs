@@ -1,0 +1,181 @@
+<% include header.ejs %>
+
+<!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                            <center><img src="../images/logo_update.png" alt="" /></center>
+                            <br>
+                                           Facture
+                                          <small class="pull-right">Date: <%= date  %></small>
+                                      </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          De :
+                          <address>
+                                          <strong>Cambridge Weight PLan</strong>
+                                          <br>367, Boulvard Zerktouni,
+                                          <br>1er étage N°2
+                                          <br>Casablanca,
+                                          <br>Phone: 212 (5) 22 22 78 59
+                                          <br>Email: ali.cherboub@maroc-cambridge.com
+                                      </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          A :
+                          <address>
+                                          <strong><%= patient.patientnom + ' ' + patient.patientprenom %></strong>
+                                          <br><%= patient.ville %>
+                                          <br>Phone: <%= patient.telephone %>
+                                          <br>Email: <%= patient.email %>
+                                      </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b>Facture Num: <%= index %></b>
+                          <br>
+                          <b>Numéro Dossier:</b> <%= patient.numdossier %>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="col-xs-12 table">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Qty</th>
+                                <th>Programme</th>
+                                <th style="width: 59%">Description</th>
+                                <th>Prix</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for(var i=0; i < patient.visites.length; i++) { %>
+                                <% if((patient.visites[i].clotured === false) && (patient.visites[i]._id.toString() === vid.toString())){ %>
+                              <tr>
+                                <td>1</td>
+                                <td><%= patient.visites[i].prog %></td>
+                                <td><%= patient.visites[i].descprod %>
+                                </td>
+                                <td><%= patient.visites[i].prix %></td>
+                              </tr>
+                              <% } %>
+                              <% } %>
+<!--                              <tr>
+                                <td>1</td>
+                                <td>Need for Speed IV</td>
+                                <td>247-925-726</td>
+                                <td>Wes Anderson umami biodiesel</td>
+                                <td>$50.00</td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>Monsters DVD</td>
+                                <td>735-845-642</td>
+                                <td>Terry Richardson helvetica tousled street art master, El snort testosterone trophy driving gloves handsome letterpress erry Richardson helvetica tousled</td>
+                                <td>$10.70</td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>Grown Ups Blue Ray</td>
+                                <td>422-568-642</td>
+                                <td>Tousled lomo letterpress erry Richardson helvetica tousled street art master helvetica tousled street art master, El snort testosterone</td>
+                                <td>$25.99</td>
+                              </tr>-->
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-6">
+                          <p class="lead">Mode de paiement:</p>
+                          <!--
+                          <img src="images/visa.png" alt="Visa">
+                          <img src="images/mastercard.png" alt="Mastercard">
+                          <img src="images/american-express.png" alt="American Express">
+                          <img src="images/paypal.png" alt="Paypal"> -->
+                          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            Informations suplémentaires:
+                          </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-6">
+                          <p class="lead">Facture au <%= date  %></p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:80%">Remise</th>
+                                  <td><%= discount.toFixed(2) %></td>
+                                </tr>
+
+                                <tr>
+                                  <th style="width:80%">Total HT:</th>
+                                  <td><%= total.toFixed(2) %></td>
+                                </tr>
+
+                                <tr>
+                                  <th>TVA (20%)</th>
+                                  <td><%= (total*0.2).toFixed(2) %></td>
+                                </tr>
+                                <tr>
+                                  <th>Total:</th>
+                                  <td><%= (total*1.2).toFixed(2) %> DHS</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-xs-12">
+                          <button id="btn-print" class="btn btn-default" onclick="" ><i class="fa fa-print"></i> Print</button>
+                          <button class="btn btn-default" ><a href="/tabcons">Liste des visites</a></button>
+                          <!--
+                          <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                      -->  </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+
+
+
+<% include footer.ejs %>

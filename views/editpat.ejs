@@ -1,0 +1,224 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+      <!--
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                  <h2>Form Design <small>different form elements</small></h2>
+
+            <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+              <form class="form-horizontal form-label-left input_mask">
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name">
+                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name">
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email">
+                  <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="text" class="form-control" id="inputSuccess5" placeholder="Phone">
+                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Default Input</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" placeholder="Default Input">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Disabled Input </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" disabled="disabled" placeholder="Disabled Input">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Read-Only Input</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" readonly="readonly" placeholder="Read-Only Input">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                  </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                  </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary">Cancel</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+      </div>
+    -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+
+          <div class="x_content">
+
+            <form class="form-horizontal form-label-left input_mask" novalidate action="/editpat/<%= patients._id %>" method="post">
+
+              <span class="section">Informations Patient</span>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input id="name" class="form-control has-feedback-left" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="Nom" required="required" type="text" value="<%= patients.patientnom %>">
+                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input id="prenom" class="form-control" data-validate-length-range="6" data-validate-words="1" name="prenom" placeholder="Prénom" required="required" type="text" value="<%= patients.patientprenom %> ">
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input type="email" id="email" name="email"  class="form-control has-feedback-left" placeholder="Email" value="<%= patients.email %>">
+                  <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input type="tel" id="telephone" name="phone"  data-validate-length-range="8,20" class="form-control" placeholder="Téléphone" value="<%= patients.telephone %>">
+                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="ville" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="ville" placeholder="Ville" required="required" type="text" value="<%= patients.ville %>">
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="occupation" type="text" name="cin"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="CIN" value="<%= patients.cin %>">
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="occupation" type="text" name="dob"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Date de naissance" value="<%= patients.dob %>">
+              </div>
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="statu">Status <span class="required">*</span>
+                </label>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <select id="statu" type="text" name="statu"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+                    <option value=""><%= patients.statu %></option>
+                    <option>Marié</option>
+                    <option>Célibataire</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="poid" type="text" name="poid" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Poid" value="<%= patients.poidinit %>">
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="taille" type="text" name="taille"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Taille" value="<%= patients.tailleinit %>">
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="bmi" type="text" name="bmi"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="BMI" value="<%= patients.bmiinit %>">
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="occupation" type="text" name="occupation"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Travail" value="<%= patients.occupation %>">
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                <div class="control-group">
+                        <label class="control-label ">Alérgies</label>
+                        <div class="">
+                          <input id="tags_1" type="text" class="tags form-control" value="<%= patients.alergies %>" name="alergies"/>
+                          <!-- <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div> -->
+                        </div>
+                      </div>
+              </div>
+              <div class="item form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12" placeholder="Commentaire" value=""><%= patients.textarea %></textarea>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="">
+                  <!--
+                  <button type="submit" class="btn btn-primary">Cancel</button>
+                -->
+                  <input type="hidden" name="_method" value="PUT">
+                  <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- this -->
+
+<!-- end this -->
+
+
+  </div>
+</div>
+<!-- /page content -->
+
+
+
+
+<!-- /page content -->
+
+
+
+
+
+<% include footer.ejs %>
+
+
+
+<!-- jQuery Tags Input -->
+<script>
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+
+  function onChangeTag(input, tag) {
+    alert("Changed a tag: " + tag);
+  }
+
+  $(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+  });
+</script>
+<!-- /jQuery Tags Input -->

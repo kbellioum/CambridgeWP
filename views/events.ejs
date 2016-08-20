@@ -1,0 +1,36 @@
+
+
+<h1>Edit Form</h1>
+
+
+<form action="/editevents/<%= id %>" method="POST">
+
+
+<input type="text" name="titlef" value="<%= title %>">
+
+<p>
+  <input type="text" name="startf" value="<%= start %>">
+
+</p>
+
+<p>
+  <input type="text" name="endf" value="<%= end %>">
+
+</p>
+
+<p>
+  <input type="text" name="phonef" value="<%= phone %>">
+
+</p>
+
+<p>
+  <input type="text" name="allDayf" value="<%= allDay %>">
+
+</p>
+
+
+
+<input type="hidden" name="_method" value="PUT"/>
+
+<button type="submit" >Update</button>
+</form>

@@ -1,0 +1,329 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <!-- this -->
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+          </div>
+          <div class="count"><%= poid %> kg</div>
+
+          <h3>Poids</h3>
+          <p></p>
+        </div>
+      </div>
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+      <div class="tile-stats">
+        <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+        </div>
+        <div class="count"><%= taille %> cm</div>
+
+        <h3>Taille</h3>
+        <p></p>
+       </div>
+      </div>
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+          </div>
+          <div class="count"><%= bmi %></div>
+
+          <h3>IMC</h3>
+          <p></p>
+        </div>
+      </div>
+      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <!--
+          <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+          </div> -->
+          <% if (bmi < 18 ) { %>
+            <div class="count">Insuffisance</div>
+          <% } else if(bmi > 18 && bmi < 25) { %>
+            <div class="count">Normal</div>
+          <% } else if(bmi > 25 && bmi < 30) { %>
+            <div class="count">surpoids</div>
+          <% } else if(bmi > 30 && bmi < 40) { %>
+            <div class="count">obésité</div>
+          <% } else if(bmi > 30 ) { %>
+            <div class="count">obésité morbide</div>
+          <% } %>
+
+          <h3>Etat du patient</h3>
+          <p></p>
+        </div>
+      </div>
+      <!-- end this -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Patient</h2>
+
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+              <div class="profile_img">
+                <div id="crop-avatar">
+                  <!-- Current avatar -->
+                  <img class="img-responsive avatar-view" src="../images/user-img.png" alt="Avatar" title="Change the avatar">
+
+                  <% if (numdossier === undefined || numdossier === "") { %>
+                    <span class="label label-danger"> sans dossier </span>
+                  <% } else { %>
+                    <span class="label label-success"> avec dossier </span>
+                  <% } %>
+                </div>
+              </div>
+              <h3><%= nom + " " + prenom %></h3>
+
+              <ul class="list-unstyled user_data">
+                <li class="m-top-xs">
+                  <i class="fa fa-barcode user-profile-icon"></i> <%= id %>
+                </li>
+                <li>
+                  <i class="fa fa-folder user-profile-icon"></i> <%= numdossier %>
+                </li>
+                <li>
+                  <i class="fa fa-credit-card user-profile-icon"></i> <%= cin %>
+                </li>
+                <li>
+                  <i class="fa fa-asterisk user-profile-icon"></i> <%= statu %>
+                </li>
+                <li>
+                  <i class="fa fa-birthday-cake user-profile-icon"></i> <%= dob %>
+                </li>
+                <li><i class="fa fa-briefcase user-profile-icon"></i> <%= occupation %>
+                </li>
+                <li>
+                  <i class="fa fa-envelope user-profile-icon"></i> <%= email %>
+                </li>
+                <li>
+                  <i class="fa fa-phone user-profile-icon"></i> <%= phone %>
+                </li>
+                <li>
+                  <i class="fa fa-map-marker user-profile-icon"></i> <%= ville %>
+                </li>
+              </ul>
+
+
+              <br />
+
+
+
+            </div>
+
+
+            <div class="col-md-9 col-sm-9 col-xs-12">
+
+
+              <!-- start of user-activity-graph -->
+
+              <!-- end of user-activity-graph -->
+
+              <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Visites</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Programmes suivies</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Info suplémentaires</a>
+                  </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                    <!-- start recent activity -->
+                    <ul class="messages">
+
+                      <% for(var i=0; i < visites.length; i++) { %>
+                        <li>
+                        <img src="../images/user-img.png" class="avatar" alt="Avatar">
+                        <div class="message_date">
+                          <h3 class="date text-error"><%= visites[i].daterdv.substring(7,10) %></h3>
+                          <p class="month"><%= visites[i].daterdv.substring(3,7) %></p>
+                        </div>
+                        <div class="message_wrapper">
+                          <h4 class="heading"><%= visites[i].consultant %></h4>
+                          <blockquote class="message"><%= visites[i].comment %></blockquote>
+                        </div>
+                        <br />
+                          <p class="url">
+                            <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                            <!--
+                            <a href="#"><i class="fa fa-paperclip"></i>hdhdhh</a>
+                          -->
+                          </p>
+                      </li>
+                        <% } %>
+
+                    </ul>
+                    <!-- end recent activity -->
+
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                    <!-- start user projects -->
+                    <table class="data table table-striped no-margin">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Nom du programme</th>
+                          <th>Date du début traitement</th>
+                          <th>Poid</th>
+                          <th>Taille</th>
+                          <th>IMC</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0; i < visites.length; i++) { %>
+                        <tr>
+
+                          <td><%= i %></td>
+                          <td><%= visites[i].prog %></td>
+                          <td><%= visites[i].daterdv %></td>
+                          <td><%= visites[i].poid %></td>
+                          <td><%= visites[i].taille %></td>
+                          <td><%= (visites[i].poid / (visites[i].taille/100 * visites[i].taille/100)).toPrecision(2) %></td>
+
+                        </tr>
+                        <% } %>
+
+                      </tbody>
+                    </table>
+                    <!-- end user projects -->
+
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                    <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
+                      photo booth letterpress, commodo enim craft beer mlkshk </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-success" href="/editpat/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+          <a class="btn btn-success" href="/addvisite/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Nouvelle visite</a>
+          <a class="btn btn-success" href="/addrdv/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Prochain RDV</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+<% include footer.ejs %>
+
+
+<script>
+  $(function() {
+    Morris.Bar({
+      element: 'graph_bar',
+      data: [
+        { "period": "Jan", "Hours worked": 80 },
+        { "period": "Feb", "Hours worked": 125 },
+        { "period": "Mar", "Hours worked": 176 },
+        { "period": "Apr", "Hours worked": 224 },
+        { "period": "May", "Hours worked": 265 },
+        { "period": "Jun", "Hours worked": 314 },
+        { "period": "Jul", "Hours worked": 347 },
+        { "period": "Aug", "Hours worked": 287 },
+        { "period": "Sep", "Hours worked": 240 },
+        { "period": "Oct", "Hours worked": 211 }
+      ],
+      xkey: 'period',
+      hideHover: 'auto',
+      barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+      ykeys: ['Hours worked', 'sorned'],
+      labels: ['Hours worked', 'SORN'],
+      xLabelAngle: 60,
+      resize: true
+    });
+
+    $MENU_TOGGLE.on('click', function() {
+      $(window).resize();
+    });
+  });
+</script>
+
+<!-- datepicker -->
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    var cb = function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
+    }
+
+    var optionSet1 = {
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment(),
+      minDate: '01/01/2012',
+      maxDate: '12/31/2015',
+      dateLimit: {
+        days: 60
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      opens: 'left',
+      buttonClasses: ['btn btn-default'],
+      applyClass: 'btn-small btn-primary',
+      cancelClass: 'btn-small',
+      format: 'MM/DD/YYYY',
+      separator: ' to ',
+      locale: {
+        applyLabel: 'Submit',
+        cancelLabel: 'Clear',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        firstDay: 1
+      }
+    };
+    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+    $('#reportrange').daterangepicker(optionSet1, cb);
+    $('#reportrange').on('show.daterangepicker', function() {
+      console.log("show event fired");
+    });
+    $('#reportrange').on('hide.daterangepicker', function() {
+      console.log("hide event fired");
+    });
+    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+    });
+    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+      console.log("cancel event fired");
+    });
+    $('#options1').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+    });
+    $('#options2').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+    });
+    $('#destroy').click(function() {
+      $('#reportrange').data('daterangepicker').remove();
+    });
+  });
+</script>
+<!-- /datepicker -->

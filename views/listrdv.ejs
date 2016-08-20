@@ -1,0 +1,291 @@
+
+<script type="text/javascript" src="../build/js/helper.js">
+
+</script>
+<% include header.ejs %>
+
+<!-- page content -->
+<!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+
+                  <div class="x_content">
+
+                    <div id='calendar'></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+<!-- /page content -->
+<!-- calendar modal -->
+  <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
+        </div>
+        <div class="modal-body">
+          <div id="testmodal" style="padding: 5px 20px;">
+            <form id="antoform" class="form-horizontal calender" role="form" action="add('/addrdv')" method="post">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Nom</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="patientnom" name="name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Prénom</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="patientprenom" name="prenom">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Heure du RDV</label>
+                <label type="text" class="form-control" id="heurerdv" name="heurerdv"></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="heurerdv" name="heurerdv">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Description</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                <button id="submit" type="button" class="btn btn-primary antosubmit">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
+        </div>
+        <div class="modal-body">
+
+          <div id="testmodal2" style="padding: 5px 20px;">
+            <form id="antoform2" class="form-horizontal calender" role="form">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Nom</label>
+                <div class="col-sm-9">
+                  <input type="text" disabled="disabled" class="form-control" id="patientnom2" name="patientnom2">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Prénom</label>
+                <div class="col-sm-9">
+                  <input type="text" disabled="disabled" class="form-control" id="patientprenom2" name="patientprenom2">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Heure du RDV</label>
+                <div class="col-sm-9">
+                  <input type="text" disabled="disabled" class="form-control" id="heurerdv2" name="heurerdv2">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Description</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control" style="height:55px;" id="descr2" name="descr2"> <%= text %></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">OK</button>
+
+                <button id="submit2"  type="button" class="btn btn-default antosubmit2"><a class="" id="addpat" href="/addpat">Ajouter Patient</a></button>
+                <button id="submit3"  type="button" class="btn btn-default antosubmit3"><a class="" id="editrdv" href="#">Edition RDV</a></button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+  <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+  <!-- /calendar modal -->
+
+
+
+
+
+<% include footer.ejs %>
+
+<!--
+<script>
+ $(function() {
+ $("button#submit2").click(function(){
+
+     alert("OK submit2");
+
+    /*$.ajax({
+           type: "POST",
+           url: "process.php",
+           data: $('form.contact').serialize(),
+                   success: function(msg){
+                       $("#thanks").html(msg)
+                       $("#form-content").modal('hide');
+                      },
+                   error: function(){
+                           alert("failure");
+                          }
+          });*/
+      });
+
+      $("button#submit").click(function(){
+
+          alert("OK submit");
+
+         /*$.ajax({
+               type: "POST",
+                url: "process.php",
+                data: $('form.contact').serialize(),
+                        success: function(msg){
+                             $("#thanks").html(msg)
+                            $("#form-content").modal('hide');
+                           },
+                        error: function(){
+                                alert("failure");
+                               }
+               });*/
+           });
+   });
+</script>
+-->
+
+
+
+
+
+<!-- FullCalendar -->
+<script>
+$(window).load(function() {
+var date = new Date(),
+    d = date.getDate(),
+    m = date.getMonth(),
+    y = date.getFullYear(),
+    started,
+    categoryClass;
+
+var calendar = $('#calendar').fullCalendar({
+  header: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'month,agendaWeek,agendaDay'
+  },
+  lang: 'fr',
+  selectable: false,
+  selectHelper: false,
+  select: function(start, end, allDay) {
+    $('#fc_create').click();
+
+    started = start;
+    ended = end;
+
+  $(".antosubmit").on("click", function() {
+    var nom = $("#patientnom").val();
+      var prenom = $("#patientprenom").val();
+
+      var title = nom + " " + prenom;
+      alert("OK antosubmit : " + title);
+      if (end) {
+        ended = end;
+      }
+
+      categoryClass = $("#event_type").val();
+
+      if (title) {
+        calendar.fullCalendar('renderEvent', {
+            title: title,
+            start: started,
+            end: end,
+            allDay: allDay
+          },
+          true // make the event "stick"
+        );
+      }
+
+      $('#patientnom').val('');
+      $("#patientprenom").val('');
+
+      calendar.fullCalendar('unselect');
+
+      $('.antoclose').click();
+
+      return false;
+    });
+  },
+  eventClick: function(calEvent, jsEvent, view) {
+    $('#fc_edit').click();
+
+    var tab = calEvent.title.split(" ", 2);
+    console.log(typeof(calEvent.start));
+    var heurerdv = calEvent.start._i.split("T",2);
+
+    //var endh = calEvent.end;
+    //console.log(tab[0]);
+    //console.log(tab[1]);
+    //console.log(calEvent);
+    //console.log(calEvent.end);
+    //console.log(heurerdv);
+    //console.log(endh);
+
+    $('#patientnom2').val(tab[0]);
+    $('#patientprenom2').val(tab[1]);
+    $('#editrdv').attr("href", "/editrdv/" + calEvent._id);
+    if (calEvent.isPatient){
+      $('#submit2').hide();
+    } else {
+      $('#submit2').show();
+      $('#addpat').attr("href", "/addpat/?nom="+tab[0]+"&prenom="+tab[1]+"&phone="+calEvent.phone+"&eventsid="+calEvent._id);
+    }
+
+
+    $('#heurerdv2').val(heurerdv[1].substring(0, 8));
+
+    categoryClass = $("#event_type").val();
+
+   $(".antosubmit2").on("click", function() {
+
+      calEvent.title = $("#patientnom2").val() + " " + $("#patientprenom2").val();
+
+      calendar.fullCalendar('updateEvent', calEvent);
+      $('.antoclose2').click();
+    });
+
+    calendar.fullCalendar('unselect');
+  },
+  editable: false,
+  events: { url : 'http://localhost:3003/events' },
+  timezone: false,
+  //'Africa/Casablanca',
+  timezoneParam: 'Africa/Casablanca',
+  weekNumbers: true
+
+});
+});
+</script>
+<!-- /FullCalendar -->
