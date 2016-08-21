@@ -43,13 +43,7 @@ initPassport(passport);
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
-app.use('/tabrdv', routes);
-app.use('/tabinst', routes);
-app.use('/tabcons', routes);
-app.use('/addpat', routes);
-app.use('/listpat', routes);
-app.use('/addrdv', routes);
-app.use('/listrdv', routes);
+
 
 
 /// catch 404 and forward to error handler
