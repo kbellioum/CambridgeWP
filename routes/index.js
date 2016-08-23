@@ -96,7 +96,12 @@ var SetPrice = function(prog){
       {
         prog: "Cons 5",
         prix: "240",
-        desc: "Consultation sans produits"
+        desc: "CONSULTATION"
+      },
+      {
+        prog: "Cons 6",
+        prix: "632",
+        desc: "PROG/Semaine"
       }
     ];
 
