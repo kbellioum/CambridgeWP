@@ -72,35 +72,51 @@ var Getcounter = function(){
 
 var SetPrice = function(prog){
 
+      /*
+          @ PROG1--------- 3,490.00 Dhs ---> var a
+          @ PROG2--------- 2,790.00 Dhs ---> var b
+          @ PROG3--------- 1,990.00 Dhs ---> var c
+          @ PROG4--------- 1,090.00 Dhs ---> var d
+          @ PROG/Semaine--   790.00 Dhs ---> var e
+          @ CONSULTATION--   300.00 Dhs ---> var f
+          */
+
+      var a = (3490 * 100)/120;
+      var b = (2790 * 100)/120;
+      var c = (1990 * 100)/120;
+      var d = (1090 * 100)/120;
+      var e = (790 * 100)/120;
+      var f = (300 * 100)/120;
+
     var progprice = [
       {
         prog: "Prog 1",
-        prix: "2792",
+        prix: a.toFixed(2),
         desc: "120 Unités"
       },
       {
         prog: "Prog 2",
-        prix: "2232",
+        prix: b.toFixed(2),
         desc: "90 Unités"
       },
       {
         prog: "Prog 3",
-        prix: "1592",
+        prix: c.toFixed(2),
         desc: "60 Unités"
       },
       {
         prog: "Prog 4",
-        prix: "892",
+        prix: d.toFixed(2),
         desc: "30 Unités"
       },
       {
         prog: "Cons 5",
-        prix: "240",
+        prix: f.toFixed(2),
         desc: "CONSULTATION"
       },
       {
         prog: "Cons 6",
-        prix: "632",
+        prix: e.toFixed(2),
         desc: "PROG/Semaine"
       }
     ];
