@@ -44,15 +44,17 @@
           <div class="icon"><i class="fa fa-caret-square-o-right"></i>
           </div> -->
           <% if (bmi < 18 ) { %>
-            <div class="count">Insuffisance</div>
+
+            <div class="count"><small>Insuffisance</small> <div class="icon"><img src="../images/insuffisance.png" alt="" height="80" width="80"></div></div>
+
           <% } else if(bmi > 18 && bmi < 25) { %>
-            <div class="count">Normal</div>
+            <div class="count"><small>Normal</small> <div class="icon"><img src="../images/normal.png" alt="" height="80" width="80"></div></div>
           <% } else if(bmi > 25 && bmi < 30) { %>
-            <div class="count">surpoids</div>
+            <div class="count"><small>surpoids</small> <div class="icon"><img src="../images/normal.png" alt="" height="80" width="80"></div></div>
           <% } else if(bmi > 30 && bmi < 40) { %>
-            <div class="count">obésité</div>
+            <div class="count"><small>obésité</small> <div class="icon"><img src="../images/obese.png" alt="" height="80" width="80"></div></div>
           <% } else if(bmi > 30 ) { %>
-            <div class="count">obésité morbide</div>
+            <div class="count"><small>obésité morbide</small> <div class="icon"><img src="../images/deathobesety.png" alt="" height="80" width="80"></div></div>
           <% } %>
 
           <h3>Etat du patient</h3>
@@ -72,7 +74,7 @@
               <div class="profile_img">
                 <div id="crop-avatar">
                   <!-- Current avatar -->
-                  <img class="img-responsive avatar-view" src="../images/user-img.png" alt="Avatar" title="Change the avatar">
+                  <img class="img-responsive avatar-view" src="../images/user-img.png" alt="Avatar" title="Change the avatar" height="128" width="128">
 
                   <% if (numdossier === undefined || numdossier === "") { %>
                     <span class="label label-danger"> sans dossier </span>
