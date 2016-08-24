@@ -130,11 +130,12 @@
                           <div class="table-responsive">
                             <table class="table">
                               <tbody>
+                                <% if(discount !== 0) {%>
                                 <tr>
                                   <th style="width:80%">Remise</th>
                                   <td><%= discount.toFixed(2) %></td>
                                 </tr>
-
+                                <% } %>
                                 <tr>
                                   <th style="width:80%">Total HT:</th>
                                   <td><%= total.toFixed(2) %></td>
