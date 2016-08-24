@@ -232,7 +232,9 @@ module.exports = function(passport){
 
 
     Events.find(function (err, events){
-    res.render('todayevents', { user: req.user, text: 'Tableau des RDVs', events: events});
+    var datenow =  new Date();
+    var dtnow = datenow.toISOString();
+    res.render('todayevents', { user: req.user, text: 'Tableau des RDVs', events: events, datenow: dtnow});
     });
 
   });
