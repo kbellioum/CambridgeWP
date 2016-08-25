@@ -5,8 +5,8 @@ module.exports = mongoose.model('Prog',{
 	products: [
         {
           codeproduit: String,
+					nomproduit: String,
           prixproduit: Number,
-          nomproduit: String,
           qte: Number
         }
   ],

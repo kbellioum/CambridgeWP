@@ -1,0 +1,144 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Edit programme <small>Gestion des programmes</small></h2>
+
+        <div class="clearfix"></div>
+
+      </div>
+      <div class="x_content">
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprog" method="post">
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Séléctionner un Programme : </label>
+              <select id="statu" type="text" name="statu"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+                <option>Choisir un Programme</option>
+                <option>Prog 1</option>
+                <option>Prog 2</option>
+                <option>Prog 3</option>
+                <option>Prog 4</option>
+                <option>Cons 5</option>
+                <option>Cons 6</option>
+              </select>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+            <label for="">Nom du produit : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+        <div class="col-md-2 col-sm-2 item form-group has-feedback">
+            <label for="">Quantité : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+            <label for="">Date d'expiration : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+        <label for="">Valider la ligne : </label>
+        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
+          <button id="" type="" class="btn"><i class="fa fa-check"></i></button>
+        </div>
+
+        </form>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+
+
+        <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
+        <div class="table-responsive">
+                              <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                  <tr class="headings">
+
+                                    <th class="column-title">Nom produit </th>
+                                    <th class="column-title">Qté  </th>
+                                    <th class="column-title">Date d'expiration </th>
+                                    <th class="column-title no-link last"><span class="nobr">Action</span>
+                                    </th>
+                                    <th class="bulk-actions" colspan="7">
+                                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                    </th>
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr class="odd pointer">
+
+                                    <td class=" ">Chocolat</td>
+                                    <td class=" ">12</td>
+                                    <td class=" ">12/12/2020</td>
+
+                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
+                                    </td>
+                                  </tr>
+
+                                  <tr class="even pointer">
+
+                                    <td class=" ">Nouga</td>
+                                    <td class=" ">13</td>
+                                    <td class=" ">12/12/2020</td>
+
+                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
+                                    </td>
+                                  </tr>
+                                  <tr class="odd pointer">
+
+                                    <td class=" ">Vanille</td>
+                                    <td class=" ">23</td>
+                                    <td class=" ">12/12/2020</td>
+
+                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+            </div>
+
+
+
+
+
+
+
+
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>

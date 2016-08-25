@@ -81,42 +81,36 @@ var SetPrice = function(prog){
           @ CONSULTATION--   300.00 Dhs ---> var f
           */
 
-      var a = (3490 * 100)/120;
-      var b = (2790 * 100)/120;
-      var c = (1990 * 100)/120;
-      var d = (1090 * 100)/120;
-      var e = (790 * 100)/120;
-      var f = (300 * 100)/120;
 
     var progprice = [
       {
         prog: "Prog 1",
-        prix: a.toFixed(2),
+        prix: ((3490 * 100)/120).toFixed(2),
         desc: "120 Unités"
       },
       {
         prog: "Prog 2",
-        prix: b.toFixed(2),
+        prix: ((2790 * 100)/120).toFixed(2),
         desc: "90 Unités"
       },
       {
         prog: "Prog 3",
-        prix: c.toFixed(2),
+        prix: ((1990 * 100)/120).toFixed(2),
         desc: "60 Unités"
       },
       {
         prog: "Prog 4",
-        prix: d.toFixed(2),
+        prix: ((1090 * 100)/120).toFixed(2),
         desc: "30 Unités"
       },
       {
         prog: "Cons 5",
-        prix: f.toFixed(2),
+        prix: ((300 * 100)/120).toFixed(2),
         desc: "CONSULTATION"
       },
       {
         prog: "Cons 6",
-        prix: e.toFixed(2),
+        prix: ((790 * 100)/120).toFixed(2),
         desc: "PROG/Semaine"
       }
     ];
@@ -923,7 +917,13 @@ module.exports = function(passport){
   });
 
 
+ router.get('/addprod', isAuthenticated, function(req, res){
+   res.render('addprod', {user: req.user});
+ });
 
+ router.get('/editprog', isAuthenticated, function(req, res){
+   res.render('editprog', {user: req.user});
+ });
 
 
 	/* Handle Logout */

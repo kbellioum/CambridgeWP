@@ -108,6 +108,8 @@ $(document).ready(function(){
 
         // evaluate the form using generic validaing
         if (!validator.checkAll($(this))) {
+          $("#alert").toggleClass("hidden");
+          $("#alert").toggleClass("show");
           submit = false;
         }
 
