@@ -934,17 +934,20 @@ module.exports = function(passport){
 
  router.post('/updateprogdetail', isAuthenticated, function(req, res){
 
-   var obj = req.body.obj;
+   var obj = JSON.parse(req.body.obj);
    var progone = req.body.progname;
 
    Prog.findById("57bf4ff8d7a933feb5a64995", function(err, prog){
+     for(i=0; i < obj.length; i++){
+       prog.products.push(obj[i]);
+     }
 
 
-     console.log(JSON.parse(obj));
+     console.log(obj);
      console.log(progone);
 
      prog.update({
-       products: obj
+       products: prog.products
      }, function (err, progID){
        if(err){
          console.log('GET Error: There was a problem retrieving: ' + err);
