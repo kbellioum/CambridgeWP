@@ -935,9 +935,9 @@ module.exports = function(passport){
  router.post('/updateprogdetail', isAuthenticated, function(req, res){
 
    var obj = JSON.parse(req.body.obj);
-   var progone = req.body.progname;
+   var progone = req.body.progname.toString();
 
-   Prog.findById("57bf4ff8d7a933feb5a64995", function(err, prog){
+   Prog.findOne({progname: progone}, function(err, prog){
      for(i=0; i < obj.length; i++){
        prog.products.push(obj[i]);
      }
@@ -975,12 +975,11 @@ module.exports = function(passport){
 
  router.post('/addprog', isAuthenticated, function(req, res){
 
-    //  res.send("OK OK");
-
 
        var prog = new Prog();
        prog.progname = req.body.progname;
        prog.progprice = req.body.progprice;
+       prog.maxunite = req.body.maxunite;
 
        console.log(prog);
 

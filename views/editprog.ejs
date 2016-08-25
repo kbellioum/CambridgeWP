@@ -63,19 +63,18 @@
 
         <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
 
-        <div class="clearfix"></div>
-        <div class="divider-dashed"></div>
 
-        <textarea id="message" name="obj" required="required" class="form-control" name="message" >
+
+        <textarea id="message" name="obj" required="required" class="form-control hidden" name="message" >
         </textarea>
-        <div id="progname" name="">
-          <input id="progname-val" type="text" name="progname" value="">
+        <div id="progname" name="" class="hidden">
+          <input id="progname-val" type="text" name="progname" value="" >
         </div>
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
-
+        <label for="">Detail produits :</label>
 
         <div class="table-responsive">
                               <table id="detail" class="table table-striped jambo_table bulk_action">

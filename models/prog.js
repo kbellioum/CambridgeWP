@@ -11,5 +11,6 @@ module.exports = mongoose.model('Prog',{
 					prodexpdate: String
         }
   ],
-  progprice: Number
+  progprice: Number,
+	maxunite: Number
 });
