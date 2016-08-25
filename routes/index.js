@@ -935,10 +935,32 @@ module.exports = function(passport){
  router.post('/updateprogdetail', isAuthenticated, function(req, res){
 
    var obj = req.body.obj;
+   var progone = req.body.progname;
 
-   console.log(obj);
+   Prog.findById("57bf4ff8d7a933feb5a64995", function(err, prog){
 
-   res.redirect('/editprog');
+
+     console.log(JSON.parse(obj));
+     console.log(progone);
+
+     prog.update({
+       products: obj
+     }, function (err, progID){
+       if(err){
+         console.log('GET Error: There was a problem retrieving: ' + err);
+         res.redirect('/home');
+       }else{
+         res.redirect("/editprog");
+       }
+     })
+
+   });
+
+
+
+
+
+   //res.redirect('/editprog');
 
  });
 

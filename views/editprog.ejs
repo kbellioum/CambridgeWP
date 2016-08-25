@@ -26,12 +26,6 @@
                 <% for(i=0; i < progs.length; i++ ){%>
                    <option><%= progs[i].progname %></option>
                 <%}%>
-<!--
-                <option>Prog 2</option>
-                <option>Prog 3</option>
-                <option>Prog 4</option>
-                <option>Cons 5</option>
-                <option>Cons 6</option>-->
               </select>
         </div>
 
@@ -74,7 +68,9 @@
 
         <textarea id="message" name="obj" required="required" class="form-control" name="message" >
         </textarea>
-        <div id="progname"></div>
+        <div id="progname" name="">
+          <input id="progname-val" type="text" name="progname" value="">
+        </div>
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
@@ -160,7 +156,8 @@ $(document).ready(function() {
        if($('#progs').val() !== "Choisir un Programme" && $('#prodname').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" && $('#prodcode').val() !== "" ){
          $('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$('#prodcode').val() +'</td><td class=" ">'+$('#prodname').val() +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"><a href="#"><i class="fa fa-close"></i></a></td></tr>');
 
-         $('#progname').text($('#progs').val());
+        // $('#progname').text($('#progs').val());
+         $('#progname-val').val($('#progs').val());
 
          tab.push({
            prodcode: $('#prodcode').val(),
