@@ -5,6 +5,7 @@ var router = express.Router();
 var Patient = require('../models/patient');
 var Events = require('../models/events');
 var Counter = require('../models/counter');
+var Prog = require('../models/prog');
 
 
 var Getdate = function(d){
@@ -922,9 +923,49 @@ module.exports = function(passport){
  });
 
  router.get('/editprog', isAuthenticated, function(req, res){
-   res.render('editprog', {user: req.user});
+
+   Prog.find(function (err, prog){
+   //res.render('tabcons', { user: req.user, text: 'Tableau des consultations', patient: patient});
+   res.render('editprog', {user: req.user, progs: prog});
+   });
+
+   //res.render('editprog', {user: req.user});
  });
 
+ router.post('/updateprogdetail', isAuthenticated, function(req, res){
+
+   var obj = req.body.obj;
+
+   console.log(obj);
+
+   res.redirect('/editprog');
+
+ });
+
+
+ router.get('/addprog', isAuthenticated, function(req, res){
+   res.render('addprog', {user: req.user});
+ });
+
+
+ router.post('/addprog', isAuthenticated, function(req, res){
+
+    //  res.send("OK OK");
+
+
+       var prog = new Prog();
+       prog.progname = req.body.progname;
+       prog.progprice = req.body.progprice;
+
+       console.log(prog);
+
+       prog.save(function(err) {
+           if (err)
+               res.send(err);
+
+           res.redirect('/addprog');
+       });
+ });
 
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {

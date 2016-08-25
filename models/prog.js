@@ -1,14 +1,15 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Prog',{
-	nom: String,
+	progname: String,
 	products: [
         {
-          codeproduit: String,
-					nomproduit: String,
-          prixproduit: Number,
-          qte: Number
+          prodcode: String,
+					prodname: String,
+          prodprice: Number,
+          prodqte: Number,
+					prodexpdate: String
         }
   ],
-  prix: Number
+  progprice: Number
 });

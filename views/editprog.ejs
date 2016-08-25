@@ -21,54 +21,72 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Séléctionner un Programme : </label>
-              <select id="statu" type="text" name="statu"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+              <select  id="progs" type="text" name="prog"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
                 <option>Choisir un Programme</option>
-                <option>Prog 1</option>
+                <% for(i=0; i < progs.length; i++ ){%>
+                   <option><%= progs[i].progname %></option>
+                <%}%>
+<!--
                 <option>Prog 2</option>
                 <option>Prog 3</option>
                 <option>Prog 4</option>
                 <option>Cons 5</option>
-                <option>Cons 6</option>
+                <option>Cons 6</option>-->
               </select>
         </div>
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
+            <label for="">Code produit : </label>
+            <input id="prodcode"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
             <label for="">Nom du produit : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <input id="prodname"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
         <div class="col-md-2 col-sm-2 item form-group has-feedback">
             <label for="">Quantité : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
             <label for="">Date d'expiration : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <input id="prodexpdate"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
         <label for="">Valider la ligne : </label>
-        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
-          <button id="" type="" class="btn"><i class="fa fa-check"></i></button>
+        <div class="col-md-1 col-sm-1 col-xs-12 item form-group has-feedback">
+          <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
         </div>
 
         </form>
+
+        <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <textarea id="message" name="obj" required="required" class="form-control" name="message" >
+        </textarea>
+        <div id="progname"></div>
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
 
 
-        <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
         <div class="table-responsive">
-                              <table class="table table-striped jambo_table bulk_action">
+                              <table id="detail" class="table table-striped jambo_table bulk_action">
                                 <thead>
                                   <tr class="headings">
 
+                                    <th class="column-title">Code produit </th>
                                     <th class="column-title">Nom produit </th>
                                     <th class="column-title">Qté  </th>
                                     <th class="column-title">Date d'expiration </th>
@@ -81,34 +99,7 @@
                                 </thead>
 
                                 <tbody>
-                                  <tr class="odd pointer">
 
-                                    <td class=" ">Chocolat</td>
-                                    <td class=" ">12</td>
-                                    <td class=" ">12/12/2020</td>
-
-                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
-                                    </td>
-                                  </tr>
-
-                                  <tr class="even pointer">
-
-                                    <td class=" ">Nouga</td>
-                                    <td class=" ">13</td>
-                                    <td class=" ">12/12/2020</td>
-
-                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
-                                    </td>
-                                  </tr>
-                                  <tr class="odd pointer">
-
-                                    <td class=" ">Vanille</td>
-                                    <td class=" ">23</td>
-                                    <td class=" ">12/12/2020</td>
-
-                                    <td class=" last"><a href="#"><i class="fa fa-close"></i></a>
-                                    </td>
-                                  </tr>
                                 </tbody>
                               </table>
             </div>
@@ -141,4 +132,55 @@
 </div>
 </div>
 
+<!-- Modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Prière de saisir les champs  &hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <% include footer.ejs %>
+
+
+<script type="text/javascript">
+var tab = [];
+$(document).ready(function() {
+    $("#addline").click(function() {
+       if($('#progs').val() !== "Choisir un Programme" && $('#prodname').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" && $('#prodcode').val() !== "" ){
+         $('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$('#prodcode').val() +'</td><td class=" ">'+$('#prodname').val() +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"><a href="#"><i class="fa fa-close"></i></a></td></tr>');
+
+         $('#progname').text($('#progs').val());
+
+         tab.push({
+           prodcode: $('#prodcode').val(),
+           prodname: $('#prodname').val(),
+           prodqte: $('#prodqte').val(),
+           prodexpdate: $('#prodexpdate').val()
+          });
+
+         $('#message').val(JSON.stringify(tab));
+
+         $('#prodcode').val('');
+         $('#prodname').val('');
+         $('#prodqte').val('');
+         $('#prodexpdate').val('');
+         $('#progs').attr('disabled','disabled');
+       }else{
+         $('#myModal').modal('show');
+
+       }
+
+    });
+});
+</script>
