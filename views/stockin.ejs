@@ -19,6 +19,15 @@
 
       <form class="form-horizontal form-label-left input_mask" novalidate action="/stockin" method="post">
 
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Dépôt : </label>
+              <select type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+                <option>Choisir un Dépôt</option>
+                <% for (var i = 0; i < depots.length; i++){%>
+                  <option><%= depots[i].depotname %></option>
+                <%}%>
+              </select>
+        </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
           <label>Code produit : </label>
@@ -32,6 +41,28 @@
           </div>
         </div>
 
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Fournisseur : </label>
+              <select id="statu" type="text" name="fournisseur"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Fournisseur">
+                <option>Cambridge Store</option>
+
+              </select>
+        </div>
+
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
+            <label for="">Numéro Bon de commande : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="Numéro bon de commande" type="text">
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+
+        <div class="col-md-3 col-sm-3 item form-group has-feedback">
+            <label for="">Numéro bon de livraison : </label>
+            <input class="form-control" data-validate-length-range="6"  name="numbl" placeholder="Numéro bon de livraison" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
@@ -42,19 +73,47 @@
         </div>
 
         <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
-          <label for="">Type de regroupement : </label>
-          <div class="radio">
-           <label>
-              <input type="radio" checked="" value="Caisse" id="optionsRadios1" name="produnite"> Caisse
-          </label>
-          <label>
-             <input type="radio" checked="" value="Boîte" id="optionsRadios1" name="produnite"> Boîte
-         </label>
-         <label>
-            <input type="radio" checked="" value="Unité" id="optionsRadios1" name="produnite"> Unité
-        </label>
-      </div>
+            <label for="">Type de regroupement : </label>
+            <div class="radio">
+              <label>
+                  <input type="radio" checked="" value="Caisse" id="optionsRadios1" name="produnite"> Caisse
+              </label>
+              <label>
+                  <input type="radio" checked="" value="Boîte" id="optionsRadios1" name="produnite"> Boîte
+              </label>
+              <label>
+                  <input type="radio" checked="" value="Unité" id="optionsRadios1" name="produnite"> Unité
+              </label>
+            </div>
         </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Date d'achat : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="dateachat" placeholder="date d'achat" type="text">
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+
+        <div class="col-md-3 col-sm-3 item form-group has-feedback">
+            <label for="">Prix d'achat : </label>
+            <input class="form-control" data-validate-length-range="6"  name="prixachat" placeholder="Prix d'achat" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+
+        <div class="col-md-3 col-sm-3 item form-group has-feedback">
+            <label for="">Prix de vente : </label>
+            <input class="form-control" data-validate-length-range="6"  name="prixvente" placeholder="Prix de vente" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+
+
+
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
@@ -71,13 +130,6 @@
         </div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Dépôt : </label>
-              <select id="statu" type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
-                <option>Siège</option>
-
-              </select>
-        </div>
 
         <div class="clearfix"></div>
         <div class="ln_solid"></div>

@@ -7,6 +7,7 @@ var Events = require('../models/events');
 var Counter = require('../models/counter');
 var Prog = require('../models/prog');
 var Product = require('../models/product');
+var Depot = require('../models/depot');
 
 
 var Getdate = function(d){
@@ -70,6 +71,18 @@ var Getcounter = function(){
  return facnum;
 }
 
+
+var ConvertToUnit = function(qte, unittype){
+
+    if (unittype == "Boîte"){
+      return Number(qte) * 21;
+    }else if (unittype == "Caisse"){
+      return Number(qte) * 6 * 21;
+    }else if(unittype == "Unité"){
+      return Number(qte);
+    }
+
+}
 
 
 var SetPrice = function(prog){
@@ -201,10 +214,6 @@ module.exports = function(passport){
           }
 
           });
-
-
-
- 	 //res.render('invoice', { user: req.user });
   });
 /*
 	router.get('/invoice/:id', isAuthenticated, function(req, res){
@@ -1026,7 +1035,10 @@ module.exports = function(passport){
    var dt = new Date().toISOString();
    //s.split("").reverse().join("")
    Product.find(function(err, prod){
-     res.render('stockin', {user: req.user, prods: prod, dt: dt.substring(0,10).split("-").reverse().join("/")});
+     Depot.find(function(err, depot){
+       res.render('stockin', {user: req.user, prods: prod, depots: depot,dt: dt.substring(0,10).split("-").reverse().join("/")});
+     });
+
    });
 
  });
@@ -1040,6 +1052,15 @@ module.exports = function(passport){
    var proddatein = req.body.datein;
    var proddateexp = req.body.dateexp;
    var proddepot = req.body.depot;
+   var dateachat = req.body.dateachat;
+   var prixachat = req.body.prixachat;
+   var prixvente = req.body.prixvente;
+   var fournisseur = req.body.fournisseur;
+   var numbc = req.body.numbc;
+   var numbl = req.body.numbl;
+
+
+
 
    var prodcode = prodinfo.substring(0,9);
 
@@ -1050,21 +1071,64 @@ module.exports = function(passport){
      var obj = {
        prodid: prodid,
        prodcode: prodcode,
-       prodqte: prodqte,
-       produnite: produnite,
+       prodqteinit: prodqte,
+       prodqtemv: ConvertToUnit(prodqte,produnite),       // 1 x Caisse = 6 x Boîtes ; 1 x Boîte = 21 x unités
+       produnite: produnite,                              // 1 x Caisse = 6 x 21 unités
        datein: proddatein,
        dateexp: proddateexp,
-       depot: proddepot
+       depot: proddepot,
+       dateachat: dateachat,
+       prixachat: prixachat,
+       prixvente: prixvente,
+       Fournisseur: fournisseur,
+       numbc: numbc,
+       numbl: numbl
      };
-     console.log(obj);
+
+     Depot.findOne({depotname: proddepot}, function(err, depot){
+
+       depot.inout.push(obj);
+
+       depot.update({
+         inout: depot.inout
+       }, function (err, depotID){
+         if(err){
+           console.log('GET Error: There was a problem retrieving: ' + err);
+           res.redirect('/home');
+         }else{
+           res.redirect("/home");
+         }
+       })
+
+     });
+
 
    });
 
+ });
 
 
-   res.redirect('/home')
+ router.get('/adddepot', isAuthenticated, function(req, res){
+   res.render('adddepot', {user: req.user});
+ });
+
+ router.post('/adddepot', isAuthenticated, function(req, res){
+
+    var depot = new Depot();
+
+    depot.depotname = req.body.depotname;
+    depot.inout = [];
+
+    depot.save(function(err) {
+         if (err)
+             res.send(err);
+
+         res.redirect('/home');
+     });
+
 
  });
+
 
 
 
