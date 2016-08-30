@@ -248,7 +248,11 @@ var validator = (function($){
 
         else if( defaults.alerts ){
             warning = $('<div class="'+ defaults.classes.alert +'">').html( text );
-            item.append( warning );
+            //item.append( warning );
+            //$("#alert").toggleClass("alert alert-danger alert-dismissible fade in hidden");
+            //$("#alert").toggleClass("alert alert-danger alert-dismissible fade in");
+
+            //$("#alert").a
         }
 
         item.removeClass(defaults.classes.bad);

@@ -5,6 +5,8 @@ var router = express.Router();
 var Patient = require('../models/patient');
 var Events = require('../models/events');
 var Counter = require('../models/counter');
+var Prog = require('../models/prog');
+var Product = require('../models/product');
 
 
 var Getdate = function(d){
@@ -81,42 +83,36 @@ var SetPrice = function(prog){
           @ CONSULTATION--   300.00 Dhs ---> var f
           */
 
-      var a = (3490 * 100)/120;
-      var b = (2790 * 100)/120;
-      var c = (1990 * 100)/120;
-      var d = (1090 * 100)/120;
-      var e = (790 * 100)/120;
-      var f = (300 * 100)/120;
 
     var progprice = [
       {
         prog: "Prog 1",
-        prix: a.toFixed(2),
+        prix: ((3490 * 100)/120).toFixed(2),
         desc: "120 Unités"
       },
       {
         prog: "Prog 2",
-        prix: b.toFixed(2),
+        prix: ((2790 * 100)/120).toFixed(2),
         desc: "90 Unités"
       },
       {
         prog: "Prog 3",
-        prix: c.toFixed(2),
+        prix: ((1990 * 100)/120).toFixed(2),
         desc: "60 Unités"
       },
       {
         prog: "Prog 4",
-        prix: d.toFixed(2),
+        prix: ((1090 * 100)/120).toFixed(2),
         desc: "30 Unités"
       },
       {
         prog: "Cons 5",
-        prix: f.toFixed(2),
+        prix: ((300 * 100)/120).toFixed(2),
         desc: "CONSULTATION"
       },
       {
         prog: "Cons 6",
-        prix: e.toFixed(2),
+        prix: ((790 * 100)/120).toFixed(2),
         desc: "PROG/Semaine"
       }
     ];
@@ -492,7 +488,7 @@ module.exports = function(passport){
 				patient.alergies = req.body.alergies;
 				patient.poidinit = req.body.poid;
 				patient.tailleinit = req.body.taille;
-				patient.bmiinit = req.body.bmi;
+				patient.bmiinit = req.body.bmi; //((patient.poidinit/(patient.tailleinit/100*patient.tailleinit/100)).toPrecision(2))
 
 		    patient.save(function(err) {
 		        if (err)
@@ -923,6 +919,152 @@ module.exports = function(passport){
   });
 
 
+ router.get('/addprod', isAuthenticated, function(req, res){
+
+   Product.find(function(err, prod){
+     res.render('addprod', {user: req.user, prods: prod});
+   });
+
+ });
+
+ router.get('/editprog', isAuthenticated, function(req, res){
+
+   Prog.find(function (err, prog){
+   //res.render('tabcons', { user: req.user, text: 'Tableau des consultations', patient: patient});
+   res.render('editprog', {user: req.user, progs: prog});
+   });
+
+   //res.render('editprog', {user: req.user});
+ });
+
+ router.post('/updateprogdetail', isAuthenticated, function(req, res){
+
+   var obj = JSON.parse(req.body.obj);
+   var progone = req.body.progname.toString();
+
+   Prog.findOne({progname: progone}, function(err, prog){
+     for(i=0; i < obj.length; i++){
+       prog.products.push(obj[i]);
+     }
+
+
+     //console.log(obj);
+     //console.log(progone);
+
+     prog.update({
+       products: prog.products
+     }, function (err, progID){
+       if(err){
+         console.log('GET Error: There was a problem retrieving: ' + err);
+         res.redirect('/home');
+       }else{
+         res.redirect("/editprog");
+       }
+     })
+
+   });
+
+
+ });
+
+
+ router.get('/addprog', isAuthenticated, function(req, res){
+   res.render('addprog', {user: req.user});
+ });
+
+
+ router.post('/addprog', isAuthenticated, function(req, res){
+
+
+       var prog = new Prog();
+       prog.progname = req.body.progname;
+       prog.progprice = req.body.progprice;
+       prog.maxunite = req.body.maxunite;
+
+       console.log(prog);
+
+       prog.save(function(err) {
+           if (err)
+               res.send(err);
+
+           res.redirect('/addprog');
+       });
+ });
+
+ router.post('/addprod', isAuthenticated, function(req, res){
+
+
+       var product = new Product();
+
+
+       product.prodname = req.body.prodname;
+       product.prodcode = req.body.prodcode;
+       product.extra = req.body.extra ? true : false;
+       product.qtemin = req.body.qtemin;
+
+       console.log(product.extra);
+
+
+
+      product.save(function(err) {
+           if (err)
+               res.send(err);
+
+           res.redirect('/home');
+       });
+
+ });
+
+ router.get('/listprod', isAuthenticated, function(req, res){
+   Product.find(function (err, prod){
+     res.render('listprod', {user: req.user, prods: prod});
+   });
+
+ });
+
+ router.get('/stockin', isAuthenticated, function(req, res){
+   var dt = new Date().toISOString();
+   //s.split("").reverse().join("")
+   Product.find(function(err, prod){
+     res.render('stockin', {user: req.user, prods: prod, dt: dt.substring(0,10).split("-").reverse().join("/")});
+   });
+
+ });
+
+
+ router.post('/stockin', isAuthenticated, function(req, res){
+
+   var prodinfo = req.body.prodinfo;
+   var prodqte = req.body.prodqte;
+   var produnite = req.body.produnite;
+   var proddatein = req.body.datein;
+   var proddateexp = req.body.dateexp;
+   var proddepot = req.body.depot;
+
+   var prodcode = prodinfo.substring(0,9);
+
+   Product.findOne({prodcode: prodcode}, function(err, prod){
+
+     var prodid = prod._id;
+
+     var obj = {
+       prodid: prodid,
+       prodcode: prodcode,
+       prodqte: prodqte,
+       produnite: produnite,
+       datein: proddatein,
+       dateexp: proddateexp,
+       depot: proddepot
+     };
+     console.log(obj);
+
+   });
+
+
+
+   res.redirect('/home')
+
+ });
 
 
 

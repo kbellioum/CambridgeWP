@@ -1,0 +1,185 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Edit programme <small>Gestion des programmes</small></h2>
+
+        <div class="clearfix"></div>
+
+      </div>
+      <div class="x_content">
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="" method="">
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Séléctionner un Programme : </label>
+              <select  id="progs" type="text" name="prog"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required">
+                <option>Choisir un Programme</option>
+                <% for(i=0; i < progs.length; i++ ){%>
+                   <option><%= progs[i].progname %></option>
+                <%}%>
+              </select>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
+            <label for="">Code produit : </label>
+            <input id="prodcode"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
+            <label for="">Nom du produit : </label>
+            <input id="prodname"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+        <div class="col-md-2 col-sm-2 item form-group has-feedback">
+            <label for="">Quantité : </label>
+            <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
+            <label for="">Date d'expiration : </label>
+            <input id="prodexpdate"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+        <label for="">Valider la ligne : </label>
+        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
+          <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
+        </div>
+
+        </form>
+
+        <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
+
+
+<!--         <div class="clearfix"></div>
+        <div class="divider-dashed"></div> -->
+        <textarea id="message" type="hidden" name="obj" required="required" class="form-control hidden" name="message" placeholder="Obj" required="required">
+        </textarea>
+
+        <div id="progname" name="">
+
+          <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" required="required">
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <label for="">Detail produits :</label>
+
+        <div class="table-responsive">
+                              <table id="detail" class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                  <tr class="headings">
+
+                                    <th class="column-title">Code produit </th>
+                                    <th class="column-title">Nom produit </th>
+                                    <th class="column-title">Qté  </th>
+                                    <th class="column-title">Date d'expiration </th>
+                                    <th class="column-title no-link last"><span class="nobr">Action</span>
+                                    </th>
+                                    <th class="bulk-actions" colspan="7">
+                                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                    </th>
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+                              </table>
+            </div>
+
+
+
+
+
+
+
+
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Prière de saisir les champs  &hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<% include footer.ejs %>
+
+
+<script type="text/javascript">
+var tab = [];
+$(document).ready(function() {
+    $("#addline").click(function() {
+       if($('#progs').val() !== "Choisir un Programme" && $('#prodname').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" && $('#prodcode').val() !== "" ){
+         $('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$('#prodcode').val() +'</td><td class=" ">'+$('#prodname').val() +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"><a href="#"><i class="fa fa-close"></i></a></td></tr>');
+
+        // $('#progname').text($('#progs').val());
+         $('#progname-val').val($('#progs').val());
+
+         tab.push({
+           prodcode: $('#prodcode').val(),
+           prodname: $('#prodname').val(),
+           prodqte: $('#prodqte').val(),
+           prodexpdate: $('#prodexpdate').val()
+          });
+
+         $('#message').val(JSON.stringify(tab));
+
+         $('#prodcode').val('');
+         $('#prodname').val('');
+         $('#prodqte').val('');
+         $('#prodexpdate').val('');
+         $('#progs').attr('disabled','disabled');
+       }else{
+         $('#myModal').modal('show');
+
+       }
+
+    });
+});
+</script>

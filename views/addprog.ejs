@@ -1,0 +1,64 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Ajouter Programme <small>Gestion des Programmes</small></h2>
+
+        <div class="clearfix"></div>
+
+      </div>
+      <div class="x_content">
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/addprog" method="post">
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+            <label for="">Nom programme : </label>
+            <input class="form-control" name="progname" placeholder="Nom produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+            <label for="">Prix programme : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="progprice" placeholder="Prix produit" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group ">
+            <label for="">Quantité Max d'unités : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="maxunite" placeholder="Nomber maximum d'unités" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>

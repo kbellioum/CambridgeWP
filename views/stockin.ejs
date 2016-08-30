@@ -1,0 +1,102 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Arrivée produit <small>Alimentation Stock</small></h2>
+
+        <div class="clearfix"></div>
+
+      </div>
+      <div class="x_content">
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/stockin" method="post">
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+          <label>Code produit : </label>
+          <div class="">
+            <select class="select2_single form-control" name="prodinfo" type="text">
+              <option></option>
+              <% for (var i = 0; i < prods.length; i++) {%>
+                <option><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
+              <%}%>
+            </select>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <div class="col-md-3 col-sm-3 item form-group has-feedback">
+            <label for="">Quantité : </label>
+            <input class="form-control" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
+          <label for="">Type de regroupement : </label>
+          <div class="radio">
+           <label>
+              <input type="radio" checked="" value="Caisse" id="optionsRadios1" name="produnite"> Caisse
+          </label>
+          <label>
+             <input type="radio" checked="" value="Boîte" id="optionsRadios1" name="produnite"> Boîte
+         </label>
+         <label>
+            <input type="radio" checked="" value="Unité" id="optionsRadios1" name="produnite"> Unité
+        </label>
+      </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="divider-dashed"></div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Date d'arrivée : </label>
+            <input readOnly class="form-control" data-validate-length-range="6" data-validate-words="1" name="datein" placeholder="date d'arrivée" type="text" value="<%= dt %>">
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Date d'expiration : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="dateexp" placeholder="date d'expiration" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Dépôt : </label>
+              <select id="statu" type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+                <option>Siège</option>
+
+              </select>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>
