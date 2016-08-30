@@ -17,11 +17,11 @@
       </div>
       <div class="x_content">
 
-      <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprog" method="post">
+      <form class="form-horizontal form-label-left input_mask" novalidate action="" method="">
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Séléctionner un Programme : </label>
-              <select  id="progs" type="text" name="prog"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
+              <select  id="progs" type="text" name="prog"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required">
                 <option>Choisir un Programme</option>
                 <% for(i=0; i < progs.length; i++ ){%>
                    <option><%= progs[i].progname %></option>
@@ -55,7 +55,7 @@
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
         <label for="">Valider la ligne : </label>
-        <div class="col-md-1 col-sm-1 col-xs-12 item form-group has-feedback">
+        <div class="col-md-2 col-sm-2 col-xs-12 item form-group has-feedback">
           <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
         </div>
 
@@ -64,11 +64,14 @@
         <form class="form-horizontal form-label-left input_mask" novalidate action="/updateprogdetail" method="post">
 
 
-
-        <textarea id="message" name="obj" required="required" class="form-control hidden" name="message" >
+<!--         <div class="clearfix"></div>
+        <div class="divider-dashed"></div> -->
+        <textarea id="message" type="hidden" name="obj" required="required" class="form-control hidden" name="message" placeholder="Obj" required="required">
         </textarea>
-        <div id="progname" name="" class="hidden">
-          <input id="progname-val" type="text" name="progname" value="" >
+
+        <div id="progname" name="">
+
+          <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" required="required">
         </div>
 
         <div class="clearfix"></div>

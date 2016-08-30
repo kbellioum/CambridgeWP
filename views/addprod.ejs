@@ -21,65 +21,34 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Code produit : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodcode" placeholder="Code produit" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
 
+
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Nom produit : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
+            <input class="form-control" data-validate-length-range="6" data-validate-words="" name="prodname" placeholder="Nom produit" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
           <label>
-          <input type="checkbox" value="">  Produit Extra
+          <input type="checkbox" value="true" name="extra">  Produit Extra
           </label>
         </div>
 
-        <div class="col-md-3 col-sm-3 item form-group has-feedback">
-            <label for="">Quantité : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-        </div>
-
-        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
-          <label for="">Type de regroupement : </label>
-          <div class="radio">
-           <label>
-              <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Caisse
-          </label>
-          <label>
-             <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Boîte
-         </label>
-         <label>
-            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Unité
-        </label>
-      </div>
-        </div>
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Date d'arrivée : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Date d'expiration : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Code produit" required="required" type="text" >
+            <label for="">Quantité minimale : </label>
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="qtemin" placeholder="Quantité minimale" type="text">
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Dépôt : </label>
-              <select id="statu" type="text" name="statu"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
-                <option>Siège</option>
-
-              </select>
-        </div>
 
         <div class="clearfix"></div>
         <div class="ln_solid"></div>

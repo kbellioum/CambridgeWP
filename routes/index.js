@@ -6,6 +6,7 @@ var Patient = require('../models/patient');
 var Events = require('../models/events');
 var Counter = require('../models/counter');
 var Prog = require('../models/prog');
+var Product = require('../models/product');
 
 
 var Getdate = function(d){
@@ -487,7 +488,7 @@ module.exports = function(passport){
 				patient.alergies = req.body.alergies;
 				patient.poidinit = req.body.poid;
 				patient.tailleinit = req.body.taille;
-				patient.bmiinit = req.body.bmi;
+				patient.bmiinit = req.body.bmi; //((patient.poidinit/(patient.tailleinit/100*patient.tailleinit/100)).toPrecision(2))
 
 		    patient.save(function(err) {
 		        if (err)
@@ -919,7 +920,11 @@ module.exports = function(passport){
 
 
  router.get('/addprod', isAuthenticated, function(req, res){
-   res.render('addprod', {user: req.user});
+
+   Product.find(function(err, prod){
+     res.render('addprod', {user: req.user, prods: prod});
+   });
+
  });
 
  router.get('/editprog', isAuthenticated, function(req, res){
@@ -943,8 +948,8 @@ module.exports = function(passport){
      }
 
 
-     console.log(obj);
-     console.log(progone);
+     //console.log(obj);
+     //console.log(progone);
 
      prog.update({
        products: prog.products
@@ -959,11 +964,6 @@ module.exports = function(passport){
 
    });
 
-
-
-
-
-   //res.redirect('/editprog');
 
  });
 
@@ -990,6 +990,83 @@ module.exports = function(passport){
            res.redirect('/addprog');
        });
  });
+
+ router.post('/addprod', isAuthenticated, function(req, res){
+
+
+       var product = new Product();
+
+
+       product.prodname = req.body.prodname;
+       product.prodcode = req.body.prodcode;
+       product.extra = req.body.extra ? true : false;
+       product.qtemin = req.body.qtemin;
+
+       console.log(product.extra);
+
+
+
+      product.save(function(err) {
+           if (err)
+               res.send(err);
+
+           res.redirect('/home');
+       });
+
+ });
+
+ router.get('/listprod', isAuthenticated, function(req, res){
+   Product.find(function (err, prod){
+     res.render('listprod', {user: req.user, prods: prod});
+   });
+
+ });
+
+ router.get('/stockin', isAuthenticated, function(req, res){
+   var dt = new Date().toISOString();
+   //s.split("").reverse().join("")
+   Product.find(function(err, prod){
+     res.render('stockin', {user: req.user, prods: prod, dt: dt.substring(0,10).split("-").reverse().join("/")});
+   });
+
+ });
+
+
+ router.post('/stockin', isAuthenticated, function(req, res){
+
+   var prodinfo = req.body.prodinfo;
+   var prodqte = req.body.prodqte;
+   var produnite = req.body.produnite;
+   var proddatein = req.body.datein;
+   var proddateexp = req.body.dateexp;
+   var proddepot = req.body.depot;
+
+   var prodcode = prodinfo.substring(0,9);
+
+   Product.findOne({prodcode: prodcode}, function(err, prod){
+
+     var prodid = prod._id;
+
+     var obj = {
+       prodid: prodid,
+       prodcode: prodcode,
+       prodqte: prodqte,
+       produnite: produnite,
+       datein: proddatein,
+       dateexp: proddateexp,
+       depot: proddepot
+     };
+     console.log(obj);
+
+   });
+
+
+
+   res.redirect('/home')
+
+ });
+
+
 
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
