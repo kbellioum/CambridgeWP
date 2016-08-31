@@ -1129,7 +1129,15 @@ module.exports = function(passport){
 
  });
 
+router.get('/listinout', isAuthenticated, function(req, res){
 
+  Depot.find(function(err, depot){
+
+    res.render('listinout', {user: req.user, depots: depot});
+
+  });
+
+});
 
 
 	/* Handle Logout */
