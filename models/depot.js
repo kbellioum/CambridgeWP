@@ -6,10 +6,11 @@ module.exports = mongoose.model('Depot',{
     {
     prodid: String,
     prodcode: String,
-    prodqte: Number,
+    prodqteinit: Number,
+    prodqtemv: Number,
     produnite: String,
     datein: String,
-    dateexp: String
+    dateexp: String,
     dateachat: String,
     prixachat: Number,
     prixvente: Number,
