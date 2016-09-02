@@ -21,6 +21,26 @@ var Gethour = function(h){
     return out;
 }
 
+var tt;
+
+var GetprodByExp = function(){
+
+  Depot.findOne({depotname: "Siège"},function(err, depot){
+
+    //console.log(depot.inout[0]);
+
+    tt = depot.inout;
+
+    console.log(tt);
+
+    //return depot.inout[0];
+
+  });
+
+  return tt;
+
+}
+
 var SetisPatient = function(id){
 
 	Events.findById(id, function (err, events){
@@ -938,9 +958,20 @@ module.exports = function(passport){
 
  router.get('/editprog', isAuthenticated, function(req, res){
 
+
    Prog.find(function (err, prog){
    //res.render('tabcons', { user: req.user, text: 'Tableau des consultations', patient: patient});
-   res.render('editprog', {user: req.user, progs: prog});
+   Product.find(function(err, product){
+     //Depot.find({depotname: 'Siège' },{ inout: { $elemMatch: { prodqteinit: 12 } } }, function(err, depot){
+     //Depot.find({depotname: 'Siège' },{ inout: { $elemMatch: { prodcode: 'MOR560012', prodqteinit: 8 } } }, function(err, depot){
+     Depot.find({depotname: 'Siege' }, function(err, depot){
+       //console.log(depot);
+       res.render('editprog', {user: req.user, progs: prog, products: product, depot: depot});
+       //res.send(JSON.stringify(depot));
+     }).limit(2);
+
+   });
+
    });
 
    //res.render('editprog', {user: req.user});
