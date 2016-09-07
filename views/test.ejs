@@ -1,0 +1,37 @@
+<% include header.ejs %>
+
+
+<div class="right_col" role="main" style="min-height: 368px;">
+
+
+  <span>Loged user : <%= user.username %></span>
+  <span>Permissions menu1 : <%= permissions %></span>
+
+
+<h1>Test </h1>
+
+<div class="">
+  <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
+  </label>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <select id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="col-md-7 col-xs-12" placeholder="">
+      <option value=""></option>
+      <% if(tt == "Prog 1"){%>
+        <option selected>Prog 1</option>
+      <%}%>
+      <option>Prog 2</option>
+      <option>Prog 3</option>
+      <option>Prog 4</option>
+      <option>Cons 5</option>
+      <option>Cons 6</option>
+    </select>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+<% include footer.ejs %>

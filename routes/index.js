@@ -208,7 +208,7 @@ module.exports = function(passport){
           var vid = req.query.vid;
           //console.log("index: " + index);
           var total = 0;
-          var d = new Date();
+          var d = new Date().toISOString();
           Patient.findById(req.query.id, function(err, patient){
             for (i=0; i< patient.visites.length; i++){
               if((patient.visites[i].clotured === false) && (patient.visites[i]._id.toString() === vid.toString())){
@@ -217,7 +217,7 @@ module.exports = function(passport){
               var discount = patient.visites[i].discount;
               }
             }
-          var totalr = (total - discount);
+          var totalr = (total - ((total * discount)/100));
 
           if (err) {
               console.log('GET Error: There was a problem retrieving: ' + err);
@@ -229,7 +229,7 @@ module.exports = function(passport){
              index: factnum,
              vid: vid,
              discount: discount,
-             date: d.getDate() + "/" + (Number(d.getMonth())+1).toString() + "/" + d.getFullYear()
+             date: d.substring(0,10).split("-").reverse().join("/")
           });
           }
 
@@ -301,14 +301,26 @@ module.exports = function(passport){
 
 		Patient.findById(req.params.id, function(err, patients){
 
-		 if (err) {
-				 console.log('GET Error: There was a problem retrieving: ' + err);
-		 } else {
-		 res.render('visite', {
-				user: req.user,
-				patients: patients,
-		 });
-		}
+    Product.find(function(err, product){
+     Prog.find(function(err, prog){
+
+       if (err) {
+  				 console.log('GET Error: There was a problem retrieving: ' + err);
+  		 } else {
+  		 res.render('visite', {
+  				user: req.user,
+  				patients: patients,
+          products: product,
+          progs: prog
+  		 });
+  		}
+
+     });
+
+
+
+    });
+
 
 		});
 
@@ -333,37 +345,46 @@ module.exports = function(passport){
         console.log('GET Error: There was a problem retrieving: ' + err);
         //res.redirect('/home');
       }else{
-        var facturenum = inc ;
-			  var visites = {
-					poid: req.body.poid,
-				  taille: req.body.taille,
-				  prog: req.body.prog,
-				  daterdv: new Date(),
-				  prix: SetPrice(req.body.prog)[0],
-          descprod: SetPrice(req.body.prog)[1],
-					comment: req.body.comment,
-					consultant: req.user.lastName + " " + req.user.firstName,
-          clotured: false,
-          factnum: facturenum
-				};
-        var numdossier = req.body.numdossier;
 
-        Patient.findById(req.params.id, function (err, patients) {
-          patients.visites.push(visites);
+        Prog.findOne({progname: req.body.prog}, function(err, prog){
+          var obj = JSON.parse(req.body.obj);
 
-          patients.update({
-            visites: patients.visites,
-            numdossier: numdossier
-          },function (err, patientsID){
-            if(err){
-              console.log('GET Error: There was a problem retrieving: ' + err);
-              res.redirect('/home');
-            }else{
-              res.redirect("/viewpat/" + patients._id);
-            }
-          })
-          //res.render('visite', { user: req.user, patients: patients});
+          var facturenum = inc ;
+          var visites = {
+            poid: req.body.poid,
+            taille: req.body.taille,
+            prog: req.body.prog,
+            daterdv: new Date(),
+            prix: prog.progprice, //SetPrice(req.body.prog)[0],
+            descprod: prog.progdesc, //SetPrice(req.body.prog)[1],
+            comment: req.body.comment,
+            consultant: req.user.lastName + " " + req.user.firstName,
+            clotured: false,
+            products: obj,
+            factnum: facturenum
+          };
+
+
+          var numdossier = req.body.numdossier;
+
+          Patient.findById(req.params.id, function (err, patients) {
+            patients.visites.push(visites);
+
+            patients.update({
+              visites: patients.visites,
+              numdossier: numdossier
+            },function (err, patientsID){
+              if(err){
+                console.log('GET Error: There was a problem retrieving: ' + err);
+                res.redirect('/home');
+              }else{
+                res.redirect("/viewpat/" + patients._id);
+              }
+            })
+            //res.render('visite', { user: req.user, patients: patients});
+          });
         });
+
 
 
       }
@@ -373,6 +394,73 @@ module.exports = function(passport){
 
 });
 
+
+
+router.get('/listprog', isAuthenticated, function(req, res){
+
+  Prog.find(function(err, prog){
+
+    res.render('listprog', {user: req.user, progs: prog});
+
+  });
+
+});
+
+
+router.get('/editprogone/:id', isAuthenticated, function(req, res){
+
+  Prog.findById(req.params.id, function(err, prog){
+
+    res.render('editprogone', {user: req.user, progs: prog});
+
+  });
+
+});
+
+
+router.post('/editprogone/:id', isAuthenticated, function(req, res){
+
+
+  Prog.findById(req.params.id, function (err, prog) {
+
+    prog.update({
+      progname: req.body.progname,
+      progdesc: req.body.progdesc,
+      progprice: req.body.progprice
+
+
+    },function (err, progID){
+      if(err){
+        console.log('GET Error: There was a problem retrieving: ' + err);
+        res.redirect('/editprogone' +  prog._id);
+      }else{
+        res.redirect("/listprog/");
+      }
+    })
+
+   });
+
+
+
+
+
+});
+
+
+
+
+
+router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
+
+  Prog.remove({
+    _id: req.params.prog_id
+  }, function(err, prog) {
+    if (err)
+      res.send(err);
+
+    res.json({ message: 'Prog successfully deleted!' });
+  });
+});
 
 
 
@@ -533,6 +621,8 @@ module.exports = function(passport){
 		    res.render('listpat', { user: req.user, patient: patient});
 		  });
   });
+
+
 
 	router.delete('/listpat/:patient_id', isAuthenticated, function(req, res){
 
@@ -708,7 +798,9 @@ module.exports = function(passport){
 
 	router.get('/test', isAuthenticated, function(req, res){
 
+    var permissions = JSON.parse(req.user.permissions);
 
+    res.render('test', {user: req.user, tt: "Prog 1", permissions: permissions });
 
 
   });
@@ -968,7 +1060,7 @@ module.exports = function(passport){
        //console.log(depot);
        res.render('editprog', {user: req.user, progs: prog, products: product, depot: depot});
        //res.send(JSON.stringify(depot));
-     }).limit(2);
+     }).limit(10);
 
    });
 
@@ -986,10 +1078,6 @@ module.exports = function(passport){
      for(i=0; i < obj.length; i++){
        prog.products.push(obj[i]);
      }
-
-
-     //console.log(obj);
-     //console.log(progone);
 
      prog.update({
        products: prog.products
@@ -1019,6 +1107,7 @@ module.exports = function(passport){
        var prog = new Prog();
        prog.progname = req.body.progname;
        prog.progprice = req.body.progprice;
+       prog.progdesc = req.body.progdesc;
        prog.maxunite = req.body.maxunite;
 
        console.log(prog);
@@ -1027,7 +1116,7 @@ module.exports = function(passport){
            if (err)
                res.send(err);
 
-           res.redirect('/addprog');
+           res.redirect('/listprog');
        });
  });
 

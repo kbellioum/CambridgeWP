@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Prog',{
 	progname: String,
+	progdesc: String,
 	products: [
         {
           prodcode: String,

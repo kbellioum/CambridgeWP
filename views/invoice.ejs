@@ -66,8 +66,8 @@
                             <thead>
                               <tr>
                                 <th>Qty</th>
-                                <th>Programme</th>
-                                <th style="width: 59%">Description</th>
+                                <th style="width: 25%">Programme</th>
+                                <th style="width: 60%">Description</th>
                                 <th>Prix</th>
                               </tr>
                             </thead>
@@ -77,9 +77,12 @@
                               <tr>
                                 <td>1</td>
                                 <td><%= patient.visites[i].prog %></td>
-                                <td><%= patient.visites[i].descprod %>
+                                <td><%= patient.visites[i].descprod %><br>
+                                    <% for(j=0; j< patient.visites[i].products.length; j++){%>
+                                      <span><%= patient.visites[i].products[j].prodqte %> x <%= patient.visites[i].products[j].prodname %></span><br>
+                                    <%}%>
                                 </td>
-                                <td><%= patient.visites[i].prix %></td>
+                                <td class="text-right"><%= patient.visites[i].prix.toFixed(2) %></td>
                               </tr>
                               <% } %>
                               <% } %>
@@ -133,21 +136,21 @@
                                 <% if(discount !== 0) {%>
                                 <tr>
                                   <th style="width:80%">Remise</th>
-                                  <td><%= discount.toFixed(2) %></td>
+                                  <td class="text-right">-<%= discount %> %</td>
                                 </tr>
                                 <% } %>
                                 <tr>
                                   <th style="width:80%">Total HT:</th>
-                                  <td><%= total.toFixed(2) %></td>
+                                  <td class="text-right"><%= total.toFixed(2) %></td>
                                 </tr>
 
                                 <tr>
                                   <th>TVA (20%)</th>
-                                  <td><%= (total*0.2).toFixed(2) %></td>
+                                  <td class="text-right"><%= (total*0.2).toFixed(2) %></td>
                                 </tr>
                                 <tr>
                                   <th>Total:</th>
-                                  <td><%= (total*1.2).toFixed(2) %> DHS</td>
+                                  <td class="text-right"><%= (total*1.2).toFixed(2) %> DHS</td>
                                 </tr>
                               </tbody>
                             </table>
