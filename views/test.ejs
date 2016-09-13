@@ -5,25 +5,23 @@
 
 
   <span>Loged user : <%= user.username %></span>
-  <span>Permissions menu1 : <%= permissions %></span>
 
 
-<h1>Test </h1>
+
+<h1><%= tt %> </h1>
 
 <div class="">
   <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
-    <select id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="col-md-7 col-xs-12" placeholder="">
+    <select onchange="Setselect('<%= tt %>')" id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="col-md-7 col-xs-12" placeholder="">
       <option value=""></option>
-      <% if(tt == "Prog 1"){%>
-        <option selected>Prog 1</option>
-      <%}%>
-      <option>Prog 2</option>
-      <option>Prog 3</option>
-      <option>Prog 4</option>
-      <option>Cons 5</option>
-      <option>Cons 6</option>
+      <option  value="Prog 1">Prog 1</option>
+      <option  value="Prog 2">Prog 2</option>
+      <option  value="Prog 3">Prog 3</option>
+      <option  value="Prog 4">Prog 4</option>
+      <option  value="Prog 5">Prog 5</option>
+      <option  value="Prog 6">Prog 6</option>
     </select>
   </div>
 </div>
@@ -31,7 +29,41 @@
 
 </div>
 
+<script type="text/javascript">
+
+
+
+  function Setselect(value){
+    var ab = "<%= tt %>";
+    alert(value);
+    alert(ab);
+
+  }
+
+
+</script>
 
 
 
 <% include footer.ejs %>
+
+
+
+
+<script>
+
+$(document).ready(function() {
+
+
+
+  //$('#prog option[value="Prog 3"]').prop('selected', true);
+  console.log($('#prog').val());
+  var a = "Prog 2"
+  $('#prog').val(a);
+  //$('#prog').val('Prog 2');
+  console.log($("#prog").val());
+
+});
+
+
+</script>
