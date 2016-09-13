@@ -174,7 +174,8 @@ $(document).ready(function() {
         loadData: function(filter) {
             return $.grep(tab, function(obj) {
                 return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
-                && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1);
+                && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
+                && (!filter.prodqte || obj.prodqte == filter.prodqte);
             });
         },
 

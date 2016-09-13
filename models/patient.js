@@ -31,7 +31,12 @@ module.exports = mongoose.model('Patient',{
 							consultant: String,
 							clotured: Boolean,
 							factnum: String,
-							discount: {type: Number, default: 0}
+							discount: {type: Number, default: 0},
+							products:[{
+								prodcode: String,
+								prodname: String,
+								prodqte: Number
+								}]
 						}
 	]
 });

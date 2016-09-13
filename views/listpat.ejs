@@ -50,7 +50,7 @@
                     <td class=" "><%= patient[i].ville %></td>
                     <td class=" "><%= patient[i].statu %></td>
                     <td class=" "><%= patient[i].dob %></td>
-                    <td class=" last"><a class="" href="/editpat/<%= patient[i]._id %>" role="button"> Edit </a>|<a class="" href="/viewpat/<%= patient[i]._id %>" role="button"> View </a>|<a onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('/listpat/<%= patient[i]._id%>'); else alert('OK')" href="/listpat"> Delete </a>
+                    <td class=" last"><a class="btn btn-info btn-xs" href="/editpat/<%= patient[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a><a class="btn btn-primary btn-xs" href="/viewpat/<%= patient[i]._id %>" role="button"><i class="fa fa-folder"></i> View </a><a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('/listpat/<%= patient[i]._id%>'); else alert('OK')" href="/listpat"><i class="fa fa-trash-o"></i> Delete </a>
                       <!-- <a onclick=supprimer('/listpat/<%= patient[i]._id%>') href="/listpat"> Delete </a> -->
                     </td>
                   </tr>

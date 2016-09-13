@@ -63,62 +63,68 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
-                    <option value=""></option>
-                    <option>Prog 1</option>
-                    <option>Prog 2</option>
-                    <option>Prog 3</option>
-                    <option>Prog 4</option>
-                    <option>Cons 5</option>
-                    <option>Cons 6</option>
+                  <select id="progs" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un Programme</option>
+                    <% for(i=0; i < progs.length; i++ ){%>
+                       <option><%= progs[i].progname %></option>
+                    <%}%>
                   </select>
                 </div>
-
-
-
-
-
               </div>
 
 
-<!--
-<textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
+            <div class="clearfix"></div>
+            <div class="divider-dashed"></div>
 
-
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Téléphone <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="prenom" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="phone" placeholder="Téléphone" required="required" type="text">
-                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
-                </div>
+            <div class="col-md-5 col-sm-5 col-xs-12 item form-group">
+              <label>Code produit : </label>
+              <div class="">
+                <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
+                  <option></option>
+                  <% for (var i = 0; i < products.length; i++) {%>
+                    <option><%= products[i].prodcode + ' | ' + products[i].prodname %> <span style="color:blue"><%= products[i].extra? " | Extra Product" : ""%></span> </option>
+                  <%}%>
+                </select>
               </div>
+            </div>
+
+            <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                <label for="">Quantité : </label>
+                <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
+                <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+            </div>
+            <label for="">Valider la ligne : </label>
+            <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
+              <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
+            </div>
+
+            <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
+            </textarea>
+
+            <div id="progname" name="">
+
+              <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" >
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="divider-dashed"></div>
+
+            <label for="">Detail produits :</label>
 
 
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Heure du RDV</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" class="form-control" data-inputmask="'mask': '99:99:99'" name="heurerdv">
-                  <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
-                </div>
-              </div>
+            <div id="jsGrid"></div>
 
 
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Date du RDV</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12 xdisplay_inputx form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-right" id="single_cal4" placeholder="Date" aria-describedby="inputSuccess2Status4" data-inputmask="'mask': '99/99/9999'" name="daterdv">
-                    <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
-                    <span id="inputSuccess2Status4" class="sr-only">(success)</span>
-                  </div>
-              </div>
--->
 
-
+              <div class="clearfix"></div>
               <div class="ln_solid"></div>
 
+
+
+
+
               <div class="form-group">
-                <div class="col-md-9 col-md-offset-3">
+                <div class="col-md-9 col-md-offset-0">
                   <!--
                   <button type="submit" class="btn btn-primary">Cancel</button>
                 -->
@@ -143,7 +149,140 @@
 </div>
 <!-- /page content -->
 
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Prière de saisir les champs  &hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
 <% include footer.ejs %>
+
+
+<script type="text/javascript">
+var tab = [];
+$(document).ready(function() {
+  $("#jsGrid").jsGrid({
+      width: "100%",
+      height: "400px",
+
+      /*filtering: true,
+      autoload: true,
+      inserting: false,
+      editing: true,
+      sorting: true,
+      paging: true,*/
+
+      filtering: true,
+      editing: true,
+      sorting: true,
+      paging: true,
+      autoload: true,
+
+      controller: {
+        loadData: function(filter) {
+            return $.grep(tab, function(obj) {
+                return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
+                && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
+                && (!filter.prodqte || obj.prodqte == filter.prodqte);
+            });
+        },
+
+        insertItem: function(insertingClient) {
+
+        },
+
+        updateItem: function(updatingClient) { },
+
+        deleteItem: function(deletingClient) {
+
+        }
+      },
+
+      data: tab,
+
+      fields: [
+          { name: "prodcode", type: "text", title: "Code produit", width: 50, validate: "required", editing: false },
+          { name: "prodname", type: "text", title: "Nom produit", width: 50 , editing: false },
+          { name: "prodqte", type: "number", title: "Qté", width: 30 },
+          //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
+
+          { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 50, editing: false },
+          { type: "control" }
+      ]
+    });
+
+
+    $("#addline").click(function() {
+      //console.log($("#prodinfo").val().split("|")[0]);
+      //console.log(tab);
+       if($('#progs').val() !== "Choisir un Programme" && $('#prodinfo').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" ){
+         //$('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$("#prodinfo").val().split("|")[0] +'</td><td class=" ">'+$("#prodinfo").val().split("|")[1] +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"> <a onclick="$(this).parent().parent().remove()" class="removelink" ><i class="fa fa-close"></i></a> </td></tr>');
+
+        // $('#progname').text($('#progs').val());
+         $('#progname-val').val($('#progs').val());
+
+         tab.push({
+           prodcode: $("#prodinfo").val().split("|")[0],
+           prodname: $("#prodinfo").val().split("|")[1],
+           prodqte: $('#prodqte').val(),
+           prodexpdate: $('#prodexpdate').val()
+          });
+
+         $('#message').val(JSON.stringify(tab));
+
+         $('#prodinfo').val('');
+         $('#prodqte').val('');
+         $('#prodexpdate').val('');
+         $('#progs').attr('readonly','true');
+       }else{
+         $('#myModal').modal('show');
+
+       }
+       $("#jsGrid").jsGrid({
+
+           onItemUpdated: function() {
+           //console.log("row updated");
+           $('#message').val(JSON.stringify(tab));
+           },
+
+           onItemDeleted: function() {
+           //console.log("row deleted");
+           $('#message').val(JSON.stringify(tab));
+           },
+           onItemInserted: function() {
+           //console.log("row deleted");
+           $('#message').val(JSON.stringify(tab));
+           }
+       });
+
+
+    });
+
+
+
+});
+</script>
+
+
 
 
 <!-- bootstrap-daterangepicker -->

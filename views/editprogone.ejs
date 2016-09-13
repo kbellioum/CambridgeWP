@@ -17,26 +17,26 @@
       </div>
       <div class="x_content">
 
-      <form class="form-horizontal form-label-left input_mask" novalidate action="/addprog" method="post">
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/editprogone/<%= progs._id %>" method="post">
 
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
             <label for="">Nom programme : </label>
-            <input class="form-control" name="progname" placeholder="Nom programme" required="required" type="text" >
+            <input class="form-control" name="progname" placeholder="Nom produit" required="required" type="text" value="<%= progs.progname %>">
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
             <label for="">Description programme : </label>
-            <input class="form-control" name="progdesc" placeholder="Description programme" required="required" type="text" >
+            <input class="form-control" name="progdesc" placeholder="Description produit" required="required" type="text" value="<%= progs.progdesc %>">
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
             <label for="">Prix programme : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="progprice" placeholder="Prix programme" required="required" type="text" >
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="progprice" placeholder="Prix produit" required="required" type="text" value="<%= progs.progprice.toFixed(2) %>">
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 <!--

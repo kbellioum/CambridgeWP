@@ -71,8 +71,9 @@
             </form>
         </td>
         <td class=" last">
-          <a class="" href="/invoice/?id=<%= patient[i]._id %>&vid=<%= patient[i].visites[j]._id %>" role="button"> Impression </a>|<a href="/cloture/<%= patient[i]._id %>/?vid=<%= patient[i].visites[j]._id %>" id="cloture" class="" role="button"> Cloture </a>
-
+          <div class="pull-right">
+          <a class="btn btn-info btn-xs" href="/invoice/?id=<%= patient[i]._id %>&vid=<%= patient[i].visites[j]._id %>" role="button"><i class="fa fa-print"></i> Impression </a><a href="/cloture/<%= patient[i]._id %>/?vid=<%= patient[i].visites[j]._id %>" id="cloture" class="btn btn-danger btn-xs" role="button"><i class="fa fa-close"></i> Cloture </a>
+          </div>
           <input type="hidden" id="buffer-discount" value="/addremise/<%= patient[i]._id %>/?vid=<%= patient[i].visites[j]._id %>">
           <!--
           <a class="" href="/editpat/<%= patient[i]._id %>" role="button"> Edit </a>|<a class="" href="/viewpat/<%= patient[i]._id %>" role="button"> View </a>|<a onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('/listpat/<%= patient[i]._id%>'); else alert('OK')" href="/listpat"> Delete </a>
