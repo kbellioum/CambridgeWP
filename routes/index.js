@@ -9,7 +9,7 @@ var Counter = require('../models/counter');
 var Prog = require('../models/prog');
 var Product = require('../models/product');
 var Depot = require('../models/depot');
-
+var Users = require('../models/user');
 
 
 var Getdate = function(d){
@@ -676,7 +676,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
     var question1 = req.body.question1;
     var question2 = req.body.question2;
     var question3 = req.body.question3;
-   
+
 		Patient.findById(req.params.id, function (err, patients) {
 console.log(question1);
 console.log(question2);
@@ -1464,6 +1464,15 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
        })
 
       });
+      });
+
+      router.get('/userlist', isAuthenticated, function(req, res){
+
+        Users.find(function(err,users){
+          res.render('userlist', {user: req.user, users: users});
+        });
+
+
       });
 
 
