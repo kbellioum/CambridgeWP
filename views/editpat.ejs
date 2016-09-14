@@ -168,12 +168,22 @@
                               <div class="col-md-4"><label for="">Est ce vous avez déjà suivi un régime ? </label></div>
                               <div class="col-md-4" align="center">
                                 <div class="radio">
+                                    <% if(patients.question1 == "Oui") {%>
                                       <label>
-                                          <input type="radio" class="flat" checked="checked" value="Oui" id="question1" name="question1"> Oui
+                                          <input type="radio" class="flat" checked value="Oui" id="question1" name="question1"> Oui
                                       </label>
                                       <label>
                                          <input type="radio" class="flat" value="Non" id="question1" name="question1"> Non
                                       </label>
+                                      <%} else if(patients.question1 == "Non") {%>
+                                        <label>
+                                            <input type="radio" class="flat"  value="Oui" id="question1" name="question1"> Oui
+                                        </label>
+                                        <label>
+                                           <input type="radio" class="flat" checked value="Non" id="question1" name="question1"> Non
+                                        </label>
+
+                                      <%}%>
                                 </div>
                               </div>
                               <div class="col-md-4"><label class="pull-right">هل سبق لك ان اتبعت حمية من قبل ؟</label></div>
@@ -189,10 +199,10 @@
                 <div class="col-md-4" align="center">
                   <div class="radio">
                         <label>
-                            <input type="radio" class="flat" checked="" value="Oui" id="optionsRadios2" name="question2"> Oui
+                            <input type="radio" class="flat" checked="" value="Oui" id="question2" name="question2"> Oui
                         </label>
                         <label>
-                           <input type="radio" class="flat" checked="" value="Non" id="optionsRadios2" name="question2"> Non
+                           <input type="radio" class="flat" checked="" value="Non" id="question2" name="question2"> Non
                         </label>
                   </div>
                 </div>
@@ -206,16 +216,16 @@
                 <div class="col-md-4" align="center">
                   <div class="radio">
                         <label>
-                            <input type="radio" class="flat" checked="" value="Amis ou Famille" id="optionsRadios3" name="question3"> Amis ou Famille
+                            <input type="radio" class="flat" checked="" value="Amis ou Famille" id="question3" name="question3"> Amis ou Famille
                         </label>
                         <label>
-                           <input type="radio" class="flat" checked="" value="Exhibition" id="optionsRadios3" name="question3"> Exhibition
+                           <input type="radio" class="flat" checked="" value="Exhibition" id="question3" name="question3"> Exhibition
                         </label>
                         <label>
-                           <input type="radio" class="flat" checked="" value="Internet" id="optionsRadios3" name="question3"> Internet
+                           <input type="radio" class="flat" checked="" value="Internet" id="question3" name="question3"> Internet
                         </label>
                         <label>
-                           <input type="radio" checked="" value="Publicité" id="optionsRadios3" name="question3"> Publicité
+                           <input type="radio" checked="" value="Publicité" id="question3" name="question3"> Publicité
                         </label>
                   </div>
                 </div>
