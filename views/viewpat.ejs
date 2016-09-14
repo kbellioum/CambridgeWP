@@ -213,6 +213,8 @@
           <a class="btn btn-success" href="/editpat/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
           <a class="btn btn-success" href="/addvisite/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Nouvelle visite</a>
           <a class="btn btn-success" href="/addrdv/<%= id %>"><i class="fa fa-edit m-right-xs"></i>Prochain RDV</a>
+          <a class="btn btn-success" href="/listpat"><i class="fa fa-edit m-right-xs"></i>Liste patients</a>
+
         </div>
 
       </div>
@@ -296,7 +298,7 @@
         cancelLabel: 'Clear',
         fromLabel: 'From',
         toLabel: 'To',
-        customRangeLabel: 'Custom',
+        customRan  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>geLabel: 'Custom',
         daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         firstDay: 1
@@ -320,8 +322,8 @@
       $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
     });
     $('#options2').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-    });
+      $('#reportr  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>ange').data('daterangepicker').setOptions(optionSet2, cb);
+    });  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>  <button id="newdepot" type="button" class="btn btn-success" onclick="window.location.href='/adddepot'">Nouveau dépôt</button>
     $('#destroy').click(function() {
       $('#reportrange').data('daterangepicker').remove();
     });

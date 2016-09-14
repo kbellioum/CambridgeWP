@@ -10,41 +10,40 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Saisie d'un nouveau produit </h2>
+        <h2>Modification produit <small>Alimentation Stock</small></h2>
 
         <div class="clearfix"></div>
 
       </div>
       <div class="x_content">
 
-      <form class="form-horizontal form-label-left input_mask" novalidate action="/addprod" method="post">
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/editprod/<%= prod._id %>" method="post">
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Code produit : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodcode" placeholder="Code produit" required="required" type="text" >
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodcode" placeholder="Code produit" required="required" type="text"  value="<%= prod.prodcode %>">
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
 
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Nom produit : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="" name="prodname" placeholder="Nom produit" required="required" type="text" >
+            <input class="form-control" data-validate-length-range="6" data-validate-words="" name="prodname" placeholder="Nom produit" required="required" type="text" value="<%= prod.prodname %>">
             <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
           <label>
-          <input type="checkbox" class="js-switch"  value="true" name="extra">  Produit Extra
+          <input type="checkbox" class="js-switch" value="true" id="extra" name="extra">  Produit Extra
           </label>
         </div>
-
 
         <div class="clearfix"></div>
         <div class="divider-dashed"></div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Quantité minimale : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="qtemin" placeholder="Quantité minimale" type="text">
+            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="qtemin" placeholder="Quantité minimale" type="text"  value="<%= prod.qtemin %>">
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
 
@@ -72,3 +71,6 @@
 </div>
 
 <% include footer.ejs %>
+<script type="text/javascript">
+  $('#extra').prop('checked',  <%= prod.extra %>);
+</script>

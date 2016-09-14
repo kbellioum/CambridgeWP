@@ -9,19 +9,13 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
-      <div class="x_title">
-        <h2>Arrivée produit <small>Alimentation Stock</small></h2>
-
-        <div class="clearfix"></div>
-
-      </div>
-      <div class="x_content">
+        <span class="section">Saisie d'un nouveau Dépôt</span>
 
       <form class="form-horizontal form-label-left input_mask" novalidate action="/adddepot" method="post">
 
         <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
             <label for="">Nom du Dépôt : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="depotname" placeholder="Nom du Dépôt" required="required" type="text" >
+            <input class="form-control"   name="depotname" placeholder="Nom du Dépôt" required="required" type="text" >
             <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
         </div>
 
@@ -36,6 +30,7 @@
             <button type="submit" class="btn btn-primary">Cancel</button>
           -->
             <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+            <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste des dépôts</button>
           </div>
         </div>
 

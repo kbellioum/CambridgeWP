@@ -8,7 +8,7 @@
 
 
     <div class="row">
-
+      <button id="newprod" type="button" class="btn btn-success" onclick="window.location.href='/addprod'">Nouveau produit</button>
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <span class="section">Liste des produits </span>
@@ -55,10 +55,12 @@
 
         <td class=" "><%= prods[i].extra? "Oui" : "Non" %></td>
 
-        <td class=" last">
-          <a class="" href="#" role="button"> Edit Prod </a>
 
-        </td>
+          <td class=" last" align='right' width='120px;'><a class="btn btn-info btn-xs" href="/editprod/<%= prods[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a>
+            <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listprod/<%= prods[i]._id%>');" href="/listprod"><i class="fa fa-trash-o"></i> Delete </a>
+          </td>
+
+
       </tr>
 
     <% } %>

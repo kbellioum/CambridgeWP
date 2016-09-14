@@ -3,11 +3,13 @@ var router = express.Router();
 
 
 var Patient = require('../models/patient');
+var Provider = require('../models/provider');
 var Events = require('../models/events');
 var Counter = require('../models/counter');
 var Prog = require('../models/prog');
 var Product = require('../models/product');
 var Depot = require('../models/depot');
+
 
 
 var Getdate = function(d){
@@ -606,6 +608,9 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 				patient.poidinit = req.body.poid;
 				patient.tailleinit = req.body.taille;
 				patient.bmiinit = req.body.bmi; //((patient.poidinit/(patient.tailleinit/100*patient.tailleinit/100)).toPrecision(2))
+        patient.question1 = req.body.question1;
+        patient.question2 = req.body.question2;
+        patient.question3 = req.body.question3;
 
 		    patient.save(function(err) {
 		        if (err)
@@ -614,7 +619,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 						res.redirect('/listpat');
 		    });
   });
-
+/*show lispat*/
 	router.get('/listpat', isAuthenticated, function(req, res){
 
 		    Patient.find(function (err, patient){
@@ -668,9 +673,14 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 		var cin = req.body.cin;
 		var dob = req.body.dob;
 		var statu = req.body.statu;
-
+    var question1 = req.body.question1;
+    var question2 = req.body.question2;
+    var question3 = req.body.question3;
+   
 		Patient.findById(req.params.id, function (err, patients) {
-
+console.log(question1);
+console.log(question2);
+console.log(question3);
 			patients.update({
 				patientnom: name,
 				patientprenom: prenom,
@@ -685,7 +695,10 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 				textarea: textarea,
 				cin: cin,
 				dob: dob,
-				statu: statu
+				statu: statu,
+        question1: question1,
+        question2: question2,
+        question3:  question3
 			},function (err, patientsID){
 				if(err){
 					console.log('GET Error: There was a problem retrieving: ' + err);
@@ -798,9 +811,9 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 	router.get('/test', isAuthenticated, function(req, res){
 
+    var permissions = JSON.parse(req.user.permissions);
 
-
-    res.render('test', {user: req.user, tt: "Prog 1" });
+    res.render('test', {user: req.user, tt: "Prog 1", permissions: permissions });
 
 
   });
@@ -1004,7 +1017,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 
 
-  router.post('/counter', isAuthenticated, function(req, res){
+  router.post('/counteCasablancaCasablancar', isAuthenticated, function(req, res){
 
 		   var counter = new Counter();
        counter.counter = 1;
@@ -1040,22 +1053,12 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
   });
 
 
- router.get('/addprod', isAuthenticated, function(req, res){
-
-   Product.find(function(err, prod){
-     res.render('addprod', {user: req.user, prods: prod});
-   });
-
- });
 
  router.get('/editprog', isAuthenticated, function(req, res){
-
-
    Prog.find(function (err, prog){
-   //res.render('tabcons', { user: req.user, text: 'Tableau des consultations', patient: patient});
+
    Product.find(function(err, product){
-     //Depot.find({depotname: 'Siège' },{ inout: { $elemMatch: { prodqteinit: 12 } } }, function(err, depot){
-     //Depot.find({depotname: 'Siège' },{ inout: { $elemMatch: { prodcode: 'MOR560012', prodqteinit: 8 } } }, function(err, depot){
+
      Depot.find({depotname: 'Siege' }, function(err, depot){
        //console.log(depot);
        res.render('editprog', {user: req.user, progs: prog, products: product, depot: depot});
@@ -1066,8 +1069,10 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
    });
 
-   //res.render('editprog', {user: req.user});
- });
+    });
+
+
+
 
  router.post('/updateprogdetail', isAuthenticated, function(req, res){
 
@@ -1139,7 +1144,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
            if (err)
                res.send(err);
 
-           res.redirect('/home');
+           res.redirect('/listprod');
        });
 
  });
@@ -1243,7 +1248,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
          if (err)
              res.send(err);
 
-         res.redirect('/home');
+         res.redirect('/listdepots');
      });
 
 
@@ -1265,6 +1270,212 @@ router.get('/listinout', isAuthenticated, function(req, res){
 		req.logout();
 		res.redirect('/');
 	});
-
 	return router;
 }
+/*******PROVIDERS************/
+/* show listproviders */
+router.get('/listproviders', isAuthenticated, function(req, res){
+
+  Provider.find(function (err, provider){
+  res.render('listproviders', { user: req.user, text: 'Tableau des consultations', prov: provider});
+  });
+});
+/*show new provider*/
+router.get('/addprovider', isAuthenticated, function(req, res){
+	 	 res.render('addprovider', { user: req.user});
+  });
+
+/*POST add provider*/
+router.post('/addprov', isAuthenticated, function(req, res){
+
+      var provider = new Provider();
+      provider.raisonsociale = req.body.raisonsociale;
+      provider.telephone = req.body.telephone;
+      provider.fax = req.body.fax;
+      provider.mail = req.body.mail;
+      provider.adresse = req.body.adresse;
+      provider.site = req.body.site;
+      provider.autre = req.body.autre;
+
+
+      provider.save(function(err) {
+          if (err)
+              res.send(err);
+
+          res.redirect('/listproviders');
+      });
+});
+
+/* Get edit provider*/
+  router.get('/editprovider/:id', isAuthenticated, function(req, res){
+		Provider.findById(req.params.id, function(err, providers){
+
+		 if (err) {
+				 console.log('GET Error: There was a problem retrieving: ' + err);
+		 } else {
+		 res.render('editprovider', {
+				user: req.user,
+				providers: providers
+		 });
+		}
+
+		});
+
+	});
+
+
+/*POST edit provider*/
+router.post('/editprov/:id', isAuthenticated, function(req, res){
+    Provider.findById(req.params.id, function (err, providers) {
+
+    providers.update({
+      raisonsociale: req.body.raisonsociale,
+      telephone: req.body.telephone,
+      fax: req.body.fax,
+      mail: req.body.mail,
+      adresse: req.body.adresse,
+      site: req.body.site,
+      autre: req.body.autre
+    },function (err, providersID){
+      if(err){
+        console.log('GET Error: There was a problem retrieving: ' + err);
+
+      }else{
+        res.redirect("/listproviders");
+      }
+    })
+
+   });
+   });
+
+/*Delete proviprovidersprovidersder*/
+router.delete('/listproviders/:provider_id', isAuthenticated, function(req, res){
+
+  Provider.remove({
+    _id: req.params.provider_id
+  }, function(err, provider) {
+    if (err)
+      res.send(err);
+
+    res.json({ message: 'Provider successfully deleted!' });
+  });
+});
+/*******DEPOTS************/
+/*show listdepot*/
+router.get('/listdepots', isAuthenticated, function(req, res){
+
+  Depot.find(function (err, depots){
+  res.render('listdepots', { user: req.user, text: 'Tableau des dépôts', depot: depots});
+  });
+});
+
+/* Get edit depot*/
+  router.get('/editdepot/:id', isAuthenticated, function(req, res){
+		Depot.findById(req.params.id, function(err, depot){
+
+		 if (err) {
+				 console.log('GET Error: There was a problem retrieving: ' + err);
+		 } else {
+		 res.render('editdepot', {
+				user: req.user,
+				depot: depot
+		 });
+		}
+
+		});
+
+	});
+/*POST edit depot*/
+router.post('/editdepot/:id', isAuthenticated, function(req, res){
+    Depot.findById(req.params.id, function (err, depot) {
+      depot.update({
+      depotname: req.body.depotname
+    },function (err, depotID){
+      if(err){
+        console.log('GET Error: There was a problem retrieving: ' + err);
+
+      }else{
+        res.redirect("/listdepots");
+      }
+    })
+
+   });
+   });
+
+
+   /*Delete depot*/
+   router.delete('/listdepots/:depot_id', isAuthenticated, function(req, res){
+
+     Depot.remove({
+       _id: req.params.depot_id
+     }, function(err, depot) {
+       if (err)
+         res.send(err);
+
+       res.json({ message: 'Depot successfully deleted!' });
+     });
+   });
+/* end DEPOT***************************************/
+
+/*****PRODUCT*****************/
+    /*get add prod*/
+     router.get('/addprod', isAuthenticated, function(req, res){
+
+       Product.find(function(err, prod){
+         res.render('addprod', {user: req.user, prods: prod});
+       });
+
+     });
+
+
+
+     /* Get edit prod*/
+       router.get('/editprod/:id', isAuthenticated, function(req, res){
+     		Product.findById(req.params.id, function(err, prod){
+
+     		 if (err) {
+     				 console.log('GET Error: There was a problem retrieving: ' + err);
+     		 } else {
+     		 res.render('editprod', {
+     				user: req.user,
+     				prod: prod
+     		 });
+     		}
+
+     		});
+
+     	});
+
+
+   /*POST edit prod*/
+   router.post('/editprod/:id', isAuthenticated, function(req, res){
+       Product.findById(req.params.id, function (err, prod) {
+         prod.update({
+         prodcode: req.body.prodcode,
+          prodname: req.body.prodname,
+           extra: req.body.extra,
+            qtemin: req.body.qtemin
+       },function (err, prodID){
+         if(err){
+           console.log('GET Error: There was a problem retrieving: ' + err);
+         }else{
+           res.redirect("/listprod");
+         }
+       })
+
+      });
+      });
+
+
+      /*Delete prod*/
+      router.delete('/listprod/:prod_id', isAuthenticated, function(req, res){
+
+        Product.remove({
+          _id: req.params.prod_id
+        }, function(err, prod) {
+          if (err)
+            res.send(err);
+
+          res.json({ message: 'Product successfully deleted!' });
+        });
+      });

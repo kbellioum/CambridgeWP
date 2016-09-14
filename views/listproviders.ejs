@@ -8,10 +8,10 @@
 
 
     <div class="row">
-  <button id="newpat" type="button" class="btn btn-success" onclick="window.location.href='/addpat'">Nouveau patient</button>
+<button id="newprovider" type="button" class="btn btn-success" onclick="window.location.href='/addprovider'">Nouveau fournisseur</button>
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <span class="section">Liste patients </span>
+            <span class="section">Liste des fournisseurs </span>
 
           <div class="x_content">
 
@@ -24,12 +24,13 @@
                     <th>
                       <input type="checkbox" id="check-all" class="flat">
                     </th>
-                    <th class="column-title">Nom </th>
-                    <th class="column-title">Prénom</th>
-                    <th class="column-title">CIN </th>
-                    <th class="column-title">Ville </th>
-                    <th class="column-title">Status </th>
-                    <th class="column-title">Date de naissance </th>
+                    <th class="column-title">Raison sociale </th>
+                    <th class="column-title">Téléphone</th>
+                    <th class="column-title">Fax </th>
+                    <th class="column-title">Mail </th>
+                    <th class="column-title">Adresse </th>
+                    <th class="column-title">Site Web</th>
+                    <th class="column-title">Autres informations</th>
                     <th class="column-title no-link last"><span class="nobr">Action</span>
                     </th>
                     <th class="bulk-actions" colspan="7">
@@ -39,19 +40,22 @@
                 </thead>
 
                 <tbody>
-                  <% for(var i=0; i < patient.length; i++) { %>
+                  <% for(var i=0; i < prov.length; i++) { %>
                   <tr class="even pointer">
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td class=" "><%= patient[i].patientnom %></td>
-                    <td class=" "><%= patient[i].patientprenom %></td>
-                    <td class=" "><%= patient[i].cin %></td>
-                    <td class=" "><%= patient[i].ville %></td>
-                    <td class=" "><%= patient[i].statu %></td>
-                    <td class=" "><%= patient[i].dob %></td>
-                    <td class=" last"  align='right' width='200px;'><a class="btn btn-info btn-xs" href="/editpat/<%= patient[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a><a class="btn btn-primary btn-xs" href="/viewpat/<%= patient[i]._id %>" role="button"><i class="fa fa-folder"></i> View </a><a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('/listpat/<%= patient[i]._id%>'); else alert('OK')" href="/listpat"><i class="fa fa-trash-o"></i> Delete </a>
 
+                    <td class=" "><%= prov[i].raisonsociale %></td>
+                    <td class=" "><%= prov[i].telephone %></td>
+                    <td class=" "><%= prov[i].fax %></td>
+                    <td class=" "><%= prov[i].mail %></td>
+                    <td class=" "><%= prov[i].adresse %></td>
+                    <td class=" "><%= prov[i].site %></td>
+                    <td class=" "><%= prov[i].autre %></td>
+                 <td class=" last"  align='right' width='120px;'><a class="btn btn-info btn-xs" href="/editprovider/<%= prov[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a>
+                   <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listproviders/<%= prov[i]._id%>');" href="/listproviders"><i class="fa fa-trash-o"></i> Delete </a>
+                    <!--      <a onclick=supprimer('/listpat/<%= prov[i]._id%>') href="/listpat"> Delete </a> -->
                     </td>
                   </tr>
                   <% } %>

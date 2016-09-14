@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Depot',{
-  depotname: String,
+depotname: String,
   inout: [
     {
     prodid: String,
