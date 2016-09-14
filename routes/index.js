@@ -1022,7 +1022,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 
 
-  router.post('/counteCasablancaCasablancar', isAuthenticated, function(req, res){
+  router.post('/counter', isAuthenticated, function(req, res){
 
 		   var counter = new Counter();
        counter.counter = 1;
