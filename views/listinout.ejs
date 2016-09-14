@@ -37,9 +37,8 @@
         <th class="column-title">Code produit</th>
         <th class="column-title">Désignation produit</th>
         <th class="column-title">Date entrée</th>
-        <th class="column-title">Qté entrée</th>
-        <th class="column-title">Unité</th>
-        <th class="column-title">Nbre Unités</th>
+        <th class="column-title">Qté Entrée</th>
+        <th class="column-title">Qté Unitaire</th>
         <th class="column-title">Total Sortie</th>
         <th class="column-title">Stock actuel</th>
         <th class="column-title">Date expiration</th>
@@ -52,50 +51,50 @@
         </th>
       </tr>
     </thead>
-
     <tbody>
-<!--
+
       <% for (var i = 0; i < depots.length; i++) {%>
         <% for (var j = 0; j< depots[i].inout.length; j++) {%>
--->
-      <tr class="even pointer">
-        <td class="a-center ">
-          <input type="checkbox" class="flat" name="table_records">
-        </td>
-        <td class=" ">Casa</td>
-        <td class=" ">1234567890</td>
-        <td class=" ">Chocolat</td>
-        <td class=" ">01/01/2016</td>
-        <td class=" ">20</td>
-        <td class=" ">Box</td>
-        <td class=" ">100</td>
-        <td class=" ">45</td>
-        <td class=" ">55</td>
-        <td class=" ">31/12/2016</td>
-        <td class=" ">10</td>
+
+<tr class="even pointer">
+  <td class="a-center ">
+    <input type="checkbox" class="flat" name="table_records">
+  </td>
+  <td class=" "><%= depots[i].depotname %></td>
+  <td class=" "><%= depots[i].inout[j].prodcode %></td>
+  <td class=" ">Chocolat</td>
+  <td class=" "><%= depots[i].inout[j].datein %></td>
+  <td class=" "><%= depots[i].inout[j].prodqteinit %> <%= depots[i].inout[j].produnite %></td>
+  <td class=" "><%= depots[i].inout[j].prodqteinit %></td> <!--quantité en unités-->
+  <td class=" "><%= depots[i].inout[j].prodqteinit - depots[i].inout[j].prodqtemv %></td><!--quantité totale sortie-->
+  <td class=" "><%= depots[i].inout[j].prodqtemv %></td><!--quantité restante en stock-->
+  <td class=" "><%= depots[i].inout[j].dateexp %></td>
+  <td class=" "><%= prods.qtemin %></td><!--stock alert-->
 <!--
-        <td class=" "><%= depots[i].depotname %></td>
+  <td class=" "><%= depots[i].depotname %></td>
 
-        <td class=" "><%= depots[i].inout[j].prodcode %></td>
+  <td class=" "><%= depots[i].inout[j].prodcode %></td>
 
-        <td class=" "><%= depots[i].inout[j].produnite %></td>
+  <td class=" "><%= depots[i].inout[j].produnite %></td>
 
-        <td class=" "><%= depots[i].inout[j].prodqteinit %></td>
+  <td class=" "><%= depots[i].inout[j].prodqteinit %></td>
 
-        <td class=" "><%= depots[i].inout[j].prodqtemv %></td>
+  <td class=" "><%= depots[i].inout[j].prodqtemv %></td>
 
-        <td class=" "><%= depots[i].inout[j].dateexp %></td>
+  <td class=" "><%= depots[i].inout[j].dateexp %></td>
 
 -->
-        <td class=" last">
-          <a class="" href="#" role="button"> Edit transaction</a>
+<td class=" last"  align='right' width='200px;'>
+    <a class="btn btn-info btn-xs" href="#" role="button"><i class="fa fa-pencil"></i> Edit </a>
+    <a class="btn btn-primary btn-xs" href="#" role="button"><i class="fa fa-folder"></i> View </a>
+    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('#'); else alert('OK')" href="#"><i class="fa fa-trash-o"></i> Delete </a>
 
-        </td>
-      </tr>
-<!--
+</td>
+
+
         <% } %>
       <% } %>
--->
+
     </tbody>
   </table>
 </div>

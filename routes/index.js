@@ -1017,7 +1017,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 
 
-  router.post('/counteCasablancaCasablancar', isAuthenticated, function(req, res){
+  router.post('/counter', isAuthenticated, function(req, res){
 
 		   var counter = new Counter();
        counter.counter = 1;
@@ -1256,10 +1256,10 @@ console.log(prodcode);
  });
 
 router.get('/listinout', isAuthenticated, function(req, res){
-
-  Depot.find(function(err, depot){
-
-    res.render('listinout', {user: req.user, depots: depot});
+  Product.find(function(err, prod){
+    Depot.find(function(err, depot){
+      res.render('listinout', {user: req.user, prods: prod, depots: depot});
+    });
 
   });
 
