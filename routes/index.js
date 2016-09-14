@@ -1186,8 +1186,9 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 
 
-
-   var prodcode = prodinfo.substring(0,9);
+   var ss = prodinfo.split('|');
+   console.log(ss[0].trim());
+   var prodcode =  ss[0].trim(); //prodinfo.substring(0,9);
 
    Product.findOne({prodcode: prodcode}, function(err, prod){
 console.log(prodcode);
@@ -1474,6 +1475,39 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
 
       });
+
+      router.get('/listuser/:id', isAuthenticated, function(req, res){
+
+        Users.findById(req.params.id, function(err, users){
+
+          res.render('edituser', {user: req.user, users: users});
+          //res.json(users);
+
+        });
+
+      });
+
+      router.post('/listuser/:id', isAuthenticated, function(req, res){
+
+        Users.findById(req.params.id, function (err, users) {
+          users.update({
+          username: req.body.username,
+           firstName: req.body.firstName,
+            lastName: req.body.lastName,
+             email: req.body.email,
+             password: req.body.password
+        },function (err, usersID){
+          if(err){
+            console.log('GET Error: There was a problem retrieving: ' + err);
+          }else{
+            res.redirect("/userlist");
+          }
+        })
+
+        });
+
+      });
+
 
 
       /*Delete prod*/

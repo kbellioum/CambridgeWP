@@ -1,0 +1,86 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+
+          <div class="x_content">
+            <form action="/listuser/<%= users._id %>" method="POST" class="">
+              <h1>Create Account</h1>
+
+              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control" value="<%= users.username %>"/>
+              <input type="password" name="password" placeholder="Password" class="form-control nomargin"/>
+              <input type="email" name="email" placeholder="Email" required="required" class="form-control" value="<%= users.email %>"/>
+              <input type="text" name="firstName" placeholder="First Name" required="required" class="form-control" value="<%= users.firstName %>"/>
+              <input type="text" name="lastName" placeholder="Last Name" required="required" class="form-control" value="<%= users.lastName %>"/>
+            <!--  <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button><span class="clearfix"></span>
+
+-->
+
+              </div>
+
+              <div class="clearfix"></div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="">
+                  <!--
+                  <button type="submit" class="btn btn-primary">Cancel</button>
+                -->
+                  <input type="hidden" name="_method" value="PUT">
+                  <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- this -->
+
+<!-- end this -->
+
+
+  </div>
+</div>
+<!-- /page content -->
+
+
+
+
+<!-- /page content -->
+
+
+
+
+
+
+
+<% include footer.ejs %>
+
+
+<!-- jQuery Tags Input -->
+<script>
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+
+  function onChangeTag(input, tag) {
+    alert("Changed a tag: " + tag);
+  }
+
+  $(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+  });
+
+<!-- /jQuery Tags Input -->
