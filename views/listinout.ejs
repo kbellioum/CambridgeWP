@@ -11,7 +11,17 @@
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <span class="section">Liste des I/O </span>
+          <div class="x_title">
+    <h2>Liste des Entrées / Sorties<small>Gestion de Stock</small></h2>
+      <div class="pull-right">
+        <a class="btn btn-primary btn-md" href="/stockin" role="button"><i class="fa fa-plus"></i>   Nouveau entrée</a>
+        <a class="btn btn-danger btn-md" href="/adddepot" role="button"><i class="fa fa-plus"></i>   Nouveau sortie</a>
+      </div>
+
+
+
+    <div class="clearfix"></div>
+  </div>
 
           <div class="x_content">
 
@@ -23,19 +33,17 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th class="column-title">Dépôt Name</th>
-
-        <th class="column-title">Product Code</th>
-
+        <th class="column-title">Dépôt</th>
+        <th class="column-title">Code produit</th>
+        <th class="column-title">Désignation produit</th>
+        <th class="column-title">Date entrée</th>
+        <th class="column-title">Qté entrée</th>
         <th class="column-title">Unité</th>
-
-        <th class="column-title">Quantité init</th>
-
-        <th class="column-title">Quantité movement</th>
-
-        <th class="column-title">Date d'expiration</th>
-
-
+        <th class="column-title">Nbre Unités</th>
+        <th class="column-title">Total Sortie</th>
+        <th class="column-title">Stock actuel</th>
+        <th class="column-title">Date expiration</th>
+        <th class="column-title">Stock Alerte</th>
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
         </th>
@@ -46,14 +54,26 @@
     </thead>
 
     <tbody>
-
+<!--
       <% for (var i = 0; i < depots.length; i++) {%>
         <% for (var j = 0; j< depots[i].inout.length; j++) {%>
-
+-->
       <tr class="even pointer">
         <td class="a-center ">
           <input type="checkbox" class="flat" name="table_records">
         </td>
+        <td class=" ">Casa</td>
+        <td class=" ">1234567890</td>
+        <td class=" ">Chocolat</td>
+        <td class=" ">01/01/2016</td>
+        <td class=" ">20</td>
+        <td class=" ">Box</td>
+        <td class=" ">100</td>
+        <td class=" ">45</td>
+        <td class=" ">55</td>
+        <td class=" ">31/12/2016</td>
+        <td class=" ">10</td>
+<!--
         <td class=" "><%= depots[i].depotname %></td>
 
         <td class=" "><%= depots[i].inout[j].prodcode %></td>
@@ -66,15 +86,16 @@
 
         <td class=" "><%= depots[i].inout[j].dateexp %></td>
 
-
+-->
         <td class=" last">
           <a class="" href="#" role="button"> Edit transaction</a>
 
         </td>
       </tr>
+<!--
         <% } %>
       <% } %>
-
+-->
     </tbody>
   </table>
 </div>

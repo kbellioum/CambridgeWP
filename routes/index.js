@@ -1190,7 +1190,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
    var prodcode = prodinfo.substring(0,9);
 
    Product.findOne({prodcode: prodcode}, function(err, prod){
-
+console.log(prodcode);
      var prodid = prod._id;
 
      var obj = {
