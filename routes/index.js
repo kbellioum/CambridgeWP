@@ -678,9 +678,9 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
     var question3 = req.body.question3;
 
 		Patient.findById(req.params.id, function (err, patients) {
-console.log(question1);
-console.log(question2);
-console.log(question3);
+      console.log(question1);
+      console.log(question2);
+      console.log(question3);
 			patients.update({
 				patientnom: name,
 				patientprenom: prenom,
