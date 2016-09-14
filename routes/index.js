@@ -1,4 +1,5 @@
 var express = require('express');
+var bCrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
 
@@ -16,6 +17,10 @@ var Getdate = function(d){
    var out = d.substring(0, 10).split("-",3);
    var dd = out[1] + "/" + out[2] + "/" + out[0]
    return dd;
+}
+
+var createHash = function(password){
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 }
 
 var Gethour = function(h){
@@ -1495,7 +1500,7 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
            firstName: req.body.firstName,
             lastName: req.body.lastName,
              email: req.body.email,
-             password: req.body.password
+            password: createHash(req.body.password)
         },function (err, usersID){
           if(err){
             console.log('GET Error: There was a problem retrieving: ' + err);

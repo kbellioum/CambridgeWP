@@ -7,16 +7,48 @@
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
+          <div class="x_title">
+          <h2>Update User Account <small>App Administration</small></h2>
+          <div class="clearfix"></div>
 
+        </div>
           <div class="x_content">
             <form action="/listuser/<%= users._id %>" method="POST" class="">
-              <h1>Create Account</h1>
 
-              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control" value="<%= users.username %>"/>
-              <input type="password" name="password" placeholder="Password" class="form-control nomargin"/>
-              <input type="email" name="email" placeholder="Email" required="required" class="form-control" value="<%= users.email %>"/>
-              <input type="text" name="firstName" placeholder="First Name" required="required" class="form-control" value="<%= users.firstName %>"/>
-              <input type="text" name="lastName" placeholder="Last Name" required="required" class="form-control" value="<%= users.lastName %>"/>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                <label for="">First Name :</label>
+              <input type="text" name="firstName" placeholder="First Name" required="required" class="form-control has-feedback-left" value="<%= users.firstName %>"/>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                <label for="">Last Name :</label>
+              <input type="text" name="lastName" placeholder="Last Name" required="required" class="form-control has-feedback-right" value="<%= users.lastName %>"/>
+              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+              <label for="">Username :</label>
+              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+              <label for="">Password :</label>
+              <input type="password" name="password" placeholder="Password" required="required" autofocus="autofocus" class="form-control has-feedback-right"/>
+              <span class="fa fa-key form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                <label for="">Email :</label>
+              <input type="email" name="email" placeholder="Email" required="required" class="form-control has-feedback-left" value="<%= users.email %>"/>
+              <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+
+
             <!--  <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button><span class="clearfix"></span>
 
 -->
