@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "startw" : "nodejs ./bin/www"
+    "startw": "nodejs ./bin/www"
   },
   "dependencies": {
     "bcrypt-nodejs": "*",
@@ -18,6 +18,7 @@
     "jade": "~1.3.0",
     "mongoose": "~3.8.12",
     "morgan": "~1.0.0",
+    "nodemon": "^1.10.2",
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
     "static-favicon": "~1.0.0"
