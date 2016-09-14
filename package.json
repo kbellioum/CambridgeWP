@@ -1,10 +1,9 @@
 {
-  "name": "passport-mongo",
+  "name": "CambridgeWP",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "startw": "nodejs ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt-nodejs": "*",
