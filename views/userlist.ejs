@@ -13,7 +13,7 @@
           <div class="x_title">
     <h2>Users List <small>App Administration</small></h2>
       <div class="pull-right">
-        <a class="btn btn-default btn-md" href="/signup" role="button"><i class="fa fa-plus"></i>   Add User</a>
+        <a class="btn btn-default btn-md" href="/adduser" role="button"><i class="fa fa-plus"></i>   Add User</a>
       </div>
 
 
@@ -61,7 +61,7 @@
 
 
 
-                    <td class=" last"  align='right' width='200px;'><a class="btn btn-info btn-xs" href="/listuser/<%= users[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a><a class="btn btn-primary btn-xs" href="#" role="button"><i class="fa fa-folder"></i> View </a>
+                    <td class=" last"  align='right' width='200px;'><a class="btn btn-info btn-xs" href="/listuser/<%= users[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a><a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer cet utilisateur ?')) supprimer('/deluser/<%= users[i]._id%>'); else alert('OK')" href="/userlist"><i class="fa fa-trash-o"></i> Delete </a>
 
                     </td>
                   </tr>

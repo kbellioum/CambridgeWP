@@ -13,23 +13,23 @@
 
         </div>
           <div class="x_content">
-            <form action="/listuser/<%= users._id %>" method="POST" class="">
+            <form action="/adduser" method="POST" class="">
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
                 <label for="">First Name :</label>
-              <input type="text" name="firstName" placeholder="First Name" required="required" class="form-control has-feedback-left" value="<%= users.firstName %>"/>
+              <input type="text" name="firstName" placeholder="First Name" required="required" class="form-control has-feedback-left"/>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
                 <label for="">Last Name :</label>
-              <input type="text" name="lastName" placeholder="Last Name" required="required" class="form-control has-feedback-right" value="<%= users.lastName %>"/>
+              <input type="text" name="lastName" placeholder="Last Name" required="required" class="form-control has-feedback-right"/>
               <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Username :</label>
-              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
+              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left"/>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -43,7 +43,7 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
                 <label for="">Email :</label>
-              <input type="email" name="email" placeholder="Email" required="required" class="form-control has-feedback-left" value="<%= users.email %>"/>
+              <input type="email" name="email" placeholder="Email" required="required" class="form-control has-feedback-left"/>
               <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -62,8 +62,8 @@
                   <!--
                   <button type="submit" class="btn btn-primary">Cancel</button>
                 -->
-                  <input type="hidden" name="_method" value="PUT">
-                  <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                  <input type="hidden" name="_method" value="post">
+                  <button id="send" type="submit" class="btn btn-success">Save</button>
                 </div>
               </div>
             </form>
