@@ -1,6 +1,24 @@
 <% include header.ejs %>
 
 <!-- page content -->
+<script>
+
+function ConvertToUnit(qte, unittype){
+
+    if (unittype == "Boîte"){
+      return Number(qte) * 21;
+    }else if (unittype == "Caisse"){
+      return Number(qte) * 6 * 21;
+    }else if(unittype == "Unité"){
+      return Number(qte);
+    }
+
+
+
+}
+
+
+</script>
 
 <div class="right_col" role="main">
   <div class="">
@@ -30,19 +48,16 @@
   <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
     <thead>
       <tr class="headings">
-        <th>
-          <input type="checkbox" id="check-all" class="flat">
-        </th>
+
         <th class="column-title">Dépôt</th>
         <th class="column-title">Code produit</th>
         <th class="column-title">Désignation produit</th>
         <th class="column-title">Date entrée</th>
-        <th class="column-title">Qté Entrée</th>
-        <th class="column-title">Qté Unitaire</th>
+        <th class="column-title">Qté Initiale</th>
         <th class="column-title">Total Sortie</th>
         <th class="column-title">Stock actuel</th>
         <th class="column-title">Date expiration</th>
-        <th class="column-title">Stock Alerte</th>
+
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
         </th>
@@ -57,19 +72,27 @@
         <% for (var j = 0; j< depots[i].inout.length; j++) {%>
 
 <tr class="even pointer">
-  <td class="a-center ">
-    <input type="checkbox" class="flat" name="table_records">
-  </td>
+
   <td class=" "><%= depots[i].depotname %></td>
   <td class=" "><%= depots[i].inout[j].prodcode %></td>
-  <td class=" ">Chocolat</td>
+  <% for(var l = 0; l < prods.length; l++){%>
+    <% if (depots[i].inout[j].prodcode == prods[l].prodcode){%>
+      <td class=" "><%= prods[l].prodname %> </td>
+    <%}%>
+
+  <%}%>
+
   <td class=" "><%= depots[i].inout[j].datein %></td>
-  <td class=" "><%= depots[i].inout[j].prodqteinit %> <%= depots[i].inout[j].produnite %></td>
-  <td class=" "><%= depots[i].inout[j].prodqteinit %></td> <!--quantité en unités-->
-  <td class=" "><%= depots[i].inout[j].prodqteinit - depots[i].inout[j].prodqtemv %></td><!--quantité totale sortie-->
+  <td class=" "><%= depots[i].inout[j].prodqteinit %> <%= depots[i].inout[j].produnite %> (<script>
+    document.write(ConvertToUnit(<%= depots[i].inout[j].prodqteinit %>, "<%= depots[i].inout[j].produnite %>"));
+  </script> Unités)</td>
+  <td class=" "><script>
+        document.write(ConvertToUnit(<%= depots[i].inout[j].prodqteinit %>, "<%= depots[i].inout[j].produnite %>") - Number("<%=depots[i].inout[j].prodqtemv %>"));
+  </script>
+    </td><!--quantité totale sortie-->
   <td class=" "><%= depots[i].inout[j].prodqtemv %></td><!--quantité restante en stock-->
   <td class=" "><%= depots[i].inout[j].dateexp %></td>
-  <td class=" "><%= prods.qtemin %></td><!--stock alert-->
+  <!--stock alert-->
 <!--
   <td class=" "><%= depots[i].depotname %></td>
 
@@ -112,6 +135,8 @@
 
 
 <script src="../build/js/Helper.js"></script>
+
+
 
 
 
