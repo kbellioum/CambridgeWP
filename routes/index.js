@@ -1164,22 +1164,24 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
  router.get('/stockin', isAuthenticated, function(req, res){
    var dt = new Date().toISOString();
    //s.split("").reverse().join("")
+  Provider.find(function (err, provider){
    Product.find(function(err, prod){
      Depot.find(function(err, depot){
-       res.render('stockin', {user: req.user, prods: prod, depots: depot,dt: dt.substring(0,10).split("-").reverse().join("/")});
+       res.render('stockin', {user: req.user, prods: prod, depots: depot, providers: provider,dt: dt.substring(0,10).split("-").reverse().join("/")});
      });
-
-   });
+    });
+  });
 
  });
 
 
  router.post('/stockin', isAuthenticated, function(req, res){
+var datesys = new Date();
 
    var prodinfo = req.body.prodinfo;
    var prodqte = req.body.prodqte;
    var produnite = req.body.produnite;
-   var proddatein = req.body.datein;
+   var proddatein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
    var proddateexp = req.body.dateexp;
    var proddepot = req.body.depot;
    var dateachat = req.body.dateachat;
@@ -1215,7 +1217,7 @@ console.log(prodcode);
        numbc: numbc,
        numbl: numbl
      };
-
+console.log(obj);
      Depot.findOne({depotname: proddepot}, function(err, depot){
 
        depot.inout.push(obj);
@@ -1225,9 +1227,9 @@ console.log(prodcode);
        }, function (err, depotID){
          if(err){
            console.log('GET Error: There was a problem retrieving: ' + err);
-           res.redirect('/home');
+           res.redirect('/listinout');
          }else{
-           res.redirect("/home");
+           res.redirect("/listinout");
          }
        })
 

@@ -1,0 +1,75 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+			<div class="row"  >
+						<div class="x_title">
+							<h2>Nouvelle Entrée en stock <small>Gestion de Stock</small></h2>
+							<div class="" align="right">
+								<label for="">Date d'arrivée : <%= dt %></label>
+							</div>
+						</div>
+				</div>
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/stockin1" method="post">
+
+	 
+
+				<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+								<label for="">Dépôt : </label>
+									<select type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" required="required" placeholder="Statu familliale">
+										<option>Choisir un Dépôt</option>
+										<% for (var i = 0; i < depots.length; i++){%>
+											<option><%= depots[i].depotname %></option>
+										<%}%>
+									</select>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+								<label for="">Date Achat : </label>
+								<input type="text" class="form-control has-feedback-right" id="dateachat" placeholder="Date" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'" name="daterdv">
+								<span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+								<span id="inputSuccess2Status4" class="sr-only">(success)</span>
+								<!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+						</div>
+				</div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+            <label for="">Nom du Dépôt : </label>
+            <input class="form-control"   name="depotname" placeholder="Nom du Dépôt" required="required" type="text" >
+            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+        </div>
+
+
+
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+            <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste des dépôts</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>
