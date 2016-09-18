@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Depot',{
-depotname: String,
-  inout: [
-    {
+module.exports = mongoose.model('inout',{
+    depotname: String,
     prodid: String,
     prodcode: String,
+    prodname: String,
     prodqteinit: Number,
     prodqtemv: Number,
     produnite: String,
@@ -17,11 +16,10 @@ depotname: String,
     Fournisseur: String,
     numbc: String,
     numbl: String,
-    inout: [{
+    motifin: String,
+    out: [{
       qteout: Number,
-      motif: String,
+      motifout: String,
       dateout: String
     }]
-  }
-  ]
 });

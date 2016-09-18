@@ -1161,6 +1161,16 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  });
 
+ router.get('/listinout', isAuthenticated, function(req, res){
+   Product.find(function(err, prod){
+     Depot.find(function(err, depot){
+       res.render('listinout', {user: req.user, prods: prod, depots: depot});
+     });
+
+   });
+
+ });
+
  router.get('/stockin', isAuthenticated, function(req, res){
    var dt = new Date().toISOString();
    //s.split("").reverse().join("")
@@ -1198,7 +1208,7 @@ var datesys = new Date();
    var prodcode =  ss[0].trim(); //prodinfo.substring(0,9);
 
    Product.findOne({prodcode: prodcode}, function(err, prod){
-console.log(prodcode);
+  console.log(prodcode);
      var prodid = prod._id;
 
      var obj = {
@@ -1217,7 +1227,7 @@ console.log(prodcode);
        numbc: numbc,
        numbl: numbl
      };
-console.log(obj);
+     console.log(obj);
      Depot.findOne({depotname: proddepot}, function(err, depot){
 
        depot.inout.push(obj);
@@ -1239,6 +1249,39 @@ console.log(obj);
    });
 
  });
+
+ router.get('/stockout', isAuthenticated, function(req, res){
+   var iddepot = req.query.iddepot;
+   var inid = req.query.vid;
+   var dt = new Date().toISOString();
+   Depot.findById(iddepot, function(err, depot){
+     for (i=0; i< depot.inout.length; i++){
+       if(depot.inout[i]._id.toString() === inid.toString()){
+       total = total + patient.visites[i].prix;
+       var factnum = patient.visites[i].factnum;
+       var discount = patient.visites[i].discount;
+       }
+     }
+   var totalr = (total - ((total * discount)/100));
+
+   if (err) {
+       console.log('GET Error: There was a problem retrieving: ' + err);
+   } else {
+   res.render('invoice', {
+      user: req.user,
+      patient: patient,
+      total: totalr,
+      index: factnum,
+      vid: vid,
+      discount: discount,
+      date: d.substring(0,10).split("-").reverse().join("/")
+   });
+   }
+
+   });
+
+ });
+
 
 
  router.get('/adddepot', isAuthenticated, function(req, res){
@@ -1262,15 +1305,6 @@ console.log(obj);
 
  });
 
-router.get('/listinout', isAuthenticated, function(req, res){
-  Product.find(function(err, prod){
-    Depot.find(function(err, depot){
-      res.render('listinout', {user: req.user, prods: prod, depots: depot});
-    });
-
-  });
-
-});
 
 
 	/* Handle Logout */
