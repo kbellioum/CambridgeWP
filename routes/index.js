@@ -1166,7 +1166,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 
 
- router.get('/listinout', function(req, res){
+ router.get('/listinout', isAuthenticated, function(req, res){
       Depotinout.find(function(err, result){
        console.log(result);
        res.render('listinout', {user: req.user, inout: result});
@@ -1190,7 +1190,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
  });
 
 
- router.post('/stockin', function(req, res){
+ router.post('/stockin', isAuthenticated, function(req, res){
 
    console.log("debut post stockin");
    var datesys = new Date();
