@@ -816,9 +816,9 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
 	router.get('/test', isAuthenticated, function(req, res){
 
-    var permissions = JSON.parse(req.user.permissions);
 
-    res.render('test', {user: req.user, tt: "Prog 1", permissions: permissions });
+
+    res.render('test', {user: req.user, tt: "Prog 1"});
 
 
   });

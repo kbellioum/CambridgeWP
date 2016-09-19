@@ -4,8 +4,8 @@
 <div class="right_col" role="main" style="min-height: 368px;">
 
 
-  <span>Loged user : <%= user.username %></span>
-  <span>Permissions menu1 : <%= permissions %></span>
+  <span>Loged user : <%= user %></span>
+
 
 
 <h1>Test </h1>
@@ -26,7 +26,14 @@
       <option>Cons 6</option>
     </select>
   </div>
+<div id="container">
+  <label id="data" for=""></label>
+  <button id="btn" type="button" name="button"></button>
 </div>
+</div>
+
+<label for="search">Search: </label>
+<input id="search">
 
 
 </div>
@@ -35,3 +42,39 @@
 
 
 <% include footer.ejs %>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  var t = "<%= user.username %>";
+  var to = "<%= user.lastName %>";
+  var perm = "<%= user.permissions %>";
+  var tab = [{ll: "one", kk: "two"}, {ll: "tree", kk: "four"}];
+
+  $("#data").text(t + " : " + $("#prog").val());
+
+  var t =<%- JSON.stringify(user) %>;
+
+  $('#container').append("<p> username : "+  t.username + "</p>");
+  $('#container').append("<p> lastname : "+  t.lastName + "</p>");
+  $('#container').append("<p> firstname : "+  t.firstName + "</p>");
+  $('#container').append("<p> email : "+  t.email + "</p>");
+  $('#container').append("<p> permissions : "+ JSON.stringify(t.permissions) + "</p>");
+
+  var to = "<%= user.lastName %>";
+  var perm = "<%= user.permissions %>";
+  var tab = [{ll: "one", kk: "two"}, {ll: "tree", kk: "four"}];
+  var i = 0;
+  $("#btn").click(function(){
+    i++;
+    $("#container").append("<label> || " + i + " || </label>");
+  });
+
+
+  //permissions: { menu3: true, menu2: false, menu1: true }
+  //console.log(perm);
+  //alert(t + " " + to + " " + perm + " " + tab);
+
+});
+</script>
