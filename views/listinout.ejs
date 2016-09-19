@@ -12,11 +12,25 @@ function ConvertToUnit(qte, unittype){
     }else if(unittype == "Unité"){
       return Number(qte);
     }
-
-
-
 }
-
+/*
+depotname: String,
+prodid: String,
+prodcode: String,
+prodname: String,
+prodqteinit: Number,
+prodqtemv: Number,
+produnite: String,
+datein: String,
+dateexp: String,
+dateachat: String,
+prixachat: Number,
+prixvente: Number,
+Fournisseur: String,
+numbc: String,
+numbl: String,
+motifin: String,
+*/
 
 </script>
 
@@ -69,42 +83,33 @@ function ConvertToUnit(qte, unittype){
     </thead>
     <tbody>
 
-      <% for (var i = 0; i < depots.length; i++) {%>
-        <% for (var j = 0; j< depots[i].inout.length; j++) {%>
+      <% for (var i = 0; i < inout.length; i++) {%>
+
 
 <tr class="even pointer">
 
-  <td class=" "><%= depots[i].depotname %></td>
-  <td class=" "><%= depots[i].inout[j].prodcode %></td>
-  <% for(var l = 0; l < prods.length; l++){%>
-    <% if (depots[i].inout[j].prodcode == prods[l].prodcode){%>
-      <td class=" "><%= prods[l].prodname %> </td>
-    <%}%>
-
-  <%}%>
-
-  <td class=" "><%= depots[i].inout[j].dateachat %></td>
-  <td class=" "><%= depots[i].inout[j].prodqteinit %> <%= depots[i].inout[j].produnite %> (<script>
-    document.write(ConvertToUnit(<%= depots[i].inout[j].prodqteinit %>, "<%= depots[i].inout[j].produnite %>"));
+  <td class=" "><%= inout[i].depotname %></td>
+  <td class=" "><%= inout[i].prodcode %></td>
+  <td class=" "><%= inout[i].prodname %> </td>
+  <td class=" "><%= inout[i].dateachat %></td>
+  <td class=" "><%= inout[i].prodqteinit %> <%= inout[i].produnite %> (<script>
+    document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>"));
   </script> Unités)</td>
   <td class=" "><script>
-        document.write(ConvertToUnit(<%= depots[i].inout[j].prodqteinit %>, "<%= depots[i].inout[j].produnite %>") - Number("<%=depots[i].inout[j].prodqtemv %>") + '  Unités');
+        document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
   </script>
     </td><!--quantité totale sortie-->
-  <td class=" "><%= depots[i].inout[j].prodqtemv %>    Unités</td><!--quantité restante en stock-->
-  <td class=" "><%= depots[i].inout[j].dateexp %></td>
-  <td class=" "><%= depots[i].inout[j].datein %></td>
+  <td class=" "><%= inout[i].prodqtemv %>    Unités</td><!--quantité restante en stock-->
+  <td class=" "><%= inout[i].dateexp %></td>
+  <td class=" "><%= inout[i].datein %></td>
 
 <td class=" last"  align='right' width='200px;'>
 
     <a class="btn btn-primary btn-xs" href="#" role="button"><i class="fa fa-folder"></i> Edit </a>
     <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('#'); else alert('OK')" href="#"><i class="fa fa-trash-o"></i> Delete </a>
-    <a class="btn btn-warning btn-xs" href="/stockout/?iddepot=<%= depots[i]._id %>&inid=<%= depots[i].inout[j]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
+    <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
 </td>
-
-
-        <% } %>
-      <% } %>
+  <% } %>
 
     </tbody>
   </table>

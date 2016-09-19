@@ -67,7 +67,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Numéro Bon de commande <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="Numéro bon de commande" type="text">
+                                 <input value="BC1" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="Numéro bon de commande" type="text">
                                </div>
                              </div>
 
@@ -76,7 +76,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Numéro bon de livraison <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="numbl" placeholder="Numéro bon de livraison"  type="text" >
+                                 <input value="BL1" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="numbl" placeholder="Numéro bon de livraison"  type="text" >
                                </div>
                              </div>
 
@@ -90,7 +90,7 @@
                                  <select class="select2_single form-control" name="prodinfo" type="text" required="required" >
                                    <option></option>
                                    <% for (var i = 0; i < prods.length; i++) {%>
-                                     <option><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
+                                     <option value="<%= prods[i]._id + ' | ' + prods[i].prodcode + ' | ' + prods[i].prodname %>"><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
                                    <%}%>
                                  </select>
                                </div>
@@ -100,7 +100,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input class="form-control  col-md-7 col-xs-12" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
+                                 <input value="10" class="form-control  col-md-7 col-xs-12" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
                                </div>
                              </div>
 
@@ -130,7 +130,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix d'achat <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="prixachat" placeholder="Prix d'achat" required="required" type="text" >
+                                 <input value="1000" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="prixachat" placeholder="Prix d'achat" required="required" type="text" >
                                </div>
                              </div>
 
@@ -138,7 +138,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix de vente <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input class="form-control   col-md-7 col-xs-12" data-validate-length-range="6"  name="prixvente" placeholder="Prix de vente" required="required" type="text" >
+                                 <input  value="1600" class="form-control   col-md-7 col-xs-12" data-validate-length-range="6"  name="prixvente" placeholder="Prix de vente" required="required" type="text" >
                                </div>
                              </div>
 

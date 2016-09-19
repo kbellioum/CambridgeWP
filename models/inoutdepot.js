@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('inout',{
+module.exports = mongoose.model('Inoutdepot',{
     depotname: String,
     prodid: String,
     prodcode: String,
@@ -13,13 +13,13 @@ module.exports = mongoose.model('inout',{
     dateachat: String,
     prixachat: Number,
     prixvente: Number,
-    Fournisseur: String,
+    fournisseur: String,
     numbc: String,
     numbl: String,
-    motifin: String,
+    motifin: String/*,
     out: [{
       qteout: Number,
       motifout: String,
       dateout: String
-    }]
+    }]*/
 });
