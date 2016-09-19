@@ -9,146 +9,183 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
-      <div class="x_title">
-        <h2>Nouvelle Entrée en stock <small>Stock de Stock</small></h2>
-
-        <div class="clearfix"></div>
-
-      </div>
-      <div class="x_content">
-
-      <form class="form-horizontal form-label-left input_mask" novalidate action="/stockin" method="post">
-
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Dépôt : </label>
-              <select type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
-                <option>Choisir un Dépôt</option>
-                <% for (var i = 0; i < depots.length; i++){%>
-                  <option><%= depots[i].depotname %></option>
-                <%}%>
-              </select>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
-          <label>Code produit : </label>
-          <div class="">
-            <select class="select2_single form-control" name="prodinfo" type="text">
-              <option></option>
-              <% for (var i = 0; i < prods.length; i++) {%>
-                <option><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
-              <%}%>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Fournisseur : </label>
-              <select id="statu" type="text" name="fournisseur"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Fournisseur">
-                <option>Cambridge Store</option>
-
-              </select>
-        </div>
-
-
-        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
-            <label for="">Numéro Bon de commande : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="Numéro bon de commande" type="text">
-            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-        </div>
-
-
-        <div class="col-md-3 col-sm-3 item form-group has-feedback">
-            <label for="">Numéro bon de livraison : </label>
-            <input class="form-control" data-validate-length-range="6"  name="numbl" placeholder="Numéro bon de livraison" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-        </div>
-
-        <div class="clearfix"></div>
-        <div class="divider-dashed"></div>
-
-        <div class="col-md-3 col-sm-3 item form-group has-feedback">
-            <label for="">Quantité : </label>
-            <input class="form-control" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-        </div>
-
-        <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
-            <label for="">Type de regroupement : </label>
-            <div class="radio">
-              <label>
-                  <input type="radio" checked="" value="Caisse" id="optionsRadios1" name="produnite"> Caisse
-              </label>
-              <label>
-                  <input type="radio" checked="" value="Boîte" id="optionsRadios1" name="produnite"> Boîte
-              </label>
-              <label>
-                  <input type="radio" checked="" value="Unité" id="optionsRadios1" name="produnite"> Unité
-              </label>
+      <div class="row"  >
+            <div class="x_title">
+              <h2>Nouvelle Entrée en stock <small>Gestion de Stock</small></h2>
+              <div class="" align="right">
+                <label for="">Date d'arrivée : <%= dt %></label>
+              </div>
             </div>
         </div>
 
-        <div class="clearfix"></div>
-        <div class="divider-dashed"></div>
+
+        <div class="x_content">
+                           <br>
+                               <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left input_mask" novalidate="" action="/stockin" method="post">
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dépôt <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <select type="text" name="depot"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required" >
+                                   <option>Choisir un Dépôt</option>
+                                   <% for (var i = 0; i < depots.length; i++){%>
+                                     <option><%= depots[i].depotname %></option>
+                                   <%}%>
+                                 </select>
+
+                               </div>
+                             </div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Date d'achat : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="dateachat" placeholder="date d'achat" type="text">
-            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-        </div>
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fournisseur <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <select type="text" name="fournisseur"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required" >
+                                   <option>Choisir un Fournisseur</option>
+                                   <% for (var i = 0; i < providers.length; i++){%>
+                                     <option><%= providers[i].raisonsociale %></option>
+                                   <%}%>
+                                 </select>
+                               </div>
+                             </div>
 
 
-        <div class="col-md-3 col-sm-3 item form-group has-feedback">
-            <label for="">Prix d'achat : </label>
-            <input class="form-control" data-validate-length-range="6"  name="prixachat" placeholder="Prix d'achat" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-        </div>
-
-
-        <div class="col-md-3 col-sm-3 item form-group has-feedback">
-            <label for="">Prix de vente : </label>
-            <input class="form-control" data-validate-length-range="6"  name="prixvente" placeholder="Prix de vente" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-        </div>
-
-
-
-
-
-        <div class="clearfix"></div>
-        <div class="divider-dashed"></div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Date d'arrivée : </label>
-            <input readOnly class="form-control" data-validate-length-range="6" data-validate-words="1" name="datein" placeholder="date d'arrivée" type="text" value="<%= dt %>">
-            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-            <label for="">Date d'expiration : </label>
-            <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="dateexp" placeholder="date d'expiration" required="required" type="text" >
-            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-        </div>
+                             <div class="form-group">
+                               <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date Achat</label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="text" class="form-control col-md-7 col-xs-12 has-feedback-right" id="dateachat" name="dateachat" placeholder="Date" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'" name="daterdv">
+                                 <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                 <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                               </div>
+                             </div>
 
 
 
-        <div class="clearfix"></div>
-        <div class="ln_solid"></div>
-        <div class="form-group">
-          <div class="">
-            <!--
-            <button type="submit" class="btn btn-primary">Cancel</button>
-          -->
-            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
-          </div>
-        </div>
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Numéro Bon de commande <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input value="BC1" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="Numéro bon de commande" type="text">
+                               </div>
+                             </div>
 
 
-      </form>
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Numéro bon de livraison <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input value="BL1" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="numbl" placeholder="Numéro bon de livraison"  type="text" >
+                               </div>
+                             </div>
+
+
+                             <div class="ln_solid"></div>
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Produit <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <select class="select2_single form-control" name="prodinfo" type="text" required="required" >
+                                   <option></option>
+                                   <% for (var i = 0; i < prods.length; i++) {%>
+                                     <option value="<%= prods[i]._id + ' | ' + prods[i].prodcode + ' | ' + prods[i].prodname %>"><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
+                                   <%}%>
+                                 </select>
+                               </div>
+                             </div>
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input value="10" class="form-control  col-md-7 col-xs-12" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
+                               </div>
+                             </div>
+
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Type de regroupement <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <select id="unitegroupe" type="text" name="produnite"  data-validate-length-range="5,20" class="select2_single form-control col-md-7 col-xs-12" placeholder="Unité de mesure" required="required" >
+                                   <option>Unité</option>
+                                   <option>Caisse</option>
+                                   <option>Boîte</option>
+                                 </select>
+                               </div>
+                             </div>
+
+                             <div class="form-group">
+                               <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date Expiration</label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input type="text" class="form-control col-md-7 col-xs-12 has-feedback-right" id="dateexp" name="dateexp" placeholder="Date" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'" name="daterdv">
+                                 <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                                 <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                               </div>
+                             </div>
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix d'achat <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input value="1000" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"  name="prixachat" placeholder="Prix d'achat" required="required" type="text" >
+                               </div>
+                             </div>
+
+                             <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix de vente <span class="required">*</span>
+                               </label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                 <input  value="1600" class="form-control   col-md-7 col-xs-12" data-validate-length-range="6"  name="prixvente" placeholder="Prix de vente" required="required" type="text" >
+                               </div>
+                             </div>
+
+
+
+                             <div class="form-group" align="right">
+                               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                 <button type="button" class="btn btn-primary" onclick="window.location.href='/listinout'">Annuler</button>
+                                 <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+                               </div>
+                             </div>
+
+                           </form>
+                         </div>
+
+
+
+
+
+                   </div>
+
+
+
     </div>
-
-    </div>
-  </div>
 </div>
 </div>
 
 <% include footer.ejs %>
+<!-- Include Date Range Picker -->
+<script>
+ $(document).ready(function(){
+ //	var date_input=$('input[name="date"]'); //our date input has the name "date"
+   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+     $('#dateexp').datepicker({
+     format: 'dd/mm/yyyy',
+     container: container,
+     todayHighlight: true,
+     autoclose: true,
+   })
+
+   $('#dateachat').datepicker({
+   format: 'dd/mm/yyyy',
+   container: container,
+   todayHighlight: true,
+   autoclose: true,
+ })
+
+ })
+</script>
+<!-- /bootstrap-daterangepicker -->

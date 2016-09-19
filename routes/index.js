@@ -1,3 +1,4 @@
+
 var express = require('express');
 var bCrypt = require('bcrypt-nodejs');
 var router = express.Router();
@@ -11,7 +12,7 @@ var Prog = require('../models/prog');
 var Product = require('../models/product');
 var Depot = require('../models/depot');
 var Users = require('../models/user');
-
+var Inoutdepot = require('../models/inoutdepot');
 
 var Getdate = function(d){
    var out = d.substring(0, 10).split("-",3);
@@ -1161,82 +1162,96 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  });
 
+ router.get('/listinout', isAuthenticated, function(req, res){
+      Inoutdepot.find(function(err, inoutdepot){
+       console.log(inoutdepot);
+       res.render('listinout', {user: req.user, inout: inoutdepot});
+     });
+
+
+ });
+
  router.get('/stockin', isAuthenticated, function(req, res){
    var dt = new Date().toISOString();
    //s.split("").reverse().join("")
+  Provider.find(function (err, provider){
    Product.find(function(err, prod){
      Depot.find(function(err, depot){
-       res.render('stockin', {user: req.user, prods: prod, depots: depot,dt: dt.substring(0,10).split("-").reverse().join("/")});
+       res.render('stockin', {user: req.user, prods: prod, depots: depot, providers: provider,dt: dt.substring(0,10).split("-").reverse().join("/")});
      });
-
-   });
+    });
+  });
 
  });
 
 
  router.post('/stockin', isAuthenticated, function(req, res){
+   console.log("debut post stockin");
+   var datesys = new Date();
 
-   var prodinfo = req.body.prodinfo;
-   var prodqte = req.body.prodqte;
-   var produnite = req.body.produnite;
-   var proddatein = req.body.datein;
-   var proddateexp = req.body.dateexp;
-   var proddepot = req.body.depot;
-   var dateachat = req.body.dateachat;
-   var prixachat = req.body.prixachat;
-   var prixvente = req.body.prixvente;
-   var fournisseur = req.body.fournisseur;
-   var numbc = req.body.numbc;
-   var numbl = req.body.numbl;
-
-
-
-   var ss = prodinfo.split('|');
+   var inoutdepot = new Inoutdepot();
+   var ss = req.body.prodinfo.split('|');
    console.log(ss[0].trim());
-   var prodcode =  ss[0].trim(); //prodinfo.substring(0,9);
+   console.log("debut affectation post stockin");
+    inoutdepot.depotname=  req.body.depot;
+    inoutdepot.prodid= ss[0].trim();
+    inoutdepot.prodcode=  ss[1].trim();
+    inoutdepot.prodname=  ss[2].trim();
+    inoutdepot.prodqteinit= req.body.prodqte;
+    inoutdepot.prodqtemv =  ConvertToUnit(req.body.prodqt,req.body.produnite);
+    inoutdepot.produnite= req.body.produnite;
+    inoutdepot.datein= (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
+    inoutdepot.dateexp= req.body.dateexp;
+    inoutdepot.dateachat= req.body.dateachat;
+    inoutdepot.prixachat = req.body.prixachat;
+    inoutdepot.prixvente= req.body.prixvente;
+    inoutdepot.fournisseur = req.body.fournisseur;
+    inoutdepot.numbc= req.body.numbc;
+    inoutdepot.numbl= req.body.numbl;
+    inoutdepot.motifin= "ACHAT NORMAL";
 
-   Product.findOne({prodcode: prodcode}, function(err, prod){
-console.log(prodcode);
-     var prodid = prod._id;
+  inoutdepot.save(function(err) {
+       if (err)
+           res.send(err);
 
-     var obj = {
-       prodid: prodid,
-       prodcode: prodcode,
-       prodqteinit: prodqte,
-       prodqtemv: ConvertToUnit(prodqte,produnite),       // 1 x Caisse = 6 x Boîtes ; 1 x Boîte = 21 x unités
-       produnite: produnite,                              // 1 x Caisse = 6 x 21 unités
-       datein: proddatein,
-       dateexp: proddateexp,
-       depot: proddepot,
-       dateachat: dateachat,
-       prixachat: prixachat,
-       prixvente: prixvente,
-       Fournisseur: fournisseur,
-       numbc: numbc,
-       numbl: numbl
-     };
+       res.redirect('/listinout');
+   });
 
-     Depot.findOne({depotname: proddepot}, function(err, depot){
+ });
 
-       depot.inout.push(obj);
+ router.get('/stockout', isAuthenticated, function(req, res){
+   var iddepot = req.query.iddepot;
+   var inid = req.query.vid;
+   var dt = new Date().toISOString();
+   Depot.findById(iddepot, function(err, depot){
+     for (i=0; i< depot.inout.length; i++){
+       if(depot.inout[i]._id.toString() === inid.toString()){
 
-       depot.update({
-         inout: depot.inout
-       }, function (err, depotID){
-         if(err){
-           console.log('GET Error: There was a problem retrieving: ' + err);
-           res.redirect('/home');
-         }else{
-           res.redirect("/home");
-         }
-       })
+       total = total + patient.visites[i].prix;
+       var factnum = patient.visites[i].factnum;
+       var discount = patient.visites[i].discount;
+       }
+     }
+   var totalr = (total - ((total * discount)/100));
 
-     });
-
+   if (err) {
+       console.log('GET Error: There was a problem retrieving: ' + err);
+   } else {
+   res.render('invoice', {
+      user: req.user,
+      patient: patient,
+      total: totalr,
+      index: factnum,
+      vid: vid,
+      discount: discount,
+      date: d.substring(0,10).split("-").reverse().join("/")
+   });
+   }
 
    });
 
  });
+
 
 
  router.get('/adddepot', isAuthenticated, function(req, res){
@@ -1245,7 +1260,7 @@ console.log(prodcode);
 
  router.post('/adddepot', isAuthenticated, function(req, res){
 
-    var depot = new Depot();
+    var depot = new Depot0();
 
     depot.depotname = req.body.depotname;
     depot.inout = [];
@@ -1260,15 +1275,6 @@ console.log(prodcode);
 
  });
 
-router.get('/listinout', isAuthenticated, function(req, res){
-  Product.find(function(err, prod){
-    Depot.find(function(err, depot){
-      res.render('listinout', {user: req.user, prods: prod, depots: depot});
-    });
-
-  });
-
-});
 
 
 	/* Handle Logout */
