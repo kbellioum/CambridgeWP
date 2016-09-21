@@ -13,50 +13,74 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
               <span class="section">Saisie d'un nouveau Fournisseur</span>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input id="raisonsociale" class="form-control has-feedback-left" name="raisonsociale" placeholder="Raison sociale" required="required" type="text">
-                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Raison sociale : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="raisonsociale" name="raisonsociale" placeholder="Raison sociale" type="text">
+                  </div>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input id="telephone" class="form-control" data-validate-length-range="10" data-validate-words="1" name="telephone" placeholder="Télephone" required="required" type="text">
-                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Téléphone : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="telephone" name="telephone" placeholder="Téléphone" type="text">
+                  </div>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input id="fax" class="form-control  has-feedback-left" data-validate-length-range="10" data-validate-words="1" name="fax" placeholder="Fax" required="required" type="text">
-                  <span class="fa fa-fax form-control-feedback left" aria-hidden="true"></span>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">fax : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="fax" name="fax" placeholder="fax" type="text">
+                  </div>
               </div>
 
-
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input type="email" id="mail" name="mail" class="form-control" placeholder="Email">
-                  <span class="fa fa-at form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input type="textarea" id="adresse" name="adresse"   class="form-control   has-feedback-left" placeholder="Adresse">
-                  <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Adresse Email : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="mail" name="mail" placeholder="Adresse email" type="email">
+                  </div>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
-                  <input id="site" class="form-control col-md-7 col-xs-12"   name="site" placeholder="Site Web" type="text">
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Adresse : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="adresse" name="adresse" placeholder="Adresse" type="textarea">
+                  </div>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
-                  <input id="autre" type="text" name="autre"  class="form-control col-md-7 col-xs-12" placeholder="Autres informations">
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Site Web : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="site" name="site" placeholder="Site Web" type="text">
+                  </div>
               </div>
+
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Autres informations : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" id="autre" name="autre" placeholder="Autres informations" type="text">
+                  </div>
+              </div>
+
 
               </div>
             </div>
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="form-group">
-            <div class="">
+
+          <div class="form-group" align="right">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
               <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
               <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listproviders'">Liste des fournisseurs</button>
             </div>
         </div>
-        </div>
+
           </form>
       </div>
     </div>

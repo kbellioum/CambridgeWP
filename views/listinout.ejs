@@ -47,7 +47,7 @@ motifin: String,
     <h2>Liste des Entrées / Sorties<small>Gestion de Stock</small></h2>
       <div class="pull-right">
         <a class="btn btn-primary btn-md" href="/stockin" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
-        <a class="btn btn-danger btn-md" href="/adddepot" role="button"><i class="fa fa-plus"></i>   Nouvelle sortie</a>
+
       </div>
 
 
@@ -92,21 +92,21 @@ motifin: String,
   <td class=" "><%= inout[i].prodcode %></td>
   <td class=" "><%= inout[i].prodname %> </td>
   <td class=" "><%= inout[i].dateachat %></td>
-  <td class=" "><%= inout[i].prodqteinit %> <%= inout[i].produnite %> (<script>
+  <td class=" " style="color:#0000FF"><%= inout[i].prodqteinit %> <%= inout[i].produnite %> (<script>
     document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>"));
   </script> Unités)</td>
-  <td class=" "><script>
+  <td class=" " style="color:#DF0101"><script>
         document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
   </script>
     </td><!--quantité totale sortie-->
-  <td class=" "><%= inout[i].prodqtemv %>    Unités</td><!--quantité restante en stock-->
+  <td class=" " style="color:#04B431"><%= inout[i].prodqtemv %>    Unités</td><!--quantité restante en stock-->
   <td class=" "><%= inout[i].dateexp %></td>
   <td class=" "><%= inout[i].datein %></td>
 
 <td class=" last"  align='right' width='200px;'>
 
-    <a class="btn btn-primary btn-xs" href="#" role="button"><i class="fa fa-folder"></i> Edit </a>
-    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce patient ?')) supprimer('#'); else alert('OK')" href="#"><i class="fa fa-trash-o"></i> Delete </a>
+    <a class="btn btn-primary btn-xs" href="/editstockin/<%= inout[i]._id %>" role="button"><i class="fa fa-folder"></i> Edit </a>
+    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listinout/<%= inout[i]._id%>');" href="/listinout"><i class="fa fa-trash-o"></i> Delete </a>
     <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
 </td>
   <% } %>

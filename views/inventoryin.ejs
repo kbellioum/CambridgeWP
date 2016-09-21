@@ -21,7 +21,7 @@
 
         <div class="x_content">
                            <br>
-                  <form class="form-horizontal form-label-left input_mask" novalidate="" action="/stockin" method="post">
+                               <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left input_mask" novalidate="" action="/inventoryin" method="post">
 
                              <div class="form-group">
                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dépôt <span class="required">*</span>
@@ -42,7 +42,7 @@
                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Fournisseur <span class="required">*</span>
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <select type="text" name="fournisseur"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required" >
+                                 <select type="text" name="fournisseur"  data-validate-length-range="5,20" class="chosen-select form-control col-md-7 col-xs-12" placeholder="Statu familliale" required="required" >
                                    <option>Choisir un Fournisseur</option>
                                    <% for (var i = 0; i < providers.length; i++){%>
                                      <option><%= providers[i].raisonsociale %></option>
@@ -110,9 +110,9 @@
                                </label>
                                <div class="col-md-6 col-sm-6 col-xs-12">
                                  <select id="unitegroupe" type="text" name="produnite"  data-validate-length-range="5,20" class="select2_single form-control col-md-7 col-xs-12" placeholder="Unité de mesure" required="required" >
-                                   <option value="Unité">Unité</option>
-                                   <option value="Boîte">Boîte (21 unités)</option>
-                                   <option value="Caisse">Caisse (6 boîtes de 21 unités)</option>
+                                   <option>Unité</option>
+                                   <option>Caisse</option>
+                                   <option>Boîte</option>
                                  </select>
                                </div>
                              </div>

@@ -1176,6 +1176,12 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  });
 
+router.get('/productstock', isAuthenticated, function(req, res){
+
+      res.render('productstock', {user: req.user});
+
+});
+
  router.get('/stockin', isAuthenticated, function(req, res){
    var dt = new Date().toISOString();
    //s.split("").reverse().join("")
@@ -1199,11 +1205,6 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
    var ss = req.body.prodinfo.split('|');
 
-   console.log(ss[0].trim());
-   console.log("debut affectation post stockin");
-
-
-
     depotinout.depotname = req.body.depot;
     depotinout.prodid = ss[0].trim();
     depotinout.prodcode = ss[1].trim();
@@ -1220,7 +1221,6 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
     depotinout.numbc = req.body.numbc;
     depotinout.numbl = req.body.numbl;
     depotinout.motifin = "ACHAT NORMAL";
-    console.log(depotinout);
 
     depotinout.save(function(err){
        if (err)
@@ -1231,6 +1231,74 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
    });
 
  });
+ router.delete('/listinout/:stockin_id', isAuthenticated, function(req, res){
+    Depotinout.remove({
+      _id: req.params.stockin_id
+    }, function(err, stockin) {
+      if (err)
+        res.send(err);
+
+      res.json({ message: 'stockin successfully deleted!' });
+    });
+  });
+
+  router.get('/editstockin/:id', isAuthenticated, function(req, res){
+
+    var dt = new Date().toISOString();
+    Provider.find(function (err, provider){
+        Product.find(function(err, prod){
+          Depot.find(function(err, depot){
+            Depotinout.findById(req.params.id, function(err, stockin){
+         		   if (err) {
+                 console.log('GET Error: There was a problem retrieving: ' + err);
+               } else {
+                 res.render('editstockin', {user: req.user,providers: provider, prods: prod, depots: depot,stockin: stockin, dt: dt.substring(0,10).split("-").reverse().join("/")});
+               }
+         });
+        });
+      });
+    });
+	});
+
+  router.post('/editstockin/:id', isAuthenticated, function(req, res){
+    var ss = req.body.prodinfo.split('|');
+    var  prodidv = ss[0].trim();
+    var  prodcodev = ss[1].trim();
+    var  prodnamev = ss[2].trim();
+      Depotinout.findById(req.params.id, function (err, stockin) {
+
+
+      stockin.update({
+
+
+         depotname: req.body.depot,
+         prodid: prodidv,
+         prodcode: prodcodev,
+         prodname: prodnamev,
+         prodqteinit: Number(req.body.prodqte),
+         prodqtemv: ConvertToUnit( Number(req.body.prodqte), req.body.produnite),
+         produnite: req.body.produnite,
+         //datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
+         dateexp: req.body.dateexp,
+         dateachat: req.body.dateachat,
+         prixachat: Number(req.body.prixachat),
+         prixvente: Number(req.body.prixvente),
+         fournisseur: req.body.fournisseur,
+         numbc: req.body.numbc,
+         numbl: req.body.numbl,
+         motifin: "ACHAT NORMAL"
+
+      },function (err, stockinID){
+        if(err){
+          console.log('GET Error: There was a problem retrieving: ' + err);
+
+        }else{
+          res.redirect("/listinout");
+        }
+      })
+
+     });
+     });
 
  router.get('/stockout', isAuthenticated, function(req, res){
    var iddepot = req.query.iddepot;
@@ -1273,7 +1341,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  router.post('/adddepot', isAuthenticated, function(req, res){
 
-    var depot = new Depot0();
+    var depot = new Depot();
 
     depot.depotname = req.body.depotname;
     depot.inout = [];

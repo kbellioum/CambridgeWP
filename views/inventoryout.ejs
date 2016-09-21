@@ -1,0 +1,126 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+
+        <div class="x_panel">
+          <div class="row"  >
+                <div class="x_title">
+                  <h2>Nouvelle Sortie du stock <small>Gestion de Stock</small></h2>
+                  <div class="" align="right">
+                    <label for="">Date de sortie : <%= dt %></label>
+                  </div>
+                </div>
+            </div>
+          <div class="x_content">
+
+            <form class="form-horizontal form-label-left input_mask" novalidate action="#" method="post">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Dépot <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input value="<%= inout.depotname %>" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="depot" placeholder="Dépôt" type="text">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Produit <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input value="<%= inout.prodcode + ' ' + inout.prodname %>" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="produit" placeholder="produit" type="text">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Stock actuel <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input value="<%= inout.prodqtemv %>" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="qtestock" placeholder="Stock actuel" type="text">
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité de sortie <span class="required">*</span>
+                </label>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                  <input value="qteout" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="qteout" placeholder="Quantité de sortie" type="Number">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Motif de sortie <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="unitegroupe" type="text" name="motifout"  data-validate-length-range="5,20" class="select2_single form-control col-md-7 col-xs-12" placeholder="Motif de sortie" required="required" >
+                    <option selected>Vente normale</option>
+                    <option>Retour au fournisseur</option>
+                    <option>Perte</option>
+                    <option>Autre</option>
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <div class="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                    <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste des dépôts</button>
+                  </div>
+                </div>
+              </div
+          </form>
+
+        </div>
+      </div>
+    </div>
+<!-- this -->
+
+<!-- end this -->
+
+
+  </div>
+</div>
+<!-- /page content -->
+
+
+
+
+<!-- /page content -->
+
+
+
+
+
+<% include footer.ejs %>
+
+
+
+<!-- jQuery Tags Input -->
+<script>
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+
+  function onChangeTag(input, tag) {
+    alert("Changed a tag: " + tag);
+  }
+
+  $(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+  });
+</script>
+<!-- /jQuery Tags Input -->
