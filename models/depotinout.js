@@ -17,6 +17,11 @@ module.exports = mongoose.model('Depotinout',{
   fournisseur: String,
   numbc: String,
   numbl: String,
-  motifin: String
+  motifin: String,
+  out: [{
+    qteout: Number,
+    dateout: String,
+    motifout: String
+  }]
 
 });

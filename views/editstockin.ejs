@@ -94,12 +94,15 @@
 			 </select>
 		 </div>
 	 </div>
-
+   <% var totalqteout=0;  for(j=0; j < stockin.out.length; j++){
+     totalqteout=totalqteout + Number(stockin.out[j].qteout);
+   }%>
 	 <div class="form-group">
 		 <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité <span class="required">*</span>
 		 </label>
 		 <div class="col-md-6 col-sm-6 col-xs-12">
-			 <input value='<%= stockin.prodqteinit %>' class="form-control  col-md-7 col-xs-12" data-validate-length-range="6"  name="prodqte" placeholder="Quantité" required="required" type="text" >
+			 <input value='<%= stockin.prodqteinit %>' class="form-control  col-md-7 col-xs-12"  data-validate-length-range="6" id="prodqte" name="prodqte" placeholder="Quantité" required="required" type="text" >
+       <input value='<%= totalqteout %>' class="form-control  col-md-7 col-xs-12 hidden"  data-validate-length-range="6" id="prodqteout" name="prodqteout" placeholder="Quantité MV" required="required" type="text" >
 		 </div>
 	 </div>
 
@@ -189,6 +192,14 @@
 </script>
 <script>
  $(document).ready(function(){
+   if(document.getElementById("prodqteout").value>0){
+     $('#prodinfo option:not(:selected)').prop('disabled', true);
+     $("#prodqte").attr('readOnly', 'true');
+     $('#unitegroupe option:not(:selected)').prop('disabled', true);    
+   }
+
+
+
  //	var date_input=$('input[name="date"]'); //our date input has the name "date"
    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
      $('#dateexp').datepicker({

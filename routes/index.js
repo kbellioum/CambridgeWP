@@ -1265,9 +1265,9 @@ router.get('/productstock', isAuthenticated, function(req, res){
     var  prodidv = ss[0].trim();
     var  prodcodev = ss[1].trim();
     var  prodnamev = ss[2].trim();
-      Depotinout.findById(req.params.id, function (err, stockin) {
+    Depotinout.findById(req.params.id, function (err, stockin) {
 
-
+console.log();
       stockin.update({
 
 
@@ -1300,8 +1300,44 @@ router.get('/productstock', isAuthenticated, function(req, res){
      });
      });
 
- router.get('/stockout', isAuthenticated, function(req, res){
-   var iddepot = req.query.iddepot;
+ router.get('/stockout/:id', isAuthenticated, function(req, res){
+  // var dt = new Date().toISOString();
+   Depotinout.findById(req.params.id, function(err, stockin){
+      if (err) {
+        console.log('GET Error: There was a problem retrieving: ' + err);
+      } else {
+        res.render('stockout', {user: req.user, stockin:stockin});
+      }
+   });
+});
+
+router.post('/stockout/:id', isAuthenticated, function(req, res){
+var datesys = new Date();
+var qte=req.body.qteout;
+
+ var stockout = {
+  qteout: req.body.qteout,
+  dateout: (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm'),
+  motifout: "VENTE NORMALE"
+};
+Depotinout.findById(req.params.id, function (err, stockin) {
+  stockin.out.push(stockout);
+
+  stockin.update({
+    out: stockin.out,
+    prodqtemv: stockin.prodqtemv - qte,
+    },function (err, stockinID){
+      if(err){
+        console.log('GET Error: There was a problem retrieving: ' + err);
+
+      }else{
+        res.redirect("/listinout");
+      }
+    })
+
+   });
+   });
+  /* var iddepot = req.query.iddepot;
    var inid = req.query.vid;
    var dt = new Date().toISOString();
    Depot.findById(iddepot, function(err, depot){
@@ -1327,11 +1363,11 @@ router.get('/productstock', isAuthenticated, function(req, res){
       discount: discount,
       date: d.substring(0,10).split("-").reverse().join("/")
    });
-   }
+ }
 
-   });
+   });*/
 
- });
+
 
 
 

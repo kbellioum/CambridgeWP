@@ -13,25 +13,6 @@ function ConvertToUnit(qte, unittype){
       return Number(qte);
     }
 }
-/*
-depotname: String,
-prodid: String,
-prodcode: String,
-prodname: String,
-prodqteinit: Number,
-prodqtemv: Number,
-produnite: String,
-datein: String,
-dateexp: String,
-dateachat: String,
-prixachat: Number,
-prixvente: Number,
-Fournisseur: String,
-numbc: String,
-numbl: String,
-motifin: String,
-*/
-
 </script>
 
 <div class="right_col" role="main">
@@ -67,9 +48,9 @@ motifin: String,
         <th class="column-title">Code produit</th>
         <th class="column-title">Désignation produit</th>
         <th class="column-title">Date Achat</th>
-        <th class="column-title">Qté Initiale</th>
-        <th class="column-title">Total Sortie</th>
-        <th class="column-title">Stock actuel</th>
+        <th class="column-title">Stock initial</th>
+        <th class="column-title">Total Sortie(U)</th>
+        <th class="column-title">Stock actuel(U)</th>
         <th class="column-title">Date expiration</th>
         <th class="column-title">Date Saisie</th>
 
@@ -85,21 +66,26 @@ motifin: String,
 
       <% for (var i = 0; i < inout.length; i++) {%>
 
-
 <tr class="even pointer">
 
   <td class=" "><%= inout[i].depotname %></td>
   <td class=" "><%= inout[i].prodcode %></td>
-  <td class=" "><%= inout[i].prodname %> </td>
+  <td class=" "><%= inout[i].prodname %></td>
   <td class=" "><%= inout[i].dateachat %></td>
-  <td class=" " style="color:#0000FF"><%= inout[i].prodqteinit %> <%= inout[i].produnite %> (<script>
-    document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>"));
-  </script> Unités)</td>
-  <td class=" " style="color:#DF0101"><script>
-        document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
-  </script>
-    </td><!--quantité totale sortie-->
-  <td class=" " style="color:#04B431"><%= inout[i].prodqtemv %>    Unités</td><!--quantité restante en stock-->
+  <td class=" " style="color:#0000FF"><%= inout[i].prodqteinit %> <%= inout[i].produnite %> <script> if ("<%= inout[i].produnite %>"!=="Unité") {
+    document.write("(" + ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>")+ " Unités)" );  }
+    </script>
+  </td>
+  <% var totalqteout=0;  for(j=0; j < inout[i].out.length; j++){
+    totalqteout=totalqteout + Number(inout[i].out[j].qteout);
+  }%>
+  <td class=" " style="color:#DF0101" align="center"><%= totalqteout %></td>
+<!--
+    <script>
+          document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
+    </script>
+  </td>--><!--quantité totale sortie-->
+  <td class=" " style="color:#04B431" align="center"><b><%= inout[i].prodqtemv %></b></td><!--quantité restante en stock-->
   <td class=" "><%= inout[i].dateexp %></td>
   <td class=" "><%= inout[i].datein %></td>
 

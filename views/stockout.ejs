@@ -9,74 +9,65 @@
 
           <div class="x_content">
 
-            <form class="form-horizontal form-label-left input_mask" novalidate action="/editdepot/<%= depot._id %>" method="post">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <span class="section">Nouvelle Sortie du stock</span>
-              <input type="text" name="iddepot" value="">
-              <input type="text" name="idin" value="">
-              <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <label for="">Nom du Dépôt : </label>
-                  <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="depotname" placeholder="Nom du Dépôt" required="required" type="text" value="<%= depot.depotname %>">
-                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-              </div>
-              </div>
 
-              <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <label for="">Produit : </label>
-                  <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodname" placeholder="Nom du produit" required="required" type="text" value="<%= depot.depotname %>">
-                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-              </div>
-              </div>
 
-              <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <label for="">Stock initial : </label>
-                  <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodqteinit" placeholder="Stock initial" required="required" type="text" value="<%= depot.depotname %>">
-                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-              </div>
-              </div>
 
-              <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <label for="">Stock actuel : </label>
-                  <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="prodqtemv" placeholder="Stock actuel" required="required" type="text" value="<%= depot.depotname %>">
-                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-              </div>
-              </div>
 
+            <form class="form-horizontal form-label-left input_mask" novalidate action="/stockout/<%= stockin._id %>" method="post">
               <div class="form-group">
-              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <label for="">Quantité à sortir : </label>
-                  <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="qteout" placeholder="Quantité à sortir" required="required" type="text" value="<%= depot.depotname %>">
-                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-              </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Type de regroupement <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom du Dépôt : <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="unitegroupe" type="text" name="produnite"  data-validate-length-range="5,20" class="select2_single form-control col-md-7 col-xs-12" placeholder="Unité de mesure" required="required" >
-                    <option>Unité</option>
-                    <option>Caisse</option>
-                    <option>Boîte</option>
-                  </select>
+                  <input disabled="disabled" class="form-control col-md-7 col-xs-12"  data-validate-length-range="6" data-validate-words="1" name="depotname" placeholder="Nom du Dépôt" required="required" type="text" value="<%= stockin.depotname %>">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Produit : <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="prodinfo" placeholder="Nom du produit" required="required" type="text" value="<%= stockin.prodcode + ' | ' + stockin.prodname %>">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Stock initial : <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="prodqteinit" placeholder="Stock initial" required="required" type="text" value="<%= stockin.prodqteinit %>">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Stock actuel ( en unité) : <span class="required">*</span>
+                </label>
+                <div disabled="disabled" class="col-md-6 col-sm-6 col-xs-12">
+                  <input disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="prodqtemvt" placeholder="Stock actuel" required="required" type="text" value="<%= stockin.prodqtemv %>">
                 </div>
               </div>
 
 
-            </div>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="form-group">
-                  <div class="">
-                    <input type="hidden" name="_method" value="PUT">
-                    <button id="send" type="submit" class="btn btn-success">Valider</button>
-                    <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste Etat Stock</button>
-                  </div>
+             <div class="clearfix"></div>
+             <div class="ln_solid"></div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité à sortir : <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input class="form-control col-md-7 col-xs-12"  data-validate-words="1" name="qteout" placeholder="Quantité à sortir" required="required" type="Number" min="1" max="5">
                 </div>
-              </div
+              </div>
+
+           </div>
+           <div class="col-md-12 col-sm-12 col-xs-12">
+             <div class="form-group" align="right">
+               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                 <input type="hidden" name="_method" value="PUT">
+                 <button id="send" type="submit" class="btn btn-success">Valider</button>
+                 <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listinout'">Liste Etat Stock</button>
+               </div>
+             </div>
+           </div
           </form>
 
         </div>

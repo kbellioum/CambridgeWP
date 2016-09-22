@@ -19,7 +19,7 @@ module.exports = mongoose.model('Inventory',{
   motifin: String,
   out: [{
     qteout: Number,
-    motifout: String,
-    dateout: String
+    dateout: String,
+    motifout: String
   }]
 });
