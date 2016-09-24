@@ -17,60 +17,112 @@
           </div>
           <div class="x_content">
             <br />
-            <form class="form-horizontal form-label-left" novalidate action="/addvisite/<%= patients._id %>" method="post">
+            <form class="form-horizontal form-label-left" novalidate action="/stockinbk" method="post">
+
+
+
 
               <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Nom Patient <span class="required">*</span>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Choisir un depot <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="poid" disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text" value="<%= patients.patientnom + ' ' + patients.patientprenom %>" >
+                  <select id="depot" type="text" name="depot" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un depot</option>
+                    <% for(i=0; i<depots.length; i++){%>
+                      <option><%= depots[i].depotname%></option>
+                    <%}%>
+                  </select>
                 </div>
               </div>
 
               <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Choisir un fournisseur <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="provider" type="text" name="provider" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un fournisseur</option>
+                    <% for(i=0; i<providers.length; i++){%>
+                      <option><%= providers[i].raisonsociale %></option>
+                    <%}%>
+                  </select>
+                </div>
+              </div>
+
+
+
+
+
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Num BC <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="numbc" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="BC" required="required" type="text" value="" >
+                </div>
+              </div>
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Num BL <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="numbl" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbl" placeholder="BL" required="required" type="text" value="" >
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+              <!-- <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Numéro Dossier <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input id="numdossier" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numdossier" placeholder="Numéro de dossier" required="required" type="text">
                 </div>
-              </div>
+              </div> -->
 
 
-              <div class="item form-group">
+              <!-- <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Poids <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input id="poid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text">
                 </div>
-              </div>
-              <div class="item form-group">
+              </div> -->
+              <!-- <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="taille">Taille <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input id="taille" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="taille" placeholder="Taille" required="required" type="text">
                 </div>
-              </div>
-              <div class="item form-group">
+              </div> -->
+              <!-- <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment">Commentaire <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
                 </div>
-              </div>
+              </div> -->
 
 
-              <div class="item form-group">
+              <!-- <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select id="progs" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
                     <option>Choisir un Programme</option>
-                    <% for(i=0; i < progs.length; i++ ){%>
-                       <option><%= progs[i].progname %></option>
-                    <%}%>
+
+                       <option></option>
+
                   </select>
                 </div>
-              </div>
+              </div> -->
 
 
             <div class="clearfix"></div>
@@ -80,10 +132,14 @@
               <label>Code produit : </label>
               <div class="">
                 <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
-                  <option></option>
-                  <% for (var i = 0; i < products.length; i++) {%>
-                    <option><%= products[i].prodcode + ' | ' + products[i].prodname %> <span style="color:blue"><%= products[i].extra? " | Extra Product" : ""%></span> </option>
+                  <% for(i=0; i<prods.length; i++){%>
+                    <option value="<%= prods[i]._id %> | <%= prods[i].prodcode %> | <%= prods[i].prodname %>"><%= prods[i].prodcode %> | <%= prods[i].prodname %></option>
                   <%}%>
+
+
+                    <!-- <option> <span style="color:blue"></span> </option> -->
+
+
                 </select>
               </div>
             </div>
@@ -128,7 +184,7 @@
                   <!--
                   <button type="submit" class="btn btn-primary">Cancel</button>
                 -->
-                  <input type="hidden" name="_method" value="PUT">
+                  <!-- <input type="hidden" name="_method" value="PUT"> -->
                   <button type="submit" class="btn btn-success">Enregistrer</button>
                 </div>
               </div>
@@ -210,7 +266,9 @@ $(document).ready(function() {
 
         },
 
-        updateItem: function(updatingClient) { },
+        updateItem: function(updatingClient) {
+
+        },
 
         deleteItem: function(deletingClient) {
 
@@ -241,8 +299,9 @@ $(document).ready(function() {
          $('#progname-val').val($('#progs').val());
 
          tab.push({
-           prodcode: $("#prodinfo").val().split("|")[0],
-           prodname: $("#prodinfo").val().split("|")[1],
+           prodid: $("#prodinfo").val().split("|")[0],
+           prodcode: $("#prodinfo").val().split("|")[1],
+           prodname: $("#prodinfo").val().split("|")[2],
            prodqte: $('#prodqte').val(),
            prodexpdate: $('#prodexpdate').val()
           });
@@ -266,9 +325,10 @@ $(document).ready(function() {
            },
 
            onItemDeleted: function(arg) {
-           //console.log("row deleted");
+
            tab.splice(arg.itemIndex, 1);
            $('#message').val(JSON.stringify(tab));
+
            },
            onItemInserted: function() {
            //console.log("row deleted");

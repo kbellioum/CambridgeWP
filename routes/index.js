@@ -1196,6 +1196,9 @@ router.get('/productstock', isAuthenticated, function(req, res){
  });
 
 
+
+
+
  router.post('/stockin', isAuthenticated, function(req, res){
 
    console.log("debut post stockin");
@@ -1703,4 +1706,99 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
           res.json({ message: 'Product successfully deleted!' });
         });
+      });
+
+
+      router.get('/gallery', isAuthenticated, function(req, res){
+        res.render('productgallery', {user: req.user});
+      });
+
+      router.get('/stockinbk', isAuthenticated, function(req, res){
+
+        var dt = new Date().toISOString();
+        //s.split("").reverse().join("")
+       Provider.find(function (err, provider){
+        Product.find(function(err, prod){
+          Depot.find(function(err, depot){
+            res.render('stockinbk', {user: req.user, prods: prod, depots: depot, providers: provider,dt: dt.substring(0,10).split("-").reverse().join("/")});
+          });
+         });
+       });
+
+      });
+
+      router.post('/stockinbk', isAuthenticated, function(req, res){
+
+        console.log("debut post stockin");
+
+
+        // var datesys = new Date();
+
+        // var depotinout = new Depotinout();
+
+        // var ss = req.body.prodinfo.split('|');
+
+        //  depotinout.depotname = req.body.depot;
+        //  depotinout.prodid = ss[0].trim();
+        //  depotinout.prodcode = ss[1].trim();
+        //  depotinout.prodname = ss[2].trim();
+        //  depotinout.prodqteinit = Number(req.body.prodqte);
+        //  depotinout.prodqtemv = ConvertToUnit( Number(req.body.prodqte), req.body.produnite);
+        //  depotinout.produnite = req.body.produnite;
+        //  depotinout.datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
+        //  depotinout.dateexp = req.body.dateexp;
+        //  depotinout.dateachat = req.body.dateachat;
+        //  depotinout.prixachat = Number(req.body.prixachat);
+        //  depotinout.prixvente = Number(req.body.prixvente);
+        //  depotinout.fournisseur = req.body.fournisseur;
+        //  depotinout.numbc = req.body.numbc;
+        //  depotinout.numbl = req.body.numbl;
+        //  depotinout.motifin = "ACHAT NORMAL";
+
+
+         //res.send(req.body.obj + " | " + req.body.depot + " | " + req.body.provider + " | " + req.body.numbc + " | " + req.body.numbl );
+
+         var tt = JSON.parse(req.body.obj);
+         var to = [];
+
+
+         for(i=0; i<tt.length; i++){
+
+           var depotinout = new Depotinout();
+
+           depotinout.depotname = req.body.depot;
+           depotinout.prodid = tt[i].prodid;
+           depotinout.prodcode = tt[i].prodcode;
+           depotinout.prodname = tt[i].prodname;
+           depotinout.fournisseur = req.body.provider;
+           depotinout.numbc = req.body.numbc;
+           depotinout.numbl = req.body.numbl;
+           depotinout.prodqteinit = Number(tt[i].prodqte);
+
+              console.log(tt[i]);
+
+
+
+
+           depotinout.save(function(err){
+              if (err)
+                  res.send(err);
+
+
+              //res.json("OK success");
+          });
+          // to.push(depotinout);
+
+         }
+
+        //  res.send(to);
+        res.redirect('/listinout');
+         /*depotinout.save(function(err){
+            if (err)
+                res.send(err);
+
+            res.redirect('/listinout');
+            //res.json("OK success");
+        });*/
+
       });
