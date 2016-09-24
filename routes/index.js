@@ -1353,14 +1353,37 @@ Depotinout.findById(req.params.id, function (err, stockin) {
 router.delete('/deletestockout', isAuthenticated, function(req, res){
     var stockinoutid = req.query.id;
     var outid = req.query.outid;
+    var qteoutdel=req.query.outqte;
 
-    Depotinout.update({_id: stockinoutid}, {$pull: {out: {_id: outid}}} , function(err, stockin){
-    if (err) {
-      console.log('GET Error: There was a problem retrieving: ' + err);
-    } else {
-      res.redirect("/listinout");
-    }
-});
+    Depotinout.findById(stockinoutid, function (err, stockin) {
+    stockin.update({
+      prodqtemv: Number(stockin.prodqtemv) + qteoutdel,
+    },function (err, providersID){
+      if(err){
+        console.log('GET Error: There was a problem retrieving: ' + err);
+
+      }else{
+
+            Depotinout.update({_id: stockinoutid}, {$pull: {out: {_id: outid}}} , function(err, stockin){
+            if (err) {
+              console.log('GET Error: There was a problem retrieving: ' + err);
+            } else {
+              res.redirect("/listinout");
+            }
+        });
+      }
+    })
+
+   });
+
+
+
+
+
+
+
+
+
 
 });
 

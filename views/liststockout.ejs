@@ -53,7 +53,7 @@
                       <td class=" "><%= stockin.out[i].qteout %></td>
                       <td class=" "><%= stockin.out[i].motifout %></td>
                       <td class="last"  align='right' width='120px;'>
-                        <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/deletestockout/?id=<%= stockin._id %>&outid=<%= stockin.out[i]._id %>');" href="/liststockout/<%= stockin._id %>"><i class="fa fa-trash-o"></i> Delete </a>
+                        <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/deletestockout/?id=<%= stockin._id %>&outid=<%= stockin.out[i]._id %>&outqte=<%= stockin.out[i].qteout %>');" href="/liststockout/<%= stockin._id %>"><i class="fa fa-trash-o"></i> Delete </a>
                       </td>
                     </tr>
                   <% } %>
