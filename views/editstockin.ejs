@@ -21,7 +21,7 @@
 
         <div class="x_content">
 					<br>
-			<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left input_mask" novalidate="" action="/editstockin/<%= stockin._id %>" method="post">
+			<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left input_mask" validate  action="/editstockin/<%= stockin._id %>" method="post">
 				<div class="form-group">
 		 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dépôt <span class="required">*</span>
 		 </label>
@@ -195,7 +195,7 @@
    if(document.getElementById("prodqteout").value>0){
      $('#prodinfo option:not(:selected)').prop('disabled', true);
      $("#prodqte").attr('readOnly', 'true');
-     $('#unitegroupe option:not(:selected)').prop('disabled', true);    
+     $('#unitegroupe option:not(:selected)').prop('disabled', true);
    }
 
 

@@ -79,13 +79,13 @@ function ConvertToUnit(qte, unittype){
   <% var totalqteout=0;  for(j=0; j < inout[i].out.length; j++){
     totalqteout=totalqteout + Number(inout[i].out[j].qteout);
   }%>
-  <td class=" " style="color:#DF0101" align="center"><%= totalqteout %></td>
+  <td class=" " style="color:#DF0101" align="center"><%= totalqteout %> <a href="/liststockout/<%= inout[i]._id %>"> Détail</a></td>
 <!--
     <script>
           document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
     </script>
   </td>--><!--quantité totale sortie-->
-  <td class=" " style="color:#04B431" align="center"><b><%= inout[i].prodqtemv %></b></td><!--quantité restante en stock-->
+  <td class=" " style="color:#04B431" align="center"><b><%= inout[i].prodqtemv %></td><!--quantité restante en stock-->
   <td class=" "><%= inout[i].dateexp %></td>
   <td class=" "><%= inout[i].datein %></td>
 

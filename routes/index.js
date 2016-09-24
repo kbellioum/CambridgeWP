@@ -1266,17 +1266,18 @@ router.get('/productstock', isAuthenticated, function(req, res){
     var  prodcodev = ss[1].trim();
     var  prodnamev = ss[2].trim();
     Depotinout.findById(req.params.id, function (err, stockin) {
-
-console.log();
+    var totalqteout=0;
+      for(j=0; j < stockin.out.length; j++){
+        totalqteout=totalqteout + Number(stockin.out[j].qteout);
+      }
       stockin.update({
-
 
          depotname: req.body.depot,
          prodid: prodidv,
          prodcode: prodcodev,
          prodname: prodnamev,
          prodqteinit: Number(req.body.prodqte),
-         prodqtemv: ConvertToUnit( Number(req.body.prodqte), req.body.produnite),
+         prodqtemv: Number(req.body.prodqte)-totalqteout,//ConvertToUnit( Number(req.body.prodqte), req.body.produnite),
          produnite: req.body.produnite,
          //datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
          dateexp: req.body.dateexp,
@@ -1337,38 +1338,31 @@ Depotinout.findById(req.params.id, function (err, stockin) {
 
    });
    });
-  /* var iddepot = req.query.iddepot;
-   var inid = req.query.vid;
-   var dt = new Date().toISOString();
-   Depot.findById(iddepot, function(err, depot){
-     for (i=0; i< depot.inout.length; i++){
-       if(depot.inout[i]._id.toString() === inid.toString()){
 
-       total = total + patient.visites[i].prix;
-       var factnum = patient.visites[i].factnum;
-       var discount = patient.visites[i].discount;
-       }
-     }
-   var totalr = (total - ((total * discount)/100));
-
-   if (err) {
-       console.log('GET Error: There was a problem retrieving: ' + err);
-   } else {
-   res.render('invoice', {
-      user: req.user,
-      patient: patient,
-      total: totalr,
-      index: factnum,
-      vid: vid,
-      discount: discount,
-      date: d.substring(0,10).split("-").reverse().join("/")
+   router.get('/liststockout/:id', isAuthenticated, function(req, res){
+    // var dt = new Date().toISOString();
+     Depotinout.findById(req.params.id, function(err, stockin){
+        if (err) {
+          console.log('GET Error: There was a problem retrieving: ' + err);
+        } else {
+          res.render('liststockout', {user: req.user, stockin:stockin});
+        }
+     });
    });
- }
 
-   });*/
+router.delete('/deletestockout', isAuthenticated, function(req, res){
+    var stockinoutid = req.query.id;
+    var outid = req.query.outid;
 
+    Depotinout.update({_id: stockinoutid}, {$pull: {out: {_id: outid}}} , function(err, stockin){
+    if (err) {
+      console.log('GET Error: There was a problem retrieving: ' + err);
+    } else {
+      res.redirect("/listinout");
+    }
+});
 
-
+});
 
 
  router.get('/adddepot', isAuthenticated, function(req, res){
