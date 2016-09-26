@@ -1280,7 +1280,7 @@ router.get('/productstock', isAuthenticated, function(req, res){
          prodcode: prodcodev,
          prodname: prodnamev,
          prodqteinit: Number(req.body.prodqte),
-         prodqtemv: Number(req.body.prodqte)-totalqteout,//ConvertToUnit( Number(req.body.prodqte), req.body.produnite),
+         prodqtemv:ConvertToUnit( Number(req.body.prodqte), req.body.produnite) - totalqteout,//ConvertToUnit( Number(req.body.prodqte), req.body.produnite),
          produnite: req.body.produnite,
          //datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
          dateexp: req.body.dateexp,
@@ -1360,7 +1360,7 @@ router.delete('/deletestockout', isAuthenticated, function(req, res){
 
     Depotinout.findById(stockinoutid, function (err, stockin) {
     stockin.update({
-      prodqtemv: Number(stockin.prodqtemv) + qteoutdel,
+      prodqtemv: Number(stockin.prodqtemv) + Number(qteoutdel),
     },function (err, providersID){
       if(err){
         console.log('GET Error: There was a problem retrieving: ' + err);
@@ -1728,68 +1728,35 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
       });
 
       router.post('/stockinbk', isAuthenticated, function(req, res){
-
-        console.log("debut post stockin");
-
-
-        // var datesys = new Date();
-
-        // var depotinout = new Depotinout();
-
-        // var ss = req.body.prodinfo.split('|');
-
-        //  depotinout.depotname = req.body.depot;
-        //  depotinout.prodid = ss[0].trim();
-        //  depotinout.prodcode = ss[1].trim();
-        //  depotinout.prodname = ss[2].trim();
-        //  depotinout.prodqteinit = Number(req.body.prodqte);
-        //  depotinout.prodqtemv = ConvertToUnit( Number(req.body.prodqte), req.body.produnite);
-        //  depotinout.produnite = req.body.produnite;
-        //  depotinout.datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
-        //  depotinout.dateexp = req.body.dateexp;
-        //  depotinout.dateachat = req.body.dateachat;
-        //  depotinout.prixachat = Number(req.body.prixachat);
-        //  depotinout.prixvente = Number(req.body.prixvente);
-        //  depotinout.fournisseur = req.body.fournisseur;
-        //  depotinout.numbc = req.body.numbc;
-        //  depotinout.numbl = req.body.numbl;
-        //  depotinout.motifin = "ACHAT NORMAL";
-
-
-         //res.send(req.body.obj + " | " + req.body.depot + " | " + req.body.provider + " | " + req.body.numbc + " | " + req.body.numbl );
-
+        var datesys = new Date();
          var tt = JSON.parse(req.body.obj);
          var to = [];
 
-
          for(i=0; i<tt.length; i++){
-
            var depotinout = new Depotinout();
 
            depotinout.depotname = req.body.depot;
-           depotinout.prodid = tt[i].prodid;
-           depotinout.prodcode = tt[i].prodcode;
-           depotinout.prodname = tt[i].prodname;
+           depotinout.prodid = tt[i].prodid.trim();
+           depotinout.prodcode = tt[i].prodcode.trim();
+           depotinout.prodname = tt[i].prodname.trim();
+           depotinout.prodqteinit = Number(tt[i].prodqte);
+           depotinout.prodqtemv = ConvertToUnit(Number(tt[i].prodqte), tt[i].produnite);
+           depotinout.produnite = tt[i].produnite;
+           depotinout.datein = (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm');
+           depotinout.dateexp = tt[i].prodexpdate;
+           depotinout.dateachat = req.body.dateachat;
+           depotinout.prixachat = tt[i].prixachat;
+           depotinout.prixvente = tt[i].prixvente;
            depotinout.fournisseur = req.body.provider;
            depotinout.numbc = req.body.numbc;
            depotinout.numbl = req.body.numbl;
-           depotinout.prodqteinit = Number(tt[i].prodqte);
-
-              console.log(tt[i]);
-
-
-
+           depotinout.motifin = "ACHAT NORMAL";
 
            depotinout.save(function(err){
               if (err)
                   res.send(err);
-
-
-              //res.json("OK success");
           });
-          // to.push(depotinout);
-
-         }
+          }
 
         //  res.send(to);
         res.redirect('/listinout');

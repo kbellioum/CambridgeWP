@@ -27,7 +27,7 @@ function ConvertToUnit(qte, unittype){
           <div class="x_title">
     <h2>Liste des Entrées / Sorties<small>Gestion de Stock</small></h2>
       <div class="pull-right">
-        <a class="btn btn-primary btn-md" href="/stockin" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
+        <a class="btn btn-primary btn-md" href="/stockinbk" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
 
       </div>
 
@@ -79,7 +79,7 @@ function ConvertToUnit(qte, unittype){
   <% var totalqteout=0;  for(j=0; j < inout[i].out.length; j++){
     totalqteout=totalqteout + Number(inout[i].out[j].qteout);
   }%>
-  <td class=" " style="color:#DF0101" align="center"><%= totalqteout %> <a href="/liststockout/<%= inout[i]._id %>"> Détail</a></td>
+  <td class=" " align="center"><a style="color:#DF0101" href="/liststockout/<%= inout[i]._id %>"><%= totalqteout %></a></td>
 <!--
     <script>
           document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');

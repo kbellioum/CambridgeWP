@@ -11,7 +11,10 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Nouvelle visite</h2>
+            <h2>Nouvelle Entrée en stock <small>Gestion de Stock</small></h2>
+            <div class="" align="right">
+              <label for="">Date d'arrivée : <%= dt %></label>
+            </div>
 
             <div class="clearfix"></div>
           </div>
@@ -48,11 +51,14 @@
                 </div>
               </div>
 
-
-
-
-
-
+            <div class="form-group">
+                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date Achat</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" class="form-control col-md-7 col-xs-12 has-feedback-right" id="dateachat" name="dateachat" placeholder="Date" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'" name="daterdv">
+                      <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                      <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                </div>
+            </div>
 
               <div class="item form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Num BC <span class="required">*</span>
@@ -123,47 +129,74 @@
                   </select>
                 </div>
               </div> -->
+              <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+                          <label for="">Produit : </label>
+                            <select id="prodinfo" type="text" name="prodinfo"  data-validate-length-range="5,20" class="select2_single form-control" placeholder="Produit">
+                              <option></option>
+                              <% for (var i = 0; i < prods.length; i++) {%>
+                                <option value="<%= prods[i]._id + ' | ' + prods[i].prodcode + ' | ' + prods[i].prodname %>"><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
+                              <%}%>
+
+                            </select>
+                      </div>
+
+                      <div class="col-md-1 col-sm-1 col-xs-12 item form-group">
+                          <label for="">Qté : </label>
+                          <input class="form-control" data-validate-length-range="6" data-validate-words="1" id="prodqte"  name="prodqte" placeholder="Quantité" type="Number">
+                          <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                      </div>
 
 
-            <div class="clearfix"></div>
-            <div class="divider-dashed"></div>
+                      <div class="col-md-1 col-sm-1  col-xs-12 item form-group has-feedback" style="padding:0 0 0 0;">
+                          <label for="">Unité : </label>
+                          <select id="unitegroupe" type="text" name="unitegroupe"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Unité de mesure">
+                            <option>Unité</option>
+                            <option>Caisse</option>
+                            <option>Boîte</option>
+                          </select>
+                          <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+                      </div>
+                      <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                        <label for="">Date Expiration : </label>
+                         <input type="text" class="form-control has-feedback-left" id="prodexpdate" placeholder="Date d'expiration" aria-describedby="inputSuccess2Status">
+                         <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                         <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-xs-12 item form-group">
+                        <label for="">Prix Achat : </label>
+                        <input class="form-control" data-validate-length-range="6" id="prixachat" name="prixachat" placeholder="Prix d'achat"  type="text" >
+                      </div>
+                      <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                        <label for="">Prix Vente : </label>
+                        <input class="form-control" data-validate-length-range="6" id="prixvente" name="prixvente" placeholder="Prix de vente" required="required" type="text" >
 
-            <div class="col-md-5 col-sm-5 col-xs-12 item form-group">
-              <label>Code produit : </label>
-              <div class="">
-                <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
-                  <% for(i=0; i<prods.length; i++){%>
-                    <option value="<%= prods[i]._id %> | <%= prods[i].prodcode %> | <%= prods[i].prodname %>"><%= prods[i].prodcode %> | <%= prods[i].prodname %></option>
-                  <%}%>
+                        <div class="item form-group has-feedback">
+
+                        </div>
+                      </div>
 
 
-                    <!-- <option> <span style="color:blue"></span> </option> -->
 
 
-                </select>
+                      <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
+                      </textarea>
               </div>
-            </div>
+              <div class="row">
+                 <a onclick="" id="addline" type="" class="btn btn-primary btn-lg btn-block"><i class="fa fa-check"></i></a>
+              </div>
 
-            <div class="col-md-2 col-sm-2 item form-group has-feedback">
-                <label for="">Quantité : </label>
-                <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
-                <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-            </div>
-            <label for="">Valider la ligne : </label>
-            <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
-              <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
-            </div>
 
-            <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
-            </textarea>
 
-            <div id="progname" name="">
 
-              <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" >
-            </div>
+
+
+
+
 
             <div class="clearfix"></div>
             <div class="divider-dashed"></div>
+
 
             <label for="">Detail produits :</label>
 
@@ -280,10 +313,13 @@ $(document).ready(function() {
       fields: [
           { name: "prodcode", type: "text", title: "Code produit", width: 50, validate: "required", editing: false },
           { name: "prodname", type: "text", title: "Nom produit", width: 50 , editing: false },
-          { name: "prodqte", type: "number", title: "Qté", width: 30 },
+          { name: "prodqte", type: "number", title: "Quantité", width: 30 },
+          { name: "produnite", type: "text", title: "Unité", width: 30 },
           //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
 
           { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 50, editing: false },
+          { name: "prixachat", type: "number", title: "Prix Achat", width: 30 },
+          { name: "prixvente", type: "number", title: "Prix Vente", width: 30 },
           { type: "control" }
       ]
     });
@@ -303,7 +339,10 @@ $(document).ready(function() {
            prodcode: $("#prodinfo").val().split("|")[1],
            prodname: $("#prodinfo").val().split("|")[2],
            prodqte: $('#prodqte').val(),
-           prodexpdate: $('#prodexpdate').val()
+           produnite: $('#unitegroupe').val(),
+           prodexpdate: $('#prodexpdate').val(),
+           prixachat: $('#prixachat').val(),
+           prixvente: $('#prixvente').val()
           });
 
          $('#message').val(JSON.stringify(tab));
@@ -311,6 +350,8 @@ $(document).ready(function() {
          $('#prodinfo').val('');
          $('#prodqte').val('');
          $('#prodexpdate').val('');
+          $('#prixachat').val('');
+           $('#prodexpdate').val('');
          $('#progs').attr('disabled','disabled');
 
        }else{
@@ -543,5 +584,26 @@ $(document).ready(function() {
   $(document).ready(function() {
     $(":input").inputmask();
   });
+</script>
+
+<script>
+ $(document).ready(function(){
+ //	var date_input=$('input[name="date"]'); //our date input has the name "date"
+   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+     $('#prodexpdate').datepicker({
+     format: 'dd/mm/yyyy',
+     container: container,
+     todayHighlight: true,
+     autoclose: true,
+   })
+
+   $('#dateachat').datepicker({
+   format: 'dd/mm/yyyy',
+   container: container,
+   todayHighlight: true,
+   autoclose: true,
+ })
+
+ })
 </script>
 <!-- /jquery.inputmask -->
