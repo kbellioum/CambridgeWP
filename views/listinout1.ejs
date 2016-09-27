@@ -26,8 +26,8 @@ function ConvertToUnit(qte, unittype){
           <div class="x_title">
     <h2>Liste des Entrées / Sorties<small>Gestion de Stock</small></h2>
       <div class="pull-right">
+        <a class="btn btn-primary btn-md" href="/stockinbk" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
 
-        <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
       </div>
 
 
@@ -85,13 +85,13 @@ function ConvertToUnit(qte, unittype){
     </script>
   </td>--><!--quantité totale sortie-->
   <td class=" " style="color:#04B431" align="center"><b><%= inout[i].prodqtemv %></td><!--quantité restante en stock-->
-  <td class=" "><%= inout[i].dateexp  %></td>
+  <td class=" "><%= inout[i].dateexp %></td>
   <td class=" "><%= inout[i].datein %></td>
 
 <td class=" last"  align='right' width='200px;'>
 
     <a class="btn btn-primary btn-xs" href="/editstockin/<%= inout[i]._id %>" role="button"><i class="fa fa-folder"></i> Edit </a>
-    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listinout/<%= inout[i]._id%>');" href="/listinout/<%= inout[i].prodid%>"><i class="fa fa-trash-o"></i> Delete </a>
+    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listinout/<%= inout[i]._id%>');" href="/listinout"><i class="fa fa-trash-o"></i> Delete </a>
     <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
 </td>
   <% } %>

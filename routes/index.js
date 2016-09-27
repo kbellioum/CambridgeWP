@@ -1157,18 +1157,28 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  router.get('/listprod', isAuthenticated, function(req, res){
    Product.find(function (err, prod){
-     res.render('listprod', {user: req.user, prods: prod});
-   });
+     Depotinout.aggregate([{ $group: { _id: '$prodid', totalUnits: { $sum: "$prodqtemv" }  } }],(function (err, stock){
+        res.render('listprod', {user: req.user, prods: prod, stock: stock});
+     }));
 
  });
+});
 
 
 
 
 
- router.get('/listinout', isAuthenticated, function(req, res){
-      Depotinout.find(function(err, result){
-       console.log(result);
+ // router.get('/listinout', isAuthenticated, function(req, res){
+ //   console.log("wafiiiiiiiiiiiiiiiiiiiik by all");
+ //      Depotinout.find(function(err, result){
+ //       res.render('listinout', {user: req.user, inout: result});
+ //       //res.json(result);
+ //     });
+ //
+ //
+ // });
+ router.get('/listinout/:prodid', isAuthenticated, function(req, res){
+      Depotinout.find({prodid: req.params.prodid},function(err, result){
        res.render('listinout', {user: req.user, inout: result});
        //res.json(result);
      });
@@ -1297,7 +1307,7 @@ router.get('/productstock', isAuthenticated, function(req, res){
           console.log('GET Error: There was a problem retrieving: ' + err);
 
         }else{
-          res.redirect("/listinout");
+          res.redirect("/listinout/"+ prodidv);
         }
       })
 
@@ -1318,6 +1328,7 @@ router.get('/productstock', isAuthenticated, function(req, res){
 router.post('/stockout/:id', isAuthenticated, function(req, res){
 var datesys = new Date();
 var qte=req.body.qteout;
+var prodid=req.body.prodid2;
 
  var stockout = {
   qteout: req.body.qteout,
@@ -1335,7 +1346,7 @@ Depotinout.findById(req.params.id, function (err, stockin) {
         console.log('GET Error: There was a problem retrieving: ' + err);
 
       }else{
-        res.redirect("/listinout");
+        res.redirect("/listinout/" + prodid);
       }
     })
 
@@ -1759,7 +1770,7 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
           }
 
         //  res.send(to);
-        res.redirect('/listinout');
+        res.redirect('/listprod');
          /*depotinout.save(function(err){
             if (err)
                 res.send(err);

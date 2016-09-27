@@ -6,12 +6,12 @@ module.exports = mongoose.model('Depotinout',{
   prodid: String,
   prodcode: String,
   prodname: String,
-  prodqteinit: Number,
-  prodqtemv: Number,
+  prodqteinit: {type: Number, min:0},
+  prodqtemv: {type: Number, min:0},
   produnite: String,
-  datein: String,
+  datein: String,// {type: Date, default: Date.now},
   dateexp: String,
-  dateachat: String,
+  dateachat: String,//Date,
   prixachat: Number,
   prixvente: Number,
   fournisseur: String,
@@ -19,7 +19,7 @@ module.exports = mongoose.model('Depotinout',{
   numbl: String,
   motifin: String,
   out: [{
-    qteout: Number,
+    qteout: {type: Number, min:0},
     dateout: String,
     motifout: String
   }]

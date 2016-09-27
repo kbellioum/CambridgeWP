@@ -5,15 +5,15 @@
 <div class="right_col" role="main">
   <div class="">
 
-
-
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
         <!--     <span class="section">Liste des produits </span> -->
         <div class="x_title">
   <h2>Liste des produits <small>Gestion de Stock</small></h2>
+
     <div class="pull-right">
+      <a class="btn btn-primary btn-md" href="/stockinbk" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
       <a class="btn btn-success btn-md" href="/addprod" role="button"><i class="fa fa-plus"></i>   Nouveau produit</a>
     </div>
 
@@ -36,9 +36,11 @@
 
         <th class="column-title">Product Name</th>
 
+        <th class="column-title">Produit Extra</th>
+
         <th class="column-title">Quantité minimale</th>
 
-        <th class="column-title">Produit Extra</th>
+        <th class="column-title">Stock actuel </th>
 
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -60,9 +62,15 @@
 
         <td class=" "><%= prods[i].prodname %></td>
 
-        <td class=" "><%= prods[i].qtemin %></td>
-
         <td class=" "><%= prods[i].extra? "Oui" : "Non" %></td>
+
+        <td class=" " align="center"><%= prods[i].qtemin %></td>
+<% var qtestock=0;
+for(var k=0; k < stock.length; k++) {
+  if (stock[k]._id==prods[i]._id) {qtestock=stock[k].totalUnits;}
+}%>
+        <td class="" align="center"><a href="/listinout/<%= prods[i]._id %>"><font size="4" color="green"><%= qtestock %></font></a></td>
+
 
 
           <td class=" last" align='right' width='120px;'><a class="btn btn-info btn-xs" href="/editprod/<%= prods[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a>

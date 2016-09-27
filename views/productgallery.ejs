@@ -20,7 +20,29 @@
     </div>
 
     <div class="clearfix"></div>
+    
+<div class="row">
+    <% for(i=0; i < 35; i++){%>
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+    <div class="tile-stats">
+                              <div class="icon"><i class="fa fa-check-square-o"></i>
+                              </div>
+                              <div class="count"><%= 100 - (i*3)  %></div>
 
+                              <h3>New Sign ups</h3>
+                              <p>Lorem ipsum psdea itgum rixt.</p>
+                              <div class="progress">
+                                <% if (i<12){%>
+                                    <div class="progress-bar progress-bar-success" data-transitiongoal="<%= 100 - (i*3)  %>" aria-valuenow="0" style="width: 0%;"></div>
+                                <%} else {%>
+                                    <div class="progress-bar progress-bar-warning" data-transitiongoal="<%= 100 - (i*3)  %>" aria-valuenow="0" style="width: 0%;"></div>
+                                <%}%>
+
+                      </div>
+                            </div>
+                      </div>
+<%}%>
+</div>
     <div class="row">
       <div class="col-md-12">
         <div class="">

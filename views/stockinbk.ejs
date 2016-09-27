@@ -1,4 +1,4 @@
-<% include header.ejs %>
+ <% include header.ejs %>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
@@ -76,61 +76,8 @@
                   <input id="numbl" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbl" placeholder="BL" required="required" type="text" value="" >
                 </div>
               </div>
-
-
-
-
-
-
-
-
-
-              <!-- <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Numéro Dossier <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="numdossier" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numdossier" placeholder="Numéro de dossier" required="required" type="text">
-                </div>
-              </div> -->
-
-
-              <!-- <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Poids <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="poid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text">
-                </div>
-              </div> -->
-              <!-- <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="taille">Taille <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="taille" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="taille" placeholder="Taille" required="required" type="text">
-                </div>
-              </div> -->
-              <!-- <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment">Commentaire <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
-                </div>
-              </div> -->
-
-
-              <!-- <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="progs" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
-                    <option>Choisir un Programme</option>
-
-                       <option></option>
-
-                  </select>
-                </div>
-              </div> -->
               <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-12 item form-group has-feedback">
+                      <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
                           <label for="">Produit : </label>
                             <select id="prodinfo" type="text" name="prodinfo"  data-validate-length-range="5,20" class="select2_single form-control" placeholder="Produit">
                               <option></option>
@@ -143,7 +90,7 @@
 
                       <div class="col-md-1 col-sm-1 col-xs-12 item form-group">
                           <label for="">Qté : </label>
-                          <input class="form-control" data-validate-length-range="6" data-validate-words="1" id="prodqte"  name="prodqte" placeholder="Quantité" type="Number">
+                          <input class="form-control" data-validate-length-range="6" data-validate-words="1" id="prodqte"  name="prodqte" placeholder="Quantité" type="Number" >
                           <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                       </div>
 
@@ -170,57 +117,24 @@
                       <div class="col-md-2 col-sm-2 item form-group has-feedback">
                         <label for="">Prix Vente : </label>
                         <input class="form-control" data-validate-length-range="6" id="prixvente" name="prixvente" placeholder="Prix de vente" required="required" type="text" >
-
-                        <div class="item form-group has-feedback">
-
-                        </div>
+                      </div>
+                      <div class="col-md-1 col-sm-1 col-xs-12 item form-group">
+                        <label for="">Ajouter à la liste : </label>
+                          <a onclick="" id="addline" type="" class="btn btn-primary btn-block"><i class="fa fa-check"></i></a>
                       </div>
 
-
-
-
-                      <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
+                      <textarea id="message" type="hidden" name="obj" required="required" class="form-control hidden" name="message" placeholder="Obj">
                       </textarea>
               </div>
-              <div class="row">
-                 <a onclick="" id="addline" type="" class="btn btn-primary btn-lg btn-block"><i class="fa fa-check"></i></a>
-              </div>
 
 
-
-
-
-
-
-
-
-            <div class="clearfix"></div>
-            <div class="divider-dashed"></div>
-
-
-            <label for="">Detail produits :</label>
-
+              <label for="">Detail produits :</label>
 
             <div id="jsGrid"></div>
-
-
-
-              <div class="clearfix"></div>
-              <div class="ln_solid"></div>
-
-
-
-
-
-              <div class="form-group">
-                <div class="col-md-9 col-md-offset-0">
-                  <!--
-                  <button type="submit" class="btn btn-primary">Cancel</button>
-                -->
-                  <!-- <input type="hidden" name="_method" value="PUT"> -->
-                  <button type="submit" class="btn btn-success">Enregistrer</button>
-                </div>
-              </div>
+            <div class="" align="right">
+              <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
+              <button type="submit" class="btn btn-success">Enregistrer</button>
+            </div>
 
             </form>
           </div>
@@ -280,7 +194,7 @@ $(document).ready(function() {
       sorting: true,
       paging: true,*/
 
-      filtering: true,
+      filtering: false,
       editing: true,
       sorting: true,
       paging: true,
@@ -291,7 +205,11 @@ $(document).ready(function() {
             return $.grep(tab, function(obj) {
                 return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
                 && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
-                && (!filter.prodqte || obj.prodqte == filter.prodqte);
+                && (!filter.prodqte || obj.prodqte == filter.prodqte)
+                && (!filter.produnite || obj.produnite.indexOf(filter.produnite) > -1)
+                && (!filter.prodexpdate || obj.prodexpdate.indexOf(filter.prodexpdate) > -1)
+                && (!filter.prixachat || obj.prixachat.indexOf(filter.prixachat) > -1)
+                && (!filter.prixvente || obj.prixvente.indexOf(filter.prixvente) > -1);
             });
         },
 
