@@ -79,7 +79,7 @@
               <div class="row">
                       <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
                           <label for="">Produit : </label>
-                            <select id="prodinfo" type="text" name="prodinfo"  data-validate-length-range="5,20" class="select2_single form-control" placeholder="Produit">
+                            <select id="prodinfo" type="text" name="prodinfo"  data-validate-length-range="5,20" class="form-control select2_single" placeholder="Produit">
                               <option></option>
                               <% for (var i = 0; i < prods.length; i++) {%>
                                 <option value="<%= prods[i]._id + ' | ' + prods[i].prodcode + ' | ' + prods[i].prodname %>"><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
@@ -132,8 +132,9 @@
 
             <div id="jsGrid"></div>
             <div class="" align="right">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
               <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
-              <button type="submit" class="btn btn-success">Enregistrer</button>
+
             </div>
 
             </form>
