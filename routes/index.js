@@ -353,7 +353,7 @@ module.exports = function(passport){
         console.log('GET Error: There was a problem retrieving: ' + err);
         //res.redirect('/home');
       }else{
-
+        console.log(req.body.prog);
         Prog.findOne({progname: req.body.prog}, function(err, prog){
           var obj = JSON.parse(req.body.obj);
 
