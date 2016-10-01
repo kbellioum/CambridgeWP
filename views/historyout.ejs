@@ -14,11 +14,7 @@
           <div class="x_title">
             <h2>Liste des sorties du stock <small>Gestion de Stock</small></h2>
               <div class="pull-right">
-
               </div>
-
-
-
               <div class="clearfix"></div>
           </div>
 
@@ -27,43 +23,37 @@
               <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
                 <thead>
                   <tr class="headings">
-                    <th>
-                      <input type="checkbox" id="check-all" class="flat">
-                    </th>
-                    <th class="column-title">Date opération </th>
+
+                    <th class="column-title">Dépôt </th>
+                    <th class="column-title">Date sortie </th>
+                    <th class="column-title">Code produit </th>
+                    <th class="column-title">Désignation produit </th>
                     <th class="column-title">Quantité </th>
-                    <th class="column-title">Motif </th>
+                    <th class="column-title">Nature de sortie </th>
                     <th class="column-title">Numéro facture | Client </th>
-                    <th class="column-title no-link last"><span class="nobr">Action</span>
-                    </th>4
-                    <th class="bulk-actions" colspan="7">
-                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                    </th>
+
                   </tr>
                 </thead>
 
                 <tbody>
-
-                  <% for(var i=0; i < stockin.out.length; i++) { %>
-                    <tr class="even pointer">
-                      <td class="a-center ">
-                        <input type="checkbox" class="flat" name="table_records">
-                      </td>
-                      <td class=" "><%= stockin.out[i].dateout %></td>
-                      <td class=" "><%= stockin.out[i].qteout %></td>
-                      <td class=" "><%= stockin.out[i].motifout %></td>
-                      <td class=" "><%= stockin.out[i].factnum %></td>
-                      <td class="last"  align='right' width='120px;'>
-                        <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/deletestockout/?id=<%= stockin._id %>&outid=<%= stockin.out[i]._id %>&outqte=<%= stockin.out[i].qteout %>');" href="/liststockout/<%= stockin._id %>"><i class="fa fa-trash-o"></i> Delete </a>
-                      </td>
+                  <% for(var i=0; i < stockout.length; i++) { %>
+                    <% for(j=0; j < stockout[i].out.length; j++){%>
+                      <tr class="even pointer">
+                      <td class=" "><%= stockout[i].depotname %></td>
+                      <td class=" "><%= stockout[i].out[j].dateout %></td>
+                      <td class=" "><%= stockout[i].prodcode %></td>
+                      <td class=" "><%= stockout[i].prodname %></td>
+                      <td class=" "><%= stockout[i].out[j].qteout %></td>
+                      <td class=" "><%= stockout[i].out[j].motifout %></td>
+                      <td class=" "><%= stockout[i].out[j].factnum %></td>
                     </tr>
-                  <% } %>
+                        <%}}%>
                   </tbody>
                 </table>
           <!--    <table class="table table-striped jambo_table bulk_action"> -->
 
               </div>
-              <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listinout/<%= stockin.prodid %>'">Liste Etat stock</button>
+              <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listinout/<%= stockout.prodid %>'">Liste Etat stock</button>
             </div>
           </div>
         </div>

@@ -42,7 +42,7 @@
 
         <th class="column-title">Stock actuel </th>
 
-        <th class="column-title">Etat du stock</th>
+        <th class="column-title">Etat</th>
 
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -67,18 +67,18 @@
         <td class=" "><%= prods[i].extra? "Oui" : "Non" %></td>
 
         <td class=" " align="center"><%= prods[i].qtemin %></td>
-          <% var qtestock=0;
+          <% var qtestock=0;var valstock=0;
           for(var k=0; k < stock.length; k++) {
-            if (stock[k]._id==prods[i]._id) {qtestock=stock[k].totalUnits;}
+            if (stock[k]._id==prods[i]._id) {qtestock=stock[k].totalUnits;valstock=stock[k].totalValeur;}
           }%>
         <td class="" align="center"><a href="/listinout/<%= prods[i]._id %>"><font size="4" color="green"><%= qtestock %></font></a></td>
-        <td>
+        <td align="center">
           <% if(qtestock > Number(prods[i].qtemin)){%>
-            <i class="fa fa-check" aria-hidden="true" style="font-size:16px;color:Green"> en stock</i>
+            <i class="fa fa-check" aria-hidden="true" style="font-size:16px;color:Green">&nbsp;</i>
           <% } else if (qtestock==0) {%>
-            <i class="fa fa-ban" aria-hidden="true" style="font-size:16px;color:Red"> en rupture</i>
+            <i class="fa fa-ban" aria-hidden="true" style="font-size:16px;color:Red">&shy;</i>
         <%  } else {%>
-          <i class="fa fa-warning" aria-hidden="true" style="font-size:16px;color:#FE9A2E"> stock faible</i>
+          <i class="fa fa-warning" aria-hidden="true" style="font-size:16px;color:#FE9A2E">&lrm;</i>
         <%  }%>
 
         </td>
@@ -94,8 +94,13 @@
     <% } %>
     </tbody>
   </table>
-</div>
 
+</div>
+<div class="row">
+    <i class="fa fa-check" aria-hidden="true" style="font-size:16px;color:Green"> en stock   </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="fa fa-ban" aria-hidden="true" style="font-size:16px;color:Red"> en rupture   </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="fa fa-warning" aria-hidden="true" style="font-size:16px;color:#FE9A2E"> stock faible</i>
+</div>
 </div>
 </div>
 </div>

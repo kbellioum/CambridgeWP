@@ -13,6 +13,7 @@ var Product = require('../models/product');
 var Depot = require('../models/depot');
 var Users = require('../models/user');
 var Depotinout = require('../models/depotinout');
+var Inventory = require('../models/inventory');
 
 var Getdate = function(d){
    var out = d.substring(0, 10).split("-",3);
@@ -354,16 +355,16 @@ module.exports = function(passport){
         //res.redirect('/home');
       }else{
 
-        Prog.findOne({progname: req.body.prog}, function(err, prog){
+        Prog.findOne({progname: req.body.progs1}, function(err, prog){
           var obj = JSON.parse(req.body.obj);
 
           var facturenum = inc ;
           var visites = {
             poid: req.body.poid,
             taille: req.body.taille,
-            prog: req.body.prog,
+            prog: req.body.progs1,
             daterdv: new Date(),
-            prix: prog.progprice, //SetPrice(req.body.prog)[0],
+            prix: prog.progprice , //SetPrice(req.body.prog)[0],
             descprod: prog.progdesc, //SetPrice(req.body.prog)[1],
             comment: req.body.comment,
             consultant: req.user.lastName + " " + req.user.firstName,
@@ -1157,7 +1158,7 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
 
  router.get('/listprod', isAuthenticated, function(req, res){
    Product.find(function (err, prod){
-     Depotinout.aggregate([{ $group: { _id: '$prodid', totalUnits: { $sum: "$prodqtemv" }  } }],(function (err, stock){
+     Depotinout.aggregate([{ $group: { _id: '$prodid', totalUnits: { $sum: "$prodqtemv" } } }],(function (err, stock){
         res.render('listprod', {user: req.user, prods: prod, stock: stock});
      }));
 
@@ -1317,11 +1318,13 @@ router.get('/productstock', isAuthenticated, function(req, res){
  router.get('/stockout/:id', isAuthenticated, function(req, res){
   // var dt = new Date().toISOString();
    Depotinout.findById(req.params.id, function(err, stockin){
+     Patient.find({}, {patientnom: 1, patientprenom: 1, visites: 1},function (err, patient){
       if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
       } else {
-        res.render('stockout', {user: req.user, stockin:stockin});
+        res.render('stockout', {user: req.user, stockin:stockin, patient:patient});
       }
+    });
    });
 });
 
@@ -1329,11 +1332,13 @@ router.post('/stockout/:id', isAuthenticated, function(req, res){
 var datesys = new Date();
 var qte=req.body.qteout;
 var prodid=req.body.prodid2;
+var factnum=req.body.factureclt;
 
  var stockout = {
-  qteout: req.body.qteout,
+  qteout: qte,
   dateout: (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm'),
-  motifout: "VENTE NORMALE"
+  motifout: "VENTE NORMALE",
+  factnum: factnum
 };
 Depotinout.findById(req.params.id, function (err, stockin) {
   stockin.out.push(stockout);
@@ -1423,6 +1428,30 @@ router.delete('/deletestockout', isAuthenticated, function(req, res){
 
  });
 
+ router.get('/addinventory', isAuthenticated, function(req, res){
+   Depot.find(function (err, depots){
+      res.render('addinventory', { user: req.user, depots: depots});
+   });
+ });
+
+ router.post('/addinventory', isAuthenticated, function(req, res){
+   console.log("toooooooooooooooooooooooooo");
+    var inventory = new Inventory();
+
+    inventory.nameinventory = req.body.nameinventory;
+    inventory.depotname = req.body.depotname;
+    inventory.dateinventory = req.body.dateinventory;
+    inventory.detail = [];
+
+    inventory.save(function(err) {
+         if (err)
+             res.send(err);
+
+         res.redirect('/home');
+     });
+
+
+ });
 
 
 	/* Handle Logout */
@@ -1779,4 +1808,27 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
             //res.json("OK success");
         });*/
 
+      });
+
+
+      router.get('/historyin', isAuthenticated, function(req, res){
+           Depotinout.find(function(err, result){
+            res.render('historyin', {user: req.user, stockin: result});
+            //res.json(result);
+          });
+      });
+
+      // depotname: String,
+      // prodid: String,
+      // prodcode: String,
+      // prodname: String,
+      // qteout: {type: Number, min:0},
+      // dateout: String,
+      // motifout: String,
+      // factnum:String
+      router.get('/historyout', isAuthenticated, function(req, res){
+           Depotinout.find(function(err, result){
+            res.render('historyout', {user: req.user, stockout: result});
+            //res.json(result);
+          });
       });

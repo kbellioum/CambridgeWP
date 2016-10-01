@@ -1,0 +1,101 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<script>
+function ConvertToUnit(qte, unittype){
+
+    if (unittype == "Boîte"){
+      return Number(qte) * 21;
+    }else if (unittype == "Caisse"){
+      return Number(qte) * 6 * 21;
+    }else if(unittype == "Unité"){
+      return Number(qte);
+    }
+}
+</script>
+
+<div class="right_col" role="main">
+  <div class="">
+
+
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+    <h2>Liste des Entrées<small>Gestion de Stock</small></h2>
+      <div class="pull-right">
+
+      </div>
+
+
+
+    <div class="clearfix"></div>
+  </div>
+
+          <div class="x_content">
+
+<div class="table-responsive">
+<!--    <table class="table table-striped jambo_table bulk_action"> -->
+  <table id="datatable-checkbox" class="table table-striped table-bordered dataTable no-footer">
+    <thead>
+      <tr class="headings">
+
+        <th class="column-title">Dépôt</th>
+        <th class="column-title">Code produit</th>
+        <th class="column-title">Désignation produit</th>
+        <th class="column-title">Date Achat</th>
+        <th class="column-title">Quantité</th>
+        <th class="column-title">Nature</th>
+        <th class="column-title">Prix achat</th>
+        <th class="column-title">Date expiration</th>
+        <th class="column-title">Num BL</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <% for (var i = 0; i < stockin.length; i++) {%>
+
+<tr class="even pointer">
+
+  <td class=" "><%= stockin[i].depotname %></td>
+  <td class=" "><%= stockin[i].prodcode %></td>
+  <td class=" "><%= stockin[i].prodname %></td>
+  <td class=" "><%= stockin[i].dateachat %></td>
+  <td class=" " style="color:#0000FF"><%= stockin[i].prodqteinit %> <%= stockin[i].produnite %> <script> if ("<%= stockin[i].produnite %>"!=="Unité") {
+    document.write("(" + ConvertToUnit(<%= stockin[i].prodqteinit %>, "<%= stockin[i].produnite %>")+ " Unités)" );  }
+    </script>
+  </td>
+  <td class=" " ><%= stockin[i].motifin %></td>
+  <td class=" "  align="right"><b><%= stockin[i].prixachat.toFixed(2) %></td><!--quantité restante en stock-->
+  <td class=" "><%= stockin[i].dateexp  %></td>
+  <td class=" "><%= stockin[i].numbl %></td>
+
+  <% } %>
+
+    </tbody>
+  </table>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- /page content -->
+<!-- Handling cloture click -->
+
+
+<script src="../build/js/Helper.js"></script>
+
+
+
+
+
+
+<% include footer.ejs %>

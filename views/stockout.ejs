@@ -20,7 +20,7 @@
                   <input disabled="disabled" class="form-control col-md-7 col-xs-12"  data-validate-length-range="6" data-validate-words="1" name="depotname" placeholder="Nom du Dépôt" required="required" type="text" value="<%= stockin.depotname %>">
                 </div>
               </div>
-
+validate
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Produit : <span class="required">*</span>
                 </label>
@@ -48,6 +48,27 @@
 
              <div class="clearfix"></div>
              <div class="ln_solid"></div>
+
+             <div class="form-group">
+          		 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Numéro Facture Client : <span class="required">*</span>
+          		 </label>
+          		 <div class="col-md-6 col-sm-6 col-xs-12">
+          			 <select type="text" id="factureclt" name="factureclt"  data-validate-length-range="5,20" class="select2_single form-control col-md-7 col-xs-12" placeholder="Facture client" required="required" >
+                   <option></option>
+
+                   <% for(var i=0; i < patient.length; i++) { %>
+                     <% for(j=0; j < patient[i].visites.length; j++){%>
+                         <% if (patient[i].visites[j].factnum != undefined) { %>
+                        <option ><%= patient[i].visites[j].factnum + ' | ' +  patient[i].patientnom + ' ' + patient[i].patientprenom  %> </option>
+                  <%}}}%>
+
+                 </select>
+          		 </div>
+          	 </div>
+
+
+              
+
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantité à sortir : <span class="required">*</span>
                 </label>

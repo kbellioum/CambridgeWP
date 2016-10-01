@@ -1,171 +1,171 @@
 <% include header.ejs %>
 <!-- page content -->
 <div class="right_col" role="main">
-  <div class="">
+ <div class="">
 
 
-    <div class="clearfix"></div>
+   <div class="clearfix"></div>
 
-    <div class="row">
-      <!-- form input mask -->
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Nouvelle visite</h2>
+   <div class="row">
+     <!-- form input mask -->
+     <div class="col-md-12 col-sm-12 col-xs-12">
+       <div class="x_panel">
+         <div class="x_title">
+           <h2>Nouvelle visite</h2>
 
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <br />
-            <form class="form-horizontal form-label-left" novalidate action="/addvisite/<%= patients._id %>" method="post">
+           <div class="clearfix"></div>
+         </div>
+         <div class="x_content">
+           <br />
+           <form class="form-horizontal form-label-left" novalidate action="/addvisite/<%= patients._id %>" method="post">
 
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Nom Patient <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="poid" disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text" value="<%= patients.patientnom + ' ' + patients.patientprenom %>" >
-                </div>
-              </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Nom Patient <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input id="poid" disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text" value="<%= patients.patientnom + ' ' + patients.patientprenom %>" >
+               </div>
+             </div>
 
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Numéro Dossier <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="numdossier" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numdossier" placeholder="Numéro de dossier" required="required" type="text">
-                </div>
-              </div>
-
-
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Poids <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="poid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text">
-                </div>
-              </div>
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="taille">Taille <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input id="taille" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="taille" placeholder="Taille" required="required" type="text">
-                </div>
-              </div>
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment">Commentaire <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
-                </div>
-              </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Numéro Dossier <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input id="numdossier" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numdossier" placeholder="Numéro de dossier" required="required" type="text">
+               </div>
+             </div>
 
 
-              <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="progs" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
-                    <option>Choisir un Programme</option>
-                    <% for(i=0; i < progs.length; i++ ){%>
-                       <option><%= progs[i].progname %></option>
-                    <%}%>
-                  </select>
-                </div>
-              </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Poids <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input id="poid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text">
+               </div>
+             </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="taille">Taille <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <input id="taille" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="taille" placeholder="Taille" required="required" type="text">
+               </div>
+             </div>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment">Commentaire <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
+               </div>
+             </div>
 
 
-            <div class="clearfix"></div>
-            <div class="divider-dashed"></div>
-
-            <div class="col-md-5 col-sm-5 col-xs-12 item form-group">
-              <label>Code produit : </label>
-              <div class="">
-                <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
-                  <option></option>
-                  <% for (var i = 0; i < products.length; i++) {%>
-                    <option><%= products[i].prodcode + ' | ' + products[i].prodname %> <span style="color:blue"><%= products[i].extra? " | Extra Product" : ""%></span> </option>
-                  <%}%>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-sm-2 item form-group has-feedback">
-                <label for="">Quantité : </label>
-                <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
-                <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-            </div>
-            <label for="">Valider la ligne : </label>
-            <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
-              <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
-            </div>
-
-            <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
-            </textarea>
-
-            <div id="progname" name="">
-
-              <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" >
-            </div>
-
-            <div class="clearfix"></div>
-            <div class="divider-dashed"></div>
-
-            <label for="">Detail produits :</label>
+             <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                 <select id="progs" type="text" name="program" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                   <option>Choisir un Programme</option>
+                   <% for(i=0; i < progs.length; i++ ){%>
+                      <option value="<%= progs[i].progname %>"><%= progs[i].progname %></option>
+                   <%}%>
+                 </select>
+               </div>
+             </div>
 
 
-            <div id="jsGrid"></div>
+           <div class="clearfix"></div>
+           <div class="divider-dashed"></div>
+
+           <div class="col-md-5 col-sm-5 col-xs-12 item form-group">
+             <label>Code produit : </label>
+             <div class="">
+               <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
+                 <option></option>
+                 <% for (var i = 0; i < products.length; i++) {%>
+                   <option><%= products[i].prodcode + ' | ' + products[i].prodname %> <span style="color:blue"><%= products[i].extra? " | Extra Product" : ""%></span> </option>
+                 <%}%>
+               </select>
+             </div>
+           </div>
+
+           <div class="col-md-2 col-sm-2 item form-group has-feedback">
+               <label for="">Quantité : </label>
+               <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
+               <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+           </div>
+           <label for="">Valider la ligne : </label>
+           <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
+             <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
+           </div>
+
+           <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
+           </textarea>
+
+           <div id="progname" name="">
+
+             <input id="progname-val" type="hidden" class="form-control" name="prog" value="" placeholder="Nom prog" >
+           </div>
+
+           <div class="clearfix"></div>
+           <div class="divider-dashed"></div>
+
+           <label for="">Detail produits :</label>
 
 
-
-              <div class="clearfix"></div>
-              <div class="ln_solid"></div>
+           <div id="jsGrid"></div>
 
 
 
-
-
-              <div class="form-group">
-                <div class="col-md-9 col-md-offset-0">
-                  <!--
-                  <button type="submit" class="btn btn-primary">Cancel</button>
-                -->
-                  <input type="hidden" name="_method" value="PUT">
-                  <button type="submit" class="btn btn-success">Enregistrer</button>
-                </div>
-              </div>
-
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- /form input mask -->
-
-    </div>
+             <div class="clearfix"></div>
+             <div class="ln_solid"></div>
 
 
 
-      </div>
-    </div>
-  </div>
+
+
+             <div class="form-group">
+               <div class="col-md-9 col-md-offset-0">
+                 <!--
+                 <button type="submit" class="btn btn-primary">Cancel</button>
+               -->
+                 <input type="hidden" name="_method" value="PUT">
+                 <button type="submit" class="btn btn-success">Enregistrer</button>
+               </div>
+             </div>
+
+           </form>
+         </div>
+       </div>
+     </div>
+     <!-- /form input mask -->
+
+   </div>
+
+
+
+     </div>
+   </div>
+ </div>
 </div>
 <!-- /page content -->
 
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Alert</h4>
-      </div>
-      <div class="modal-body">
-        <p>Prière de saisir les champs  &hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title">Alert</h4>
+     </div>
+     <div class="modal-body">
+       <p>Prière de saisir les champs  &hellip;</p>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+     </div>
+   </div><!-- /.modal-content -->
+ </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 
@@ -180,104 +180,104 @@
 <script type="text/javascript">
 var tab = [];
 $(document).ready(function() {
-  $("#jsGrid").jsGrid({
-      width: "100%",
-      height: "400px",
+ $("#jsGrid").jsGrid({
+     width: "100%",
+     height: "400px",
 
-      /*filtering: true,
-      autoload: true,
-      inserting: false,
-      editing: true,
-      sorting: true,
-      paging: true,*/
+     /*filtering: true,
+     autoload: true,
+     inserting: false,
+     editing: true,
+     sorting: true,
+     paging: true,*/
 
-      filtering: true,
-      editing: true,
-      sorting: true,
-      paging: true,
-      autoload: true,
+     filtering: true,
+     editing: true,
+     sorting: true,
+     paging: true,
+     autoload: true,
 
-      controller: {
-        loadData: function(filter) {
-            return $.grep(tab, function(obj) {
-                return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
-                && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
-                && (!filter.prodqte || obj.prodqte == filter.prodqte);
-            });
-        },
+     controller: {
+       loadData: function(filter) {
+           return $.grep(tab, function(obj) {
+               return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
+               && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
+               && (!filter.prodqte || obj.prodqte == filter.prodqte);
+           });
+       },
 
-        insertItem: function(insertingClient) {
+       insertItem: function(insertingClient) {
 
-        },
+       },
 
-        updateItem: function(updatingClient) { },
+       updateItem: function(updatingClient) { },
 
-        deleteItem: function(deletingClient) {
-
-        }
-      },
-
-      data: tab,
-
-      fields: [
-          { name: "prodcode", type: "text", title: "Code produit", width: 50, validate: "required", editing: false },
-          { name: "prodname", type: "text", title: "Nom produit", width: 50 , editing: false },
-          { name: "prodqte", type: "number", title: "Qté", width: 30 },
-          //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
-
-          { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 50, editing: false },
-          { type: "control" }
-      ]
-    });
-
-
-    $("#addline").click(function() {
-      //console.log($("#prodinfo").val().split("|")[0]);
-      //console.log(tab);
-       if($('#progs').val() !== "Choisir un Programme" && $('#prodinfo').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" ){
-         //$('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$("#prodinfo").val().split("|")[0] +'</td><td class=" ">'+$("#prodinfo").val().split("|")[1] +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"> <a onclick="$(this).parent().parent().remove()" class="removelink" ><i class="fa fa-close"></i></a> </td></tr>');
-
-        // $('#progname').text($('#progs').val());
-         $('#progname-val').val($('#progs').val());
-
-         tab.push({
-           prodcode: $("#prodinfo").val().split("|")[0],
-           prodname: $("#prodinfo").val().split("|")[1],
-           prodqte: $('#prodqte').val(),
-           prodexpdate: $('#prodexpdate').val()
-          });
-
-         $('#message').val(JSON.stringify(tab));
-
-         $('#prodinfo').val('');
-         $('#prodqte').val('');
-         $('#prodexpdate').val('');
-         $('#progs').attr('disabled','disabled');
-
-       }else{
-         $('#myModal').modal('show');
+       deleteItem: function(deletingClient) {
 
        }
-       $("#jsGrid").jsGrid({
+     },
 
-           onItemUpdated: function() {
-           //console.log("row updated");
-           $('#message').val(JSON.stringify(tab));
-           },
+     data: tab,
 
-           onItemDeleted: function(arg) {
-           //console.log("row deleted");
-           tab.splice(arg.itemIndex, 1);
-           $('#message').val(JSON.stringify(tab));
-           },
-           onItemInserted: function() {
-           //console.log("row deleted");
-           $('#message').val(JSON.stringify(tab));
-           }
-       });
+     fields: [
+         { name: "prodcode", type: "text", title: "Code produit", width: 50, validate: "required", editing: false },
+         { name: "prodname", type: "text", title: "Nom produit", width: 50 , editing: false },
+         { name: "prodqte", type: "number", title: "Qté", width: 30 },
+         //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
+
+         { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 50, editing: false },
+         { type: "control" }
+     ]
+   });
 
 
-    });
+   $("#addline").click(function() {
+     //console.log($("#prodinfo").val().split("|")[0]);
+     //console.log(tab);
+      if($('#progs').val() !== "Choisir un Programme" && $('#prodinfo').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" ){
+        //$('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$("#prodinfo").val().split("|")[0] +'</td><td class=" ">'+$("#prodinfo").val().split("|")[1] +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"> <a onclick="$(this).parent().parent().remove()" class="removelink" ><i class="fa fa-close"></i></a> </td></tr>');
+
+       // $('#progname').text($('#progs').val());
+        $('#progname-val').val($('#progs').val());
+
+        tab.push({
+          prodcode: $("#prodinfo").val().split("|")[0],
+          prodname: $("#prodinfo").val().split("|")[1],
+          prodqte: $('#prodqte').val(),
+          prodexpdate: $('#prodexpdate').val()
+         });
+
+        $('#message').val(JSON.stringify(tab));
+
+        $('#prodinfo').val('');
+        $('#prodqte').val('');
+        $('#prodexpdate').val('');
+        $('#progs').attr('disabled','disabled');
+
+      }else{
+        $('#myModal').modal('show');
+
+      }
+      $("#jsGrid").jsGrid({
+
+          onItemUpdated: function() {
+          //console.log("row updated");
+          $('#message').val(JSON.stringify(tab));
+          },
+
+          onItemDeleted: function(arg) {
+          //console.log("row deleted");
+          tab.splice(arg.itemIndex, 1);
+          $('#message').val(JSON.stringify(tab));
+          },
+          onItemInserted: function() {
+          //console.log("row deleted");
+          $('#message').val(JSON.stringify(tab));
+          }
+      });
+
+
+   });
 
 
 
@@ -289,189 +289,189 @@ $(document).ready(function() {
 
 <!-- bootstrap-daterangepicker -->
 <script>
-  $(document).ready(function() {
-    var cb = function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-      $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    };
+ $(document).ready(function() {
+   var cb = function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+     $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+   };
 
-    var optionSet1 = {
-      startDate: moment().subtract(29, 'days'),
-      endDate: moment(),
-      minDate: '01/01/2012',
-      maxDate: '12/31/2015',
-      dateLimit: {
-        days: 60
-      },
-      showDropdowns: true,
-      showWeekNumbers: true,
-      timePicker: false,
-      timePickerIncrement: 1,
-      timePicker12Hour: true,
-      ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      opens: 'right',
-      buttonClasses: ['btn btn-default'],
-      applyClass: 'btn-small btn-primary',
-      cancelClass: 'btn-small',
-      format: 'MM/DD/YYYY',
-      separator: ' to ',
-      locale: {
-        applyLabel: 'Submit',
-        cancelLabel: 'Clear',
-        fromLabel: 'From',
-        toLabel: 'To',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        firstDay: 1
-      }
-    };
+   var optionSet1 = {
+     startDate: moment().subtract(29, 'days'),
+     endDate: moment(),
+     minDate: '01/01/2012',
+     maxDate: '12/31/2015',
+     dateLimit: {
+       days: 60
+     },
+     showDropdowns: true,
+     showWeekNumbers: true,
+     timePicker: false,
+     timePickerIncrement: 1,
+     timePicker12Hour: true,
+     ranges: {
+       'Today': [moment(), moment()],
+       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+       'This Month': [moment().startOf('month'), moment().endOf('month')],
+       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+     },
+     opens: 'right',
+     buttonClasses: ['btn btn-default'],
+     applyClass: 'btn-small btn-primary',
+     cancelClass: 'btn-small',
+     format: 'MM/DD/YYYY',
+     separator: ' to ',
+     locale: {
+       applyLabel: 'Submit',
+       cancelLabel: 'Clear',
+       fromLabel: 'From',
+       toLabel: 'To',
+       customRangeLabel: 'Custom',
+       daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+       monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+       firstDay: 1
+     }
+   };
 
-    $('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+   $('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 
-    $('#reportrange_right').daterangepicker(optionSet1, cb);
+   $('#reportrange_right').daterangepicker(optionSet1, cb);
 
-    $('#reportrange_right').on('show.daterangepicker', function() {
-      console.log("show event fired");
-    });
-    $('#reportrange_right').on('hide.daterangepicker', function() {
-      console.log("hide event fired");
-    });
-    $('#reportrange_right').on('apply.daterangepicker', function(ev, picker) {
-      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-    });
-    $('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
-      console.log("cancel event fired");
-    });
+   $('#reportrange_right').on('show.daterangepicker', function() {
+     console.log("show event fired");
+   });
+   $('#reportrange_right').on('hide.daterangepicker', function() {
+     console.log("hide event fired");
+   });
+   $('#reportrange_right').on('apply.daterangepicker', function(ev, picker) {
+     console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+   });
+   $('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
+     console.log("cancel event fired");
+   });
 
-    $('#options1').click(function() {
-      $('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
-    });
+   $('#options1').click(function() {
+     $('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
+   });
 
-    $('#options2').click(function() {
-      $('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
-    });
+   $('#options2').click(function() {
+     $('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
+   });
 
-    $('#destroy').click(function() {
-      $('#reportrange_right').data('daterangepicker').remove();
-    });
+   $('#destroy').click(function() {
+     $('#reportrange_right').data('daterangepicker').remove();
+   });
 
-  });
+ });
 </script>
 
 <script>
-  $(document).ready(function() {
-    var cb = function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    };
+ $(document).ready(function() {
+   var cb = function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+   };
 
-    var optionSet1 = {
-      startDate: moment().subtract(29, 'days'),
-      endDate: moment(),
-      minDate: '01/01/2012',
-      maxDate: '12/31/2015',
-      dateLimit: {
-        days: 60
-      },
-      showDropdowns: true,
-      showWeekNumbers: true,
-      timePicker: false,
-      timePickerIncrement: 1,
-      timePicker12Hour: true,
-      ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      opens: 'left',
-      buttonClasses: ['btn btn-default'],
-      applyClass: 'btn-small btn-primary',
-      cancelClass: 'btn-small',
-      format: 'MM/DD/YYYY',
-      separator: ' to ',
-      locale: {
-        applyLabel: 'Submit',
-        cancelLabel: 'Clear',
-        fromLabel: 'From',
-        toLabel: 'To',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        firstDay: 1
-      }
-    };
-    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-    $('#reportrange').daterangepicker(optionSet1, cb);
-    $('#reportrange').on('show.daterangepicker', function() {
-      console.log("show event fired");
-    });
-    $('#reportrange').on('hide.daterangepicker', function() {
-      console.log("hide event fired");
-    });
-    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-    });
-    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-      console.log("cancel event fired");
-    });
-    $('#options1').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-    });
-    $('#options2').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-    });
-    $('#destroy').click(function() {
-      $('#reportrange').data('daterangepicker').remove();
-    });
-  });
+   var optionSet1 = {
+     startDate: moment().subtract(29, 'days'),
+     endDate: moment(),
+     minDate: '01/01/2012',
+     maxDate: '12/31/2015',
+     dateLimit: {
+       days: 60
+     },
+     showDropdowns: true,
+     showWeekNumbers: true,
+     timePicker: false,
+     timePickerIncrement: 1,
+     timePicker12Hour: true,
+     ranges: {
+       'Today': [moment(), moment()],
+       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+       'This Month': [moment().startOf('month'), moment().endOf('month')],
+       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+     },
+     opens: 'left',
+     buttonClasses: ['btn btn-default'],
+     applyClass: 'btn-small btn-primary',
+     cancelClass: 'btn-small',
+     format: 'MM/DD/YYYY',
+     separator: ' to ',
+     locale: {
+       applyLabel: 'Submit',
+       cancelLabel: 'Clear',
+       fromLabel: 'From',
+       toLabel: 'To',
+       customRangeLabel: 'Custom',
+       daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+       monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+       firstDay: 1
+     }
+   };
+   $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+   $('#reportrange').daterangepicker(optionSet1, cb);
+   $('#reportrange').on('show.daterangepicker', function() {
+     console.log("show event fired");
+   });
+   $('#reportrange').on('hide.daterangepicker', function() {
+     console.log("hide event fired");
+   });
+   $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+     console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+   });
+   $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+     console.log("cancel event fired");
+   });
+   $('#options1').click(function() {
+     $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+   });
+   $('#options2').click(function() {
+     $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+   });
+   $('#destroy').click(function() {
+     $('#reportrange').data('daterangepicker').remove();
+   });
+ });
 </script>
 
 <script>
-  $(document).ready(function() {
-    $('#single_cal1').daterangepicker({
-      singleDatePicker: true,
-      calender_style: "picker_1"
-    }, function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-    });
-    $('#single_cal2').daterangepicker({
-      singleDatePicker: true,
-      calender_style: "picker_2"
-    }, function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-    });
-    $('#single_cal3').daterangepicker({
-      singleDatePicker: true,
-      calender_style: "picker_3"
-    }, function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-    });
-    $('#single_cal4').daterangepicker({
-      singleDatePicker: true,
-      calender_style: "picker_4"
-    }, function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-    });
-  });
+ $(document).ready(function() {
+   $('#single_cal1').daterangepicker({
+     singleDatePicker: true,
+     calender_style: "picker_1"
+   }, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+   $('#single_cal2').daterangepicker({
+     singleDatePicker: true,
+     calender_style: "picker_2"
+   }, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+   $('#single_cal3').daterangepicker({
+     singleDatePicker: true,
+     calender_style: "picker_3"
+   }, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+   $('#single_cal4').daterangepicker({
+     singleDatePicker: true,
+     calender_style: "picker_4"
+   }, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+ });
 </script>
 
 <script>
-  $(document).ready(function() {
-    $('#reservation').daterangepicker(null, function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-    });
-  });
+ $(document).ready(function() {
+   $('#reservation').daterangepicker(null, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+ });
 </script>
 <!-- /bootstrap-daterangepicker -->
 
@@ -480,8 +480,8 @@ $(document).ready(function() {
 
 <!-- jquery.inputmask -->
 <script>
-  $(document).ready(function() {
-    $(":input").inputmask();
-  });
+ $(document).ready(function() {
+   $(":input").inputmask();
+ });
 </script>
 <!-- /jquery.inputmask -->
