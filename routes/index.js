@@ -1648,13 +1648,28 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       router.post('/listuser/:id', isAuthenticated, function(req, res){
 
+
         Users.findById(req.params.id, function (err, users) {
+          if(req.body.password !== ''){
+            users.update({
+            username: req.body.username,
+             firstName: req.body.firstName,
+              lastName: req.body.lastName,
+               email: req.body.email,
+              password: createHash(req.body.password)
+          },function (err, usersID){
+            if(err){
+              console.log('GET Error: There was a problem retrieving: ' + err);
+            }else{
+              res.redirect("/userlist");
+            }
+          })
+        }else{
           users.update({
           username: req.body.username,
            firstName: req.body.firstName,
             lastName: req.body.lastName,
-             email: req.body.email,
-            password: createHash(req.body.password)
+             email: req.body.email
         },function (err, usersID){
           if(err){
             console.log('GET Error: There was a problem retrieving: ' + err);
@@ -1662,6 +1677,9 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
             res.redirect("/userlist");
           }
         })
+
+        }
+
 
         });
 
@@ -1673,22 +1691,71 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       });
 
+      router.get('/usercheck/:username', isAuthenticated,function(req, res){
+
+        Users.findOne({username: req.params.username},function(err,result){
+          if(result !== null){
+              console.log(result.username);
+              if(result.username == req.params.username){
+
+                console.log({result: true});
+                res.json({result: true});
+
+
+              }
+
+          }else{
+            console.log({result: false});
+            res.json({result: false});
+          }
+
+
+
+        });
+
+      });
+
 
       router.post('/adduser', isAuthenticated, function(req, res){
 
+        console.log(req.body.gp);
+        console.log(req.body.gs);
         var users = new Users();
         users.firstName = req.body.firstName;
         users.lastName = req.body.lastName;
         users.email = req.body.email;
         users.password = createHash(req.body.password);
         users.username = req.body.username;
+        users.permissions = {gs: req.body.gs, gp: req.body.gp};
 
-        users.save(function(err) {
-            if (err)
-                res.send(err);
+        Users.findOne({username: req.body.username},function(err,result){
+          if(result !== null){
+              console.log(result.username);
+              if(result.username !== req.body.username){
 
-            res.redirect('/userlist');
+                users.save(function(err) {
+                    if (err)
+                        res.send(err);
+
+                    res.redirect('/userlist');
+                });
+
+              }
+              res.redirect('/userlist');
+          }else{
+
+            users.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.redirect('/userlist');
+            });
+
+          }
+
         });
+
+
 
 
       })
