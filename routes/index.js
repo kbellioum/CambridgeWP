@@ -353,7 +353,7 @@ module.exports = function(passport){
         console.log('GET Error: There was a problem retrieving: ' + err);
         //res.redirect('/home');
       }else{
-        console.log(req.body.prog);
+        //console.log(req.body.prog);
         Prog.findOne({progname: req.body.prog}, function(err, prog){
           var obj = JSON.parse(req.body.obj);
 
@@ -1637,10 +1637,19 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       router.get('/listuser/:id', isAuthenticated, function(req, res){
 
-        Users.findById(req.params.id, function(err, users){
 
-          res.render('edituser', {user: req.user, users: users});
-          //res.json(users);
+
+        Users.findById(req.params.id, function(err, users){
+          var gp = users.permissions.gp;
+          console.log(gp);
+          var gs = users.permissions.gs;
+
+          var su = users.permissions.su;
+
+
+          console.log(gs);
+          res.render('edituser', {user: req.user, users: users, gp: gp, gs: gs, su: su});
+          // res.json(users.permissions.gp);
 
         });
 
@@ -1656,7 +1665,8 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
              firstName: req.body.firstName,
               lastName: req.body.lastName,
                email: req.body.email,
-              password: createHash(req.body.password)
+              password: createHash(req.body.password),
+              permissions: {gp: req.body.gp, gs: req.body.gs, su: req.body.su}
           },function (err, usersID){
             if(err){
               console.log('GET Error: There was a problem retrieving: ' + err);
@@ -1665,11 +1675,14 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
             }
           })
         }else{
+          console.log(req.body.gp);
+          console.log(req.body.gs);
           users.update({
           username: req.body.username,
            firstName: req.body.firstName,
             lastName: req.body.lastName,
-             email: req.body.email
+             email: req.body.email,
+             permissions: {gp: req.body.gp, gs: req.body.gs, su: req.body.su}
         },function (err, usersID){
           if(err){
             console.log('GET Error: There was a problem retrieving: ' + err);
@@ -1726,7 +1739,7 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
         users.email = req.body.email;
         users.password = createHash(req.body.password);
         users.username = req.body.username;
-        users.permissions = {gs: req.body.gs, gp: req.body.gp};
+        users.permissions = {gs: req.body.gs, gp: req.body.gp,  su: req.body.su};
 
         Users.findOne({username: req.body.username},function(err,result){
           if(result !== null){

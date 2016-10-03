@@ -74,6 +74,14 @@
                       <input type="checkbox" class="" value="true" id="gp" name="gp">
                     </div>
               </div>
+              <br>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">super user :
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                     <input type="checkbox" class="" value="true" id="su" name="su">
+                   </div>
+             </div>
               </div>
 
 
@@ -120,7 +128,7 @@
 
 <% include footer.ejs %>
 
-
+<!-- Username Validity  -->
 <script>
 i = 0;
 var result;
@@ -130,6 +138,25 @@ $(document).ready(function(){
       $("#username").keyup(function(e){
         if(e.keyCode == 8){
           txt = $("#username").val();
+          var url = "/usercheck/" + txt;
+
+          var check = $.ajax({
+                              url:url,
+                              type: 'GET'
+                            });
+          check.done(function(msg){
+            console.log(msg.result);
+            if(msg.result){
+              $("#is-user").css( "color", "red" );
+              $("#is-user").text("Username not Available");
+
+            }else {
+              $("#is-user").css( "color", "green" );
+              $("#is-user").text("Username Available");
+
+            }
+
+          });
         }
       });
       txt = txt + String.fromCharCode(e.keyCode);

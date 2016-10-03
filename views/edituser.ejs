@@ -29,7 +29,7 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Username :</label>
-              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
+              <input readonly id="username" type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -73,6 +73,14 @@
                       <input type="checkbox" class="" value="true" id="gp" name="gp">
                     </div>
               </div>
+              <br>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">super user :
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                     <input type="checkbox" class="" value="true" id="su" name="su">
+                   </div>
+             </div>
               </div>
 
 
@@ -119,6 +127,13 @@
 
 
 <% include footer.ejs %>
+
+<script type="text/javascript">
+    $('#gp').prop('checked', <%= gp %>);
+    $('#gs').prop('checked', <%= gs %>);
+    $('#su').prop('checked', <%= su %>);
+
+</script>
 
 
 <!-- jQuery Tags Input -->

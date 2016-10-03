@@ -89,6 +89,7 @@
                   <div class="clearfix"></div>
 
 	                <ul class="nav side-menu">
+                    <% if (user.permissions.gp == true){%>
 	                  <li class=""><a><i class="fa fa-home"></i>Tableau de bord<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu" style="display: none;">
 	                      <li><a href="/tabrdv">RDVs du jour</a></li>
@@ -96,6 +97,7 @@
 	                      <li><a href="#">Patient en consultation</a></li>
 	                    </ul>
 	                  </li>
+
                     <li class=""><a><i class="fa fa-flask"></i>Gestion de program<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu" style="display: none;">
 
@@ -121,8 +123,8 @@
                         <li><a href="/tabcons">Liste Factures</a></li>
                       </ul>
                     </li>
-
-
+                    <%}%>
+                    <% if (user.permissions.gs == true){%>
                     <li class=""><a><i class="fa fa-dollar"></i>Gestion de stock<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu" style="display: none;">
                                 <li><a href="/listprod">Liste des produits</a></li>
@@ -132,7 +134,7 @@
 
                           </ul>
                     </li>
-
+                    <%}%>
 	                </ul>
 	              </div>
 
@@ -179,8 +181,8 @@
 	                  <ul class="dropdown-menu dropdown-usermenu pull-right">
 
 	                    <li><a href="javascript:;"> About</a></li>
-                      <% if (user.username === "kbellioum"){%>
-                        <li><a href="/signup"> <i class="fa fa-user pull-right"></i>Add users</a></li>
+                      <% if (user.permissions.su == true){%>
+                        <li><a href="/adduser"> <i class="fa fa-user pull-right"></i>Add users</a></li>
                         <li><a href="/listsessions"> <i class="fa fa-user pull-right"></i>logged Users</a></li>
                         <li><a href="/userlist"> <i class="fa fa-user pull-right"></i>Users list</a></li>
 
@@ -195,3 +197,7 @@
 	          </div>
 	        </div>
 	        <!-- /top navigation -->
+
+          <script>
+          console.log("<%= user.permissions.gp %>");
+          </script>
