@@ -1358,6 +1358,38 @@ Depotinout.findById(req.params.id, function (err, stockin) {
    });
    });
 
+   /* Autre nature de sortie  */
+   router.post('/stockoutexception/:id', isAuthenticated, function(req, res){
+   var datesys = new Date();
+   var qte=req.body.qteoutexception;
+   var prodid=req.body.prodid2exception;
+   var motif=req.body.motifexception;
+
+    var stockout = {
+     qteout: qte,
+     dateout: (datesys.getDate() + '/' + (datesys.getMonth()+1) + '/' +  datesys.getFullYear() + ':' + datesys.getHours()+ 'h' + datesys.getMinutes() + 'mm'),
+     motifout: motif
+   };
+   Depotinout.findById(req.params.id, function (err, stockin) {
+     stockin.out.push(stockout);
+
+     stockin.update({
+       out: stockin.out,
+       prodqtemv: stockin.prodqtemv - qte,
+       },function (err, stockinID){
+         if(err){
+           console.log('GET Error: There was a problem retrieving: ' + err);
+
+         }else{
+           res.redirect("/listinout/" + prodid);
+         }
+       })
+
+      });
+      });
+
+
+
    router.get('/liststockout/:id', isAuthenticated, function(req, res){
     // var dt = new Date().toISOString();
      Depotinout.findById(req.params.id, function(err, stockin){

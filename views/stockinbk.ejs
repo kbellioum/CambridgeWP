@@ -129,9 +129,8 @@
 
 
               <label for="">Detail produits :</label>
-
-            <div id="jsGrid"></div>
-            <div class="" align="right">
+              <div id="jsGrid"></div>
+              <div class="" align="right">
               <button type="submit" class="btn btn-primary">Enregistrer</button>
               <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
 
@@ -230,15 +229,15 @@ $(document).ready(function() {
       data: tab,
 
       fields: [
-          { name: "prodcode", type: "text", title: "Code produit", width: 50, validate: "required", editing: false },
-          { name: "prodname", type: "text", title: "Nom produit", width: 50 , editing: false },
-          { name: "prodqte", type: "number", title: "Quantité", width: 30 },
-          { name: "produnite", type: "text", title: "Unité", width: 30 },
+          { name: "prodcode", type: "text", title: "Code produit", width: 150, validate: "required", editing: false },
+          { name: "prodname", type: "text", title: "Nom produit", width: 300 , editing: false },
+          { name: "prodqte", type: "number", title: "Quantité", width: 100 },
+          { name: "produnite", type: "text", title: "Unité", width: 100 },
           //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
 
-          { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 50, editing: false },
-          { name: "prixachat", type: "number", title: "Prix Achat", width: 30 },
-          { name: "prixvente", type: "number", title: "Prix Vente", width: 30 },
+          { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 200, editing: false },
+          { name: "prixachat", type: "number", title: "Prix Achat", width: 100 },
+          { name: "prixvente", type: "number", title: "Prix Vente", width: 100 },
           { type: "control" }
       ]
     });

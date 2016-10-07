@@ -92,7 +92,12 @@ function ConvertToUnit(qte, unittype){
 
     <a class="btn btn-primary btn-xs" href="/editstockin/<%= inout[i]._id %>" role="button"><i class="fa fa-folder"></i> Edit </a>
     <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listinout/<%= inout[i]._id%>');" href="/listinout/<%= inout[i].prodid%>"><i class="fa fa-trash-o"></i> Delete </a>
-    <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
+    <% if (inout[i].prodqtemv ===0){%>
+      <a class="btn btn-warning btn-xs" role="button" disabled="disabled"><i class="fa fa-minus"></i>   Sortie </a>
+    <%} else {%>
+      <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
+    <%}%>
+
 </td>
   <% } %>
 
