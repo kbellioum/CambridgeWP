@@ -354,8 +354,13 @@ module.exports = function(passport){
         console.log('GET Error: There was a problem retrieving: ' + err);
         //res.redirect('/home');
       }else{
+// <<<<<<< HEAD
 
         Prog.findOne({progname: req.body.progs1}, function(err, prog){
+// =======
+        //console.log(req.body.prog);
+        Prog.findOne({progname: req.body.prog}, function(err, prog){
+// >>>>>>> 6e0022c772488e52d086ff0d9f014581663ea222
           var obj = JSON.parse(req.body.obj);
 
           var facturenum = inc ;
@@ -389,22 +394,21 @@ module.exports = function(passport){
               }else{
                 res.redirect("/viewpat/" + patients._id);
               }
-            })
+            });
             //res.render('visite', { user: req.user, patients: patients});
           });
         });
+});
+}
 
 
 
-      }
-    })
+
+    });
 
   });
 
 });
-
-
-
 router.get('/listprog', isAuthenticated, function(req, res){
 
   Prog.find(function(err, prog){
@@ -1045,18 +1049,6 @@ router.delete('/listprog/:prog_id', isAuthenticated, function(req, res){
   router.get('/listsessions', isAuthenticated, function(req, res){
       console.log(req.session);
       res.render('listsessions', {user: req.user, session: req.session.passport});
-
-      /*var sess = req.session
-      if (sess.views) {
-        sess.views++
-        res.setHeader('Content-Type', 'text/html')
-        res.write('<p>views: ' + sess.views + '</p>')
-        res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
-        res.end()
-      } else {
-        sess.views = 1
-        res.end('welcome to the session demo. refresh!')
-      }*/
   });
 
 
@@ -1467,7 +1459,6 @@ router.delete('/deletestockout', isAuthenticated, function(req, res){
  });
 
  router.post('/addinventory', isAuthenticated, function(req, res){
-   console.log("toooooooooooooooooooooooooo");
     var inventory = new Inventory();
 
     inventory.nameinventory = req.body.nameinventory;
@@ -1479,13 +1470,59 @@ router.delete('/deletestockout', isAuthenticated, function(req, res){
          if (err)
              res.send(err);
 
-         res.redirect('/home');
+         res.redirect('/listinventory');
      });
 
 
  });
 
+ /* Get edit inventory*/
+   router.get('/editinventory/:id', isAuthenticated, function(req, res){
+ 	 Depot.find(function (err, depots){
+     	Inventory.findById(req.params.id, function(err, inventory){
 
+ 		 if (err) {
+ 				 console.log('GET Error: There was a problem retrieving: ' + err);
+ 		 } else {
+ 		 res.render('editinventory', {user: req.user,	depot: depots, inventory: inventory });
+ 		}
+
+ 		});
+  });
+ });
+
+
+    /*POST edit inventory*/
+    router.post('/editinventory/:id', isAuthenticated, function(req, res){
+        Inventory.findById(req.params.id, function (err, inventory) {
+          inventory.update({
+          nameinventory: req.body.nameinventory,
+          dateinventory: req.body.dateinventory,
+          depotname: req.body.depotname
+        },function (err, prodID){
+          if(err){
+            console.log('GET Error: There was a problem retrieving: ' + err);
+          }else{
+            res.redirect("/listinventory");
+          }
+        })
+
+       });
+       });
+
+/* Delete inventory */
+router.delete('/delinventory/:id', isAuthenticated, function(req, res){
+
+  Inventory.remove({
+    _id: req.params.id
+  }, function(err, result) {
+    if (err)
+      res.send(err);
+
+    res.json({ message: 'Inventory successfully deleted!' });
+  });
+
+});
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
 		req.logout();
@@ -1548,7 +1585,7 @@ router.post('/addprov', isAuthenticated, function(req, res){
 /*POST edit provider*/
 router.post('/editprov/:id', isAuthenticated, function(req, res){
     Provider.findById(req.params.id, function (err, providers) {
-
+var old_providername=providers.raisonsociale;
     providers.update({
       raisonsociale: req.body.raisonsociale,
       telephone: req.body.telephone,
@@ -1562,6 +1599,16 @@ router.post('/editprov/:id', isAuthenticated, function(req, res){
         console.log('GET Error: There was a problem retrieving: ' + err);
 
       }else{
+        Depotinout.find({fournisseur: old_providername}, function (err, depotinouts) {
+
+          depotinouts.forEach(function(depotinout) {
+           depotinout.fournisseur = req.body.raisonsociale;
+           depotinout.save();
+          });
+
+
+          })
+
         res.redirect("/listproviders");
       }
     })
@@ -1608,20 +1655,33 @@ router.get('/listdepots', isAuthenticated, function(req, res){
 	});
 /*POST edit depot*/
 router.post('/editdepot/:id', isAuthenticated, function(req, res){
-    Depot.findById(req.params.id, function (err, depot) {
+  Depot.findById(req.params.id, function (err, depot) {
+    var old_depotname=depot.depotname;
       depot.update({
-      depotname: req.body.depotname
-    },function (err, depotID){
-      if(err){
-        console.log('GET Error: There was a problem retrieving: ' + err);
+              depotname: req.body.depotname
+              },function (err, depotID){
+              if(err){
+                console.log('GET Error: There was a problem retrieving: ' + err);
 
-      }else{
-        res.redirect("/listdepots");
-      }
+              }else{
+                // res.redirect("/listdepots");
+                Depotinout.find({depotname: old_depotname}, function (err, depotinouts) {
+
+                  depotinouts.forEach(function(depotinout) {
+                   depotinout.depotname = req.body.depotname;
+                   depotinout.save();
+                  });
+
+
+                  })
+
+                    res.redirect("/listdepots");
+
+              }
+      })
     })
+  });
 
-   });
-   });
 
 
    /*Delete depot*/
@@ -1698,10 +1758,19 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       router.get('/listuser/:id', isAuthenticated, function(req, res){
 
-        Users.findById(req.params.id, function(err, users){
 
-          res.render('edituser', {user: req.user, users: users});
-          //res.json(users);
+
+        Users.findById(req.params.id, function(err, users){
+          var gp = users.permissions.gp;
+          console.log(gp);
+          var gs = users.permissions.gs;
+
+          var su = users.permissions.su;
+
+
+          console.log(gs);
+          res.render('edituser', {user: req.user, users: users, gp: gp, gs: gs, su: su});
+          // res.json(users.permissions.gp);
 
         });
 
@@ -1709,13 +1778,32 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       router.post('/listuser/:id', isAuthenticated, function(req, res){
 
+
         Users.findById(req.params.id, function (err, users) {
+          if(req.body.password !== ''){
+            users.update({
+            username: req.body.username,
+             firstName: req.body.firstName,
+              lastName: req.body.lastName,
+               email: req.body.email,
+              password: createHash(req.body.password),
+              permissions: {gp: req.body.gp, gs: req.body.gs, su: req.body.su}
+          },function (err, usersID){
+            if(err){
+              console.log('GET Error: There was a problem retrieving: ' + err);
+            }else{
+              res.redirect("/userlist");
+            }
+          })
+        }else{
+          console.log(req.body.gp);
+          console.log(req.body.gs);
           users.update({
           username: req.body.username,
            firstName: req.body.firstName,
             lastName: req.body.lastName,
              email: req.body.email,
-            password: createHash(req.body.password)
+             permissions: {gp: req.body.gp, gs: req.body.gs, su: req.body.su}
         },function (err, usersID){
           if(err){
             console.log('GET Error: There was a problem retrieving: ' + err);
@@ -1723,6 +1811,9 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
             res.redirect("/userlist");
           }
         })
+
+        }
+
 
         });
 
@@ -1734,22 +1825,71 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
 
       });
 
+      router.get('/usercheck/:username', isAuthenticated,function(req, res){
+
+        Users.findOne({username: req.params.username},function(err,result){
+          if(result !== null){
+              console.log(result.username);
+              if(result.username == req.params.username){
+
+                console.log({result: true});
+                res.json({result: true});
+
+
+              }
+
+          }else{
+            console.log({result: false});
+            res.json({result: false});
+          }
+
+
+
+        });
+
+      });
+
 
       router.post('/adduser', isAuthenticated, function(req, res){
 
+        console.log(req.body.gp);
+        console.log(req.body.gs);
         var users = new Users();
         users.firstName = req.body.firstName;
         users.lastName = req.body.lastName;
         users.email = req.body.email;
         users.password = createHash(req.body.password);
         users.username = req.body.username;
+        users.permissions = {gs: req.body.gs, gp: req.body.gp,  su: req.body.su};
 
-        users.save(function(err) {
-            if (err)
-                res.send(err);
+        Users.findOne({username: req.body.username},function(err,result){
+          if(result !== null){
+              console.log(result.username);
+              if(result.username !== req.body.username){
 
-            res.redirect('/userlist');
+                users.save(function(err) {
+                    if (err)
+                        res.send(err);
+
+                    res.redirect('/userlist');
+                });
+
+              }
+              res.redirect('/userlist');
+          }else{
+
+            users.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.redirect('/userlist');
+            });
+
+          }
+
         });
+
+
 
 
       })
@@ -1863,4 +2003,11 @@ router.post('/editdepot/:id', isAuthenticated, function(req, res){
             res.render('historyout', {user: req.user, stockout: result});
             //res.json(result);
           });
+      });
+
+      router.get('/listinventory', isAuthenticated, function(req, res){
+
+        Inventory.find(function (err, inventorys){
+        res.render('listinventory', { user: req.user, text: 'Liste des inventaires', inventory: inventorys});
+        });
       });

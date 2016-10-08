@@ -36,6 +36,8 @@
                     <th class="column-title">Last Name </th>
                     <th class="column-title">User name </th>
                     <th class="column-title">email </th>
+                    <th class="column-title">Roles </th>
+
 
 
 
@@ -57,6 +59,9 @@
                     <td class=" "><%= users[i].lastName %></td>
                     <td class=" "><%= users[i].username %></td>
                     <td class=" "><%= users[i].email %></td>
+                    <td class=" "><%= (users[i].permissions.gs==true)?"Gestion Stock":"---"%> | <%=(users[i].permissions.gp==true)?"Gestion Patient":"---"  %> | <%=(users[i].permissions.su==true)?"Super User":"---"  %>  </td>
+
+
 
 
 

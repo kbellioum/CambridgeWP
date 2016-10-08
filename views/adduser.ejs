@@ -29,9 +29,12 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Username :</label>
-              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left"/>
+              <input id="username" type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left"/>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                <label id="is-user" for="">---</label>
               </div>
+
+
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Password :</label>
@@ -52,6 +55,37 @@
             <!--  <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button><span class="clearfix"></span>
 
 -->
+              <div class="clearfix"></div>
+              <div class="divider-dashed"></div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <label for="">Roles :</label>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gestion Stock :
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input type="checkbox" class="" value="true" id="gs" name="gs">
+                     </div>
+               </div>
+               <br>
+               <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Gestion patients :
+                   </label>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="checkbox" class="" value="true" id="gp" name="gp">
+                    </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">super user :
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                     <input type="checkbox" class="" value="true" id="su" name="su">
+                   </div>
+             </div>
+              </div>
+
+
+
 
               </div>
 
@@ -63,7 +97,8 @@
                   <button type="submit" class="btn btn-primary">Cancel</button>
                 -->
                   <input type="hidden" name="_method" value="post">
-                  <button id="send" type="submit" class="btn btn-success">Save</button>
+                  <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+                  <a class="btn btn-success btn-md" href="/userlist" role="button">Liste des utilisateurs</a>
                 </div>
               </div>
             </form>
@@ -94,25 +129,61 @@
 
 <% include footer.ejs %>
 
-
-<!-- jQuery Tags Input -->
+<!-- Username Validity  -->
 <script>
-  function onAddTag(tag) {
-    alert("Added a tag: " + tag);
-  }
+i = 0;
+var result;
+var txt = "";
+$(document).ready(function(){
+    $("#username").keypress(function(e){
+      $("#username").keyup(function(e){
+        if(e.keyCode == 8){
+          txt = $("#username").val();
+          var url = "/usercheck/" + txt;
 
-  function onRemoveTag(tag) {
-    alert("Removed a tag: " + tag);
-  }
+          var check = $.ajax({
+                              url:url,
+                              type: 'GET'
+                            });
+          check.done(function(msg){
+            console.log(msg.result);
+            if(msg.result){
+              $("#is-user").css( "color", "red" );
+              $("#is-user").text("Username not Available");
 
-  function onChangeTag(input, tag) {
-    alert("Changed a tag: " + tag);
-  }
+            }else {
+              $("#is-user").css( "color", "green" );
+              $("#is-user").text("Username Available");
 
-  $(document).ready(function() {
-    $('#tags_1').tagsInput({
-      width: 'auto'
+            }
+
+          });
+        }
+      });
+      txt = txt + String.fromCharCode(e.keyCode);
+      console.log(txt);
+      var url = "/usercheck/" + txt;
+
+      var check = $.ajax({
+                          url:url,
+                          type: 'GET'
+                        });
+      check.done(function(msg){
+        console.log(msg.result);
+        if(msg.result){
+          $("#is-user").css( "color", "red" );
+          $("#is-user").text("Username not Available");
+
+        }else {
+          $("#is-user").css( "color", "green" );
+          $("#is-user").text("Username Available");
+
+        }
+
+      });
+
     });
-  });
+    // $("#is-user").text($("#username").keypress().keyCode);
 
-<!-- /jQuery Tags Input -->
+});
+</script>

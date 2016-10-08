@@ -29,13 +29,13 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Username :</label>
-              <input type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
+              <input readonly id="username" type="text" name="username" placeholder="Username" required="required" autofocus="autofocus" class="form-control has-feedback-left" value="<%= users.username %>"/>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
               <label for="">Password :</label>
-              <input type="password" name="password" placeholder="Password" required="required" autofocus="autofocus" class="form-control has-feedback-right"/>
+              <input type="password" name="password" placeholder="Password" autofocus="autofocus" class="form-control has-feedback-right"/>
               <span class="fa fa-key form-control-feedback right" aria-hidden="true"></span>
               </div>
 
@@ -53,6 +53,40 @@
 
 -->
 
+
+              <div class="clearfix"></div>
+              <div class="divider-dashed"></div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <label for="">Roles :</label>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gestion Stock :
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                       <input type="checkbox" class="" value="true" id="gs" name="gs">
+                     </div>
+               </div>
+               <br>
+               <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Gestion patients :
+                   </label>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="checkbox" class="" value="true" id="gp" name="gp">
+                    </div>
+              </div>
+              <br>
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">super user :
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                     <input type="checkbox" class="" value="true" id="su" name="su">
+                   </div>
+             </div>
+              </div>
+
+
+
+
+
               </div>
 
               <div class="clearfix"></div>
@@ -64,6 +98,7 @@
                 -->
                   <input type="hidden" name="_method" value="PUT">
                   <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                  <a class="btn btn-success btn-md" href="/userlist" role="button">Liste des utilisateurs</a>
                 </div>
               </div>
             </form>
@@ -93,6 +128,13 @@
 
 
 <% include footer.ejs %>
+
+<script type="text/javascript">
+    $('#gp').prop('checked', <%= gp %>);
+    $('#gs').prop('checked', <%= gs %>);
+    $('#su').prop('checked', <%= su %>);
+
+</script>
 
 
 <!-- jQuery Tags Input -->

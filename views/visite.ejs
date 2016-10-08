@@ -1,6 +1,7 @@
 <% include header.ejs %>
 <!-- page content -->
 <div class="right_col" role="main">
+<<<<<<< HEAD
  <div class="">
 
 
@@ -132,6 +133,138 @@
                  <button type="submit" class="btn btn-success">Enregistrer</button>
                </div>
              </div>
+=======
+  <div class="">
+
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <!-- form input mask -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Nouvelle visite</h2>
+
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left" novalidate action="/addvisite/<%= patients._id %>" method="post">
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Nom Patient <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="poid" disabled="disabled" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text" value="<%= patients.patientnom + ' ' + patients.patientprenom %>" >
+                </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Numéro Dossier <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="numdossier" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numdossier" placeholder="Numéro de dossier" required="required" type="text">
+                </div>
+              </div>
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="poid">Poids <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="poid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="poid" placeholder="Poids" required="required" type="text">
+                </div>
+              </div>
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="taille">Taille <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="taille" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="taille" placeholder="Taille" required="required" type="text">
+                </div>
+              </div>
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment">Commentaire <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <textarea id="textarea"  name="comment" class="form-control col-md-7 col-xs-12" placeholder="Commentaire"></textarea>
+                </div>
+              </div>
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="progs" type="text" name="program" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un Programme</option>
+                    <% for(i=0; i < progs.length; i++ ){%>
+                       <option value="<%= progs[i].progname %>"><%= progs[i].progname %></option>
+                    <%}%>
+                  </select>
+                </div>
+              </div>
+
+
+            <div class="clearfix"></div>
+            <div class="divider-dashed"></div>
+
+            <div class="col-md-5 col-sm-5 col-xs-12 item form-group">
+              <label>Code produit : </label>
+              <div class="">
+                <select id="prodinfo" class="select2_single form-control" name="prodinfo" type="text">
+                  <option></option>
+                  <% for (var i = 0; i < products.length; i++) {%>
+                    <option><%= products[i].prodcode + ' | ' + products[i].prodname %> <span style="color:blue"><%= products[i].extra? " | Extra Product" : ""%></span> </option>
+                  <%}%>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                <label for="">Quantité : </label>
+                <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
+            </div>
+            <label for="">Valider la ligne : </label>
+            <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
+              <a onclick="" id="addline" type="" class="btn btn-primary"><i class="fa fa-check"></i></a>
+            </div>
+
+            <textarea id="message" type="" name="obj" required="required" class="form-control " name="message" placeholder="Obj">
+            </textarea>
+
+            <div id="progname" name="">
+
+              <input id="progname-val" type="hidden" class="form-control" name="prog" value="" placeholder="Nom prog" >
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="divider-dashed"></div>
+
+            <label for="">Detail produits :</label>
+
+
+            <div id="jsGrid"></div>
+
+
+
+              <div class="clearfix"></div>
+              <div class="ln_solid"></div>
+
+
+
+
+
+              <div class="form-group">
+                <div class="col-md-9 col-md-offset-0">
+                  <!--
+                  <button type="submit" class="btn btn-primary">Cancel</button>
+                -->
+                  <input type="hidden" name="_method" value="PUT">
+                  <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+              </div>
+>>>>>>> 6e0022c772488e52d086ff0d9f014581663ea222
 
            </form>
          </div>
