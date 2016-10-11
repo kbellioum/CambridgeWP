@@ -312,7 +312,7 @@ module.exports = function(passport){
 
     Product.find(function(err, product){
      Prog.find(function(err, prog){
-
+       console.log(prog);
        if (err) {
   				 console.log('GET Error: There was a problem retrieving: ' + err);
   		 } else {
@@ -367,7 +367,7 @@ module.exports = function(passport){
           var visites = {
             poid: req.body.poid,
             taille: req.body.taille,
-            prog: req.body.progs1,
+            prog: req.body.prog,
             daterdv: new Date(),
             prix: prog.progprice , //SetPrice(req.body.prog)[0],
             descprod: prog.progdesc, //SetPrice(req.body.prog)[1],
