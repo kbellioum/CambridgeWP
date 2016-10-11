@@ -4,77 +4,7 @@
 <div class="right_col" role="main">
   <div class="">
     <div class="row">
-      <!--
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                  <h2>Form Design <small>different form elements</small></h2>
 
-            <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <br />
-              <form class="form-horizontal form-label-left input_mask">
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name">
-                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name">
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email">
-                  <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess5" placeholder="Phone">
-                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Default Input</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" placeholder="Default Input">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Disabled Input </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" disabled="disabled" placeholder="Disabled Input">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Read-Only Input</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" readonly="readonly" placeholder="Read-Only Input">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                  </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                  </div>
-                </div>
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary">Cancel</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
-
-      </div>
-    -->
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
 
@@ -82,7 +12,7 @@
 
             <form class="form-horizontal form-label-left input_mask" novalidate action="/editpat/<%= patients._id %>" method="post">
 
-              <span class="section">Informations Patient</span>
+              <span class="section">Modification Patient</span>
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
                   <input id="name" class="form-control has-feedback-left" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="Nom" required="required" type="text" value="<%= patients.patientnom %>">
@@ -124,7 +54,7 @@
                 </label>
                 <div class="col-md-3 col-sm-3 col-xs-12">
                   <select id="statu" type="text" name="statu"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Statu familliale">
-                    <option value=""><%= patients.statu %></option>
+                    <option></option>
                     <option>Marié</option>
                     <option>Célibataire</option>
                   </select>
@@ -155,13 +85,76 @@
                       </div>
               </div>
               <div class="item form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 colproduits-xs-12">
                   <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12" placeholder="Commentaire" value=""><%= patients.textarea %></textarea>
                 </div>
               </div>
 
 
+              <!--Questionnaire-->
+                <div class="divider-dashed"></div>
+                <!--Question 1-->
+                            <div class="row">
+                              <div class="col-md-4"><label for="">Est ce vous avez déjà suivi un régime ? </label></div>
+                              <div class="col-md-4" align="center">
+                                <div class="radio">
+                                      <label>
+                                          <input type="radio" class="flat" <%= (patients.question1 == 'Oui')?'Checked':'' %> value="Oui" id="question1" name="question1"> Oui
+                                      </label>
+                                      <label>
+                                         <input type="radio" class="flat" <%= (patients.question1 == 'Non')?'Checked':'' %> value="Non" id="question1" name="question1"> Non
+                                      </label>
 
+
+                                </div>
+                              </div>
+                              <div class="col-md-4"><label class="pull-right">هل سبق لك ان اتبعت حمية من قبل ؟</label></div>
+                            </div>
+
+
+                            <div class="divider-dashed"></div>
+              <!--Question 2-->
+
+
+              <div class="row">
+                <div class="col-md-4"><label for="">Est ce vous avez déjà utilisé des produits amincissants ?</label></div>
+                <div class="col-md-4" align="center">
+                  <div class="radio">
+                        <label>
+                            <input type="radio" class="flat" <%= (patients.question2 == 'Oui')?'Checked':'' %> value="Oui" id="question2" name="question2"> Oui
+                        </label>
+                        <label>
+                           <input type="radio" class="flat" <%= (patients.question2 == 'Non')?'Checked':'' %> value="Non" id="question2" name="question2"> Non
+                        </label>
+                  </div>
+                </div>
+                <div class="col-md-4"> <label class="pull-right">هل سبق لك ان استعملت منتوجات للحمية ؟</label></div>
+              </div>
+
+              <div class="divider-dashed"></div>
+              <!--Question 3-->
+              <div class="row">
+                <div class="col-md-4"> <label for="">Comment vous avez connu notre centre Cambridge ?</label></div>
+                <div class="col-md-4" align="center">
+                  <div class="radio">
+                        <label>
+                            <input type="radio" class="flat" <%= (patients.question3 == 'Amis ou Famille')?'Checked':'' %> value="Amis ou Famille" id="question3" name="question3"> Amis ou Famille
+                        </label>
+                        <label>
+                           <input type="radio" class="flat" <%= (patients.question3 == 'Exhibition')?'Checked':'' %> value="Exhibition" id="question3" name="question3"> Exhibition
+                        </label>
+                        <label>
+                           <input type="radio" class="flat" <%= (patients.question3 == 'Internet')?'Checked':'' %> value="Internet" id="question3" name="question3"> Internet
+                        </label>
+                        <label>
+                           <input type="radio" class="flat" <%= (patients.question3 == 'Publicité')?'Checked':'' %> value="Publicité" id="question3" name="question3"> Publicité
+                        </label>
+                  </div>
+                </div>
+                <div class="col-md-4">  <label class="pull-right">كيف تعرفت على مركزنا ؟</label></div>
+              </div>
+              <div class="divider-dashed"></div>
+              <!--Fin Questionnaire-->
 
 
               <div class="ln_solid"></div>
@@ -172,6 +165,7 @@
                 -->
                   <input type="hidden" name="_method" value="PUT">
                   <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                  <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listpat'">Liste des patients</button>
                 </div>
               </div>
             </form>
@@ -197,10 +191,24 @@
 
 
 
+
+
 <% include footer.ejs %>
 
+<script type="text/javascript">
 
+  function selectItemByValue(elmnt, value){
 
+      for(var i=0; i < elmnt.options.length; i++)
+      {
+        if(elmnt.options[i].value == value)
+          elmnt.selectedIndex = i;
+      }
+    }
+
+    selectItemByValue(document.getElementById('statu'), '<%= patients.statu %>');
+
+</script>
 <!-- jQuery Tags Input -->
 <script>
   function onAddTag(tag) {

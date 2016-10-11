@@ -5,13 +5,22 @@
 <div class="right_col" role="main">
   <div class="">
 
-
-
     <div class="row">
-
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <span class="section">Liste des produits </span>
+        <!--     <span class="section">Liste des produits </span> -->
+        <div class="x_title">
+  <h2>Liste des produits <small>Gestion de Stock</small></h2>
+
+    <div class="pull-right">
+      <a class="btn btn-primary btn-md" href="/stockinbk" role="button"><i class="fa fa-plus"></i>   Nouvelle entrée</a>
+      <a class="btn btn-success btn-md" href="/addprod" role="button"><i class="fa fa-plus"></i>   Nouveau produit</a>
+    </div>
+
+
+
+  <div class="clearfix"></div>
+</div>
 
           <div class="x_content">
 
@@ -27,9 +36,13 @@
 
         <th class="column-title">Product Name</th>
 
+        <th class="column-title">Produit Extra</th>
+
         <th class="column-title">Quantité minimale</th>
 
-        <th class="column-title">Produit Extra</th>
+        <th class="column-title">Stock actuel </th>
+
+        <th class="column-title">Etat</th>
 
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -51,21 +64,47 @@
 
         <td class=" "><%= prods[i].prodname %></td>
 
-        <td class=" "><%= prods[i].qtemin %></td>
-
         <td class=" "><%= prods[i].extra? "Oui" : "Non" %></td>
 
-        <td class=" last">
-          <a class="" href="#" role="button"> Edit Prod </a>
+        <td class=" " align="center"><%= prods[i].qtemin %></td>
+          <% var qtestock=0;var valstock=0;
+          for(var k=0; k < stock.length; k++) {
+            if (stock[k]._id==prods[i]._id) {qtestock=stock[k].totalUnits;valstock=stock[k].totalValeur;}
+          }%>
+        <td class="" align="center">
+          <a href="/listinout/<%= prods[i]._id %>"><font size="4" color="green"><%= qtestock %></font></a>
+        </td>
+        <td align="center">
+          <% if(qtestock > Number(prods[i].qtemin)){%>
+            <i class="fa fa-check" aria-hidden="true" style="font-size:16px;color:Green">&nbsp;</i>
+          <% } else if (qtestock==0) {%>
+            <i class="fa fa-ban" aria-hidden="true" style="font-size:16px;color:Red">&shy;</i>
+        <%  } else {%>
+          <i class="fa fa-warning" aria-hidden="true" style="font-size:16px;color:#FE9A2E">&lrm;</i>
+        <%  }%>
 
         </td>
+
+
+          <td class=" last" align='right' width='120px;'><a class="btn btn-info btn-xs" href="/editprod/<%= prods[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a>
+            <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listprod/<%= prods[i]._id%>');" href="/listprod"><i class="fa fa-trash-o"></i> Delete </a>
+          </td>
+
+
       </tr>
 
     <% } %>
     </tbody>
   </table>
-</div>
 
+
+</div>
+<div class="row">
+    <i class="fa fa-check" aria-hidden="true" style="font-size:16px;color:Green"> en stock   </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="fa fa-ban" aria-hidden="true" style="font-size:16px;color:Red"> en rupture   </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i class="fa fa-warning" aria-hidden="true" style="font-size:16px;color:#FE9A2E"> stock faible</i>
+
+</div>
 </div>
 </div>
 </div>

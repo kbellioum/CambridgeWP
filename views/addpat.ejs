@@ -36,7 +36,7 @@
                   <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group">dépôt
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Default Input</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <input type="text" class="form-control" placeholder="Default Input">
@@ -82,14 +82,15 @@
 
             <form class="form-horizontal form-label-left input_mask" novalidate action="/addpat" method="post">
 
-              <span class="section">Informations Patient</span>
+              <span class="section">Saisie d'un nouveau Patient</span>
 
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
                   <input id="name" class="form-control has-feedback-left" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="Nom" required="required" type="text" value="<%= nom %>">
                   <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
-                  <input id="prenom" class="form-control" data-validate-length-range="6" data-validate-words="1" name="prenom" placeholder="Prénom" required="required" type="text" value="<%= prenom %> ">
+
+                  <input id="prenom"  class="form-control" data-validate-length-range="6" data-validate-words="1" name="prenom" placeholder="Prénom" required="required" type="text" value="<%= prenom %>">
                   <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
               </div>
 
@@ -163,49 +164,67 @@
               <div class="clearfix"></div>
               <div class="divider-dashed"></div>
 
-              <div class="col-md-12 col-sm-12 col-xs-12 item form-group has-feedback">
-                <label for="">Est ce vous avez déjà suivi un régime ?    </label><label class="pull-right">هل سبق لك ان اتبعت حمية من قبل ؟</label>
-                <div class="radio">
-                      <label>
-                          <input type="radio" checked="" value="Oui" id="optionsRadios1" name="Qi"> Oui
-                      </label>
-                      <label>
-                         <input type="radio" checked="" value="Non" id="optionsRadios1" name="Qi"> Non
-                      </label>
+<!--Questionnaire-->
+<!--Question 1-->
+              <div class="row">
+                <div class="col-md-4"><label for="">Est ce vous avez déjà suivi un régime ? </label></div>
+                <div class="col-md-4"  align="center">
+                  <div class="radio">
+                        <label>
+                            <input type="radio" checked="" value="Oui" id="optionsRadios1" name="question1"> Oui
+                        </label>
+                        <label>
+                           <input type="radio" checked="" value="Non" id="optionsRadios1" name="question1"> Non
+                        </label>
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-md-12 col-sm-12 col-xs-12 item form-group has-feedback">
-                <label for="">Est ce vous avez déjà utilisé des produits amincissants ?</label> <label class="pull-right">هل سبق لك ان استعملت منتوجات للحمية ؟</label>
-                <div class="radio">
-                      <label>
-                          <input type="radio" checked="" value="Oui" id="optionsRadios1" name="Qii"> Oui
-                      </label>
-                      <label>
-                         <input type="radio" checked="" value="Non" id="optionsRadios1" name="Qii"> Non
-                      </label>
-                </div>
+                <div class="col-md-4"><label class="pull-right">هل سبق لك ان اتبعت حمية من قبل ؟</label></div>
               </div>
 
 
-              <div class="col-md-12 col-sm-12 col-xs-12 item form-group has-feedback">
-                <label for="">Comment vous avez connu notre centre Cambridge ?</label> <label class="pull-right">كيف تعرفت على مركزنا ؟</label>
-                <div class="radio">
-                      <label>
-                          <input type="radio" checked="" value="Amis ou Famille" id="optionsRadios1" name="Qiii"> Amis ou Famille
-                      </label> <br>
-                      <label>
-                         <input type="radio" checked="" value="Exhibition" id="optionsRadios1" name="Qiii"> Exhibition
-                      </label> <br>
-                      <label>
-                         <input type="radio" checked="" value="Internet" id="optionsRadios1" name="Qiii"> Internet
-                      </label> <br>
-                      <label>
-                         <input type="radio" checked="" value="Publicité" id="optionsRadios1" name="Qiii"> Publicité
-                      </label>
-                </div>
-              </div>
+              <div class="divider-dashed"></div>
+<!--Question 2-->
 
+
+<div class="row">
+  <div class="col-md-4"><label for="">Est ce vous avez déjà utilisé des produits amincissants ?</label></div>
+  <div class="col-md-4" align="center">
+    <div class="radio">
+          <label>
+              <input type="radio" checked="" value="Oui" id="optionsRadios1" name="question2"> Oui
+          </label>
+          <label>
+             <input type="radio" checked="" value="Non" id="optionsRadios1" name="question2"> Non
+          </label>
+    </div>
+  </div>
+  <div class="col-md-4"> <label class="pull-right">هل سبق لك ان استعملت منتوجات للحمية ؟</label></div>
+</div>
+
+<div class="divider-dashed"></div>
+<!--Question 3-->
+<div class="row">
+  <div class="col-md-4"> <label for="">Comment vous avez connu notre centre Cambridge ?</label></div>
+  <div class="col-md-4"  align="center">
+    <div class="radio">
+          <label>
+              <input type="radio" checked="" value="Amis ou Famille" id="optionsRadios1" name="question3"> Amis ou Famille
+          </label>
+          <label>
+             <input type="radio" checked="" value="Exhibition" id="optionsRadios1" name="question3"> Exhibition
+          </label>
+          <label>
+             <input type="radio" checked="" value="Internet" id="optionsRadios1" name="question3"> Internet
+          </label>
+          <label>
+             <input type="radio" checked="" value="Publicité" id="optionsRadios1" name="question3"> Publicité
+          </label>
+    </div>
+  </div>
+  <div class="col-md-4">  <label class="pull-right">كيف تعرفت على مركزنا ؟</label></div>
+</div>
+<div class="divider-dashed"></div>
+<!--Fin Questionnaire-->
 
               <div class="clearfix"></div>
 
@@ -216,6 +235,7 @@
                   <button type="submit" class="btn btn-primary">Cancel</button>
                 -->
                   <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+                  <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listpat'">Liste des patients</button>
                 </div>
               </div>
             </form>

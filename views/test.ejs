@@ -4,66 +4,77 @@
 <div class="right_col" role="main" style="min-height: 368px;">
 
 
-  <span>Loged user : <%= user.username %></span>
+  <span>Loged user : <%= user %></span>
 
 
 
-<h1><%= tt %> </h1>
+<h1>Test </h1>
 
 <div class="">
   <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
-    <select onchange="Setselect('<%= tt %>')" id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="col-md-7 col-xs-12" placeholder="">
+    <select id="prog" type="text" name="prog" required="required" data-validate-length-range="5,20" class="col-md-7 col-xs-12" placeholder="">
       <option value=""></option>
-      <option  value="Prog 1">Prog 1</option>
-      <option  value="Prog 2">Prog 2</option>
-      <option  value="Prog 3">Prog 3</option>
-      <option  value="Prog 4">Prog 4</option>
-      <option  value="Prog 5">Prog 5</option>
-      <option  value="Prog 6">Prog 6</option>
+      <% if(tt == "Prog 1"){%>
+        <option selected>Prog 1</option>
+      <%}%>
+      <option>Prog 2</option>
+      <option>Prog 3</option>
+      <option>Prog 4</option>
+      <option>Cons 5</option>
+      <option>Cons 6</option>
     </select>
   </div>
+<div id="container">
+  <label id="data" for=""></label>
+  <button id="btn" type="button" name="button"></button>
+</div>
 </div>
 
+<label for="search">Search: </label>
+<input id="search">
+
 
 </div>
 
-<script type="text/javascript">
-
-
-
-  function Setselect(value){
-    var ab = "<%= tt %>";
-    alert(value);
-    alert(ab);
-
-  }
-
-
-</script>
 
 
 
 <% include footer.ejs %>
 
 
-
-
-<script>
-
+<script type="text/javascript">
 $(document).ready(function() {
 
+  var t = "<%= user.username %>";
+  var to = "<%= user.lastName %>";
+  var perm = "<%= user.permissions %>";
+  var tab = [{ll: "one", kk: "two"}, {ll: "tree", kk: "four"}];
+
+  $("#data").text(t + " : " + $("#prog").val());
+
+  var t =<%- JSON.stringify(user) %>;
+
+  $('#container').append("<p> username : "+  t.username + "</p>");
+  $('#container').append("<p> lastname : "+  t.lastName + "</p>");
+  $('#container').append("<p> firstname : "+  t.firstName + "</p>");
+  $('#container').append("<p> email : "+  t.email + "</p>");
+  $('#container').append("<p> permissions : "+ JSON.stringify(t.permissions) + "</p>");
+
+  var to = "<%= user.lastName %>";
+  var perm = "<%= user.permissions %>";
+  var tab = [{ll: "one", kk: "two"}, {ll: "tree", kk: "four"}];
+  var i = 0;
+  $("#btn").click(function(){
+    i++;
+    $("#container").append("<label> || " + i + " || </label>");
+  });
 
 
-  //$('#prog option[value="Prog 3"]').prop('selected', true);
-  console.log($('#prog').val());
-  var a = "Prog 2"
-  $('#prog').val(a);
-  //$('#prog').val('Prog 2');
-  console.log($("#prog").val());
+  //permissions: { menu3: true, menu2: false, menu1: true }
+  //console.log(perm);
+  //alert(t + " " + to + " " + perm + " " + tab);
 
 });
-
-
 </script>

@@ -1,0 +1,84 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+
+        <div class="x_panel">
+
+          <div class="x_content">
+
+            <form class="form-horizontal form-label-left input_mask" novalidate action="/editdepot/<%= depot._id %>" method="post">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <span class="section">Modification Dépôt</span>
+
+
+              <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom du Dépôt : <span class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="depotname" placeholder="Nom du Dépôt" required="required" type="text" value="<%= depot.depotname %>">
+                  <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+              </div>
+                </div>
+
+
+            </div>
+              <div class="col-md-9 col-sm-9 col-xs-12" align="right">
+                <div class="form-group">
+                  <div class="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                    <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste des dépôts</button>
+                  </div>
+                </div>
+              </div
+          </form>
+
+        </div>
+      </div>
+    </div>
+<!-- this -->
+
+<!-- end this -->
+
+
+  </div>
+</div>
+<!-- /page content -->
+
+
+
+
+<!-- /page content -->
+
+
+
+
+
+<% include footer.ejs %>
+
+
+
+<!-- jQuery Tags Input -->
+<script>
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+
+  function onChangeTag(input, tag) {
+    alert("Changed a tag: " + tag);
+  }
+
+  $(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+  });
+</script>
+<!-- /jQuery Tags Input -->

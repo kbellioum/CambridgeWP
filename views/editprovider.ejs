@@ -1,0 +1,107 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="row">
+
+        <div class="x_panel">
+
+          <div class="x_content">
+
+            <form class="form-horizontal form-label-left input_mask" novalidate action="/editprov/<%= providers._id %>" method="post">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <span class="section">Modification Fournisseur</span>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input id="raisonsociale" class="form-control has-feedback-left" name="raisonsociale" placeholder="Raison sociale" required="required" type="text"  value="<%= providers.raisonsociale %>">
+                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input id="telephone" class="form-control" data-validate-length-range="10" data-validate-words="1" name="telephone" placeholder="Télephone" required="required" type="text"  value="<%= providers.telephone %>">
+                  <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input id="fax" class="form-control  has-feedback-left" data-validate-length-range="10" data-validate-words="1" name="fax" placeholder="Fax" required="required" type="text" value="<%= providers.fax %>">
+                  <span class="fa fa-fax form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input type="email" id="mail" name="mail" class="form-control" placeholder="Email" value="<%= providers.mail %>">
+                  <span class="fa fa-at form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group has-feedback">
+                  <input type="textarea" id="adresse" name="adresse"   class="form-control   has-feedback-left" placeholder="Adresse" value="<%= providers.adresse %>">
+                  <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="site" class="form-control col-md-7 col-xs-12"   name="site" placeholder="Site Web" type="text" value="<%= providers.site %>">
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 item form-group">
+                  <input id="autre" type="text" name="autre"  class="form-control col-md-7 col-xs-12" placeholder="Autres informations" value="<%= providers.autre %>">
+              </div>
+
+
+
+            </div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <div class="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button id="send" type="submit" class="btn btn-success">Mise à jour</button>
+                      <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listproviders'">Liste des fournisseurs</button>
+                  </div>
+                </div>
+              </div
+          </form>
+
+        </div>
+      </div>
+    </div>
+<!-- this -->
+
+<!-- end this -->
+
+
+  </div>
+</div>
+<!-- /page content -->
+
+
+
+
+<!-- /page content -->
+
+
+
+
+
+<% include footer.ejs %>
+
+
+
+<!-- jQuery Tags Input -->
+<script>
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+
+  function onChangeTag(input, tag) {
+    alert("Changed a tag: " + tag);
+  }
+
+  $(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+  });
+</script>
+<!-- /jQuery Tags Input -->

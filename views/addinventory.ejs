@@ -1,0 +1,84 @@
+<% include header.ejs %>
+  <div class="right_col" role="main">
+    <div class="page-title">
+    <div class="title_left">
+      <h3></h3>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <span class="section">Saisie d'un nouveau inventaire</span>
+
+      <form class="form-horizontal form-label-left input_mask" novalidate action="/addinventory" method="post">
+
+        <div class="form-group">
+            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date inventaire</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" class="form-control col-md-7 col-xs-12 has-feedback-right" id="dateinventory" name="dateinventory" placeholder="Date inventaire" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'" >
+                  <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                  <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Libellé inventaire : <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input class="form-control col-md-7 col-xs-12"   name="nameinventory" placeholder="désignation" required="required" type="text" >
+             </div>
+         </div>
+
+         <div class="item form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Choisir un depot <span class="required">*</span>
+           </label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+             <select id="depotname" type="text" name="depotname" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+               <option>Choisir un depot</option>
+               <% for(i=0; i<depots.length; i++){%>
+                 <option><%= depots[i].depotname%></option>
+               <%}%>
+             </select>
+           </div>
+         </div>
+
+
+        <div class="clearfix"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group" align="right">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <!--
+            <button type="submit" class="btn btn-primary">Cancel</button>
+          -->
+            <button id="send" type="submit" class="btn btn-success">Enregistrer</button>
+            <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listdepots'">Liste des dépôts</button>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>
+
+<script>
+ $(document).ready(function(){
+ //	var date_input=$('input[name="date"]'); //our date input has the name "date"
+   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+     $('#dateinventory').datepicker({
+     format: 'dd/mm/yyyy',
+     container: container,
+     todayHighlight: true,
+     autoclose: true,
+   })
+
+
+
+ })
+</script>
+<!-- /jquery.inputmask -->

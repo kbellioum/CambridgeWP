@@ -41,27 +41,42 @@
     <link href="../vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
     <!-- Bootstrap Colorpicker -->
     <link href="../vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<!-- st/fullcalendar.print.css" rel="stylesheet" media="print"> -->
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+
+
+    <!-- Datatables -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Ion.RangeSlider -->
+    <link href="../vendors/normalize-css/normalize.css" rel="stylesheet">
+    <link href="../vendors/ion.rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="../vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <!-- Bootstrap Colorpicker -->
+    <link href="../vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 
     <link href="../vendors/cropper/dist/cropper.min.css" rel="stylesheet">
     <!-- jsGrid -->
     <link rel="stylesheet" href="../vendors/jsgrid/jsgrid.min.css">
     <link rel="stylesheet" href="../vendors/jsgrid/jsgrid-theme.min.css">
-
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
     <!-- ... -->
 
-
-
   <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-
+<link rel="stylesheet" href="../vendors/fullcalendar/dist/bootstrap-datepicker3.css"/>
   </head>
 
 	<body class="nav-md">
 	    <div class="container body">
 	      <div class="main_container">
-	        <div class="col-md-3 left_col menu_fixed">
+	        <div class="col-md-3 left_col menu_fixed no-print">
 	          <div class="left_col scroll-view">
 	            <div class="navbar nav_title" style="border: 0;">
 	              <a href="/home" class="site_title"><i class="fa  fa-graduation-cap"></i> <span>Cambridge <small>W.P</small></span></a>
@@ -87,8 +102,9 @@
 	            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	              <div class="menu_section">
                   <div class="clearfix"></div>
-<!--	                <h3>________</h3> -->
+
 	                <ul class="nav side-menu">
+                    <% if (user.permissions.gp == true){%>
 	                  <li class=""><a><i class="fa fa-home"></i>Tableau de bord<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu" style="display: none;">
 	                      <li><a href="/tabrdv">RDVs du jour</a></li>
@@ -96,15 +112,16 @@
 	                      <li><a href="#">Patient en consultation</a></li>
 	                    </ul>
 	                  </li>
+
                     <li class=""><a><i class="fa fa-flask"></i>Gestion de program<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu" style="display: none;">
-	                      <li><a href="/addprog">Ajout Programme</a></li>
+
                         <li><a href="/listprog">Liste Programme</a></li>
 	                    </ul>
 	                  </li>
 	                  <li><a><i class="fa fa-edit"></i>Patients<span class="fa fa-chevron-down"></span></a>
 	                    <ul class="nav child_menu" style="">
-	                      <li><a href="/addpat">Ajout Patient</a></li>
+
 	                      <li><a href="/listpat">Liste des Patients</a></li>
 	                    </ul>
 	                  </li>
@@ -121,7 +138,19 @@
                         <li><a href="/tabcons">Liste Factures</a></li>
                       </ul>
                     </li>
-
+                    <%}%>
+                    <% if (user.permissions.gs == true){%>
+                    <li class=""><a><i class="fa fa-dollar"></i>Gestion de stock<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu" style="display: none;">
+                                <li><a href="/listprod">Liste des produits</a></li>
+                                <li><a href="/listproviders">Liste des fournisseurs</a></li>
+                                <li><a href="/listdepots">Liste Dépots</a></li>
+                                <li><a href="/historyin">journal des entrées</a></li>
+                                <li><a href="/historyout">journal des sorties</a></li>
+                                <li><a href="/listinventory">Liste des inventaires</a></li>
+                          </ul>
+                    </li>
+                    <%}%>
 	                </ul>
 	              </div>
 
@@ -168,9 +197,11 @@
 	                  <ul class="dropdown-menu dropdown-usermenu pull-right">
 
 	                    <li><a href="javascript:;"> About</a></li>
-                      <% if (user.username === "kbellioum"){%>
-                        <li><a href="/signup"> <i class="fa fa-user pull-right"></i>Add users</a></li>
+                      <% if (user.permissions.su == true){%>
+                        <li><a href="/adduser"> <i class="fa fa-user pull-right"></i>Add users</a></li>
                         <li><a href="/listsessions"> <i class="fa fa-user pull-right"></i>logged Users</a></li>
+                        <li><a href="/userlist"> <i class="fa fa-user pull-right"></i>Users list</a></li>
+
                       <%}%>
 	                    <li><a href="/signout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 	                  </ul>
@@ -182,3 +213,7 @@
 	          </div>
 	        </div>
 	        <!-- /top navigation -->
+
+          <script>
+          console.log("<%= user.permissions.gp %>");
+          </script>

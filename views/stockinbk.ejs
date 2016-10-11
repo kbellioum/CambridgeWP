@@ -1,0 +1,527 @@
+ <% include header.ejs %>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <!-- form input mask -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Nouvelle Entrée en stock <small>Gestion de Stock</small></h2>
+            <div class="" align="right">
+              <label for="">Date d'arrivée : <%= dt %></label>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left" validate action="/stockinbk" method="post">
+
+
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Choisir un depot <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="depot" type="text" name="depot" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un depot</option>
+                    <% for(i=0; i<depots.length; i++){%>
+                      <option><%= depots[i].depotname%></option>
+                    <%}%>
+                  </select>
+                </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Choisir un fournisseur <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <select id="provider" type="text" name="provider" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                    <option>Choisir un fournisseur</option>
+                    <% for(i=0; i<providers.length; i++){%>
+                      <option><%= providers[i].raisonsociale %></option>
+                    <%}%>
+                  </select>
+                </div>
+              </div>
+
+            <div class="form-group">
+                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date Achat</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" class="form-control col-md-7 col-xs-12 has-feedback-right" id="dateachat" name="dateachat" placeholder="Date achat" aria-describedby="inputSuccess2Status4" required="required" data-inputmask="'mask': '99/99/9999'">
+                      <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                      <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                </div>
+            </div>
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Num BC <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="numbc" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbc" placeholder="BC" required="required" type="text" value="" >
+                </div>
+              </div>
+
+
+              <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nom">Num BL <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="numbl" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="numbl" placeholder="BL" required="required" type="text" value="" >
+                </div>
+              </div>
+              <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-12 item form-group has-feedback">
+                          <label for="">Produit : </label>
+                            <select id="prodinfo" type="text" name="prodinfo"  data-validate-length-range="5,20" class="form-control select2_single" placeholder="Produit">
+                              <option></option>
+                              <% for (var i = 0; i < prods.length; i++) {%>
+                                <option value="<%= prods[i]._id + ' | ' + prods[i].prodcode + ' | ' + prods[i].prodname %>"><%= prods[i].prodcode + ' | ' + prods[i].prodname %> <span style="color:blue"><%= prods[i].extra? " | Extra Product" : ""%></span> </option>
+                              <%}%>
+
+                            </select>
+                      </div>
+
+                      <div class="col-md-1 col-sm-1 col-xs-12 item form-group">
+                          <label for="">Qté : </label>
+                          <input class="form-control" data-validate-length-range="6" data-validate-words="1" id="prodqte"  name="prodqte" placeholder="Quantité" type="Number" >
+                          <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                      </div>
+
+
+                      <div class="col-md-1 col-sm-1  col-xs-12 item form-group has-feedback" style="padding:0 0 0 0;">
+                          <label for="">Unité : </label>
+                          <select id="unitegroupe" type="text" name="unitegroupe"  data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="Unité de mesure">
+                            <option>Unité</option>
+                            <option>Caisse</option>
+                            <option>Boîte</option>
+                          </select>
+                          <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
+                      </div>
+                      <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                        <label for="">Date Expiration : </label>
+                         <input type="text" class="form-control has-feedback-left" id="prodexpdate" placeholder="Date d'expiration" aria-describedby="inputSuccess2Status">
+                         <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                         <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-xs-12 item form-group">
+                        <label for="">Prix Achat : </label>
+                        <input class="form-control" data-validate-length-range="6" id="prixachat" name="prixachat" placeholder="Prix d'achat"  type="text" >
+                      </div>
+                      <div class="col-md-2 col-sm-2 item form-group has-feedback">
+                        <label for="">Prix Vente : </label>
+                        <input class="form-control" data-validate-length-range="6" id="prixvente" name="prixvente" placeholder="Prix de vente" required="required" type="text" >
+                      </div>
+                      <div class="col-md-1 col-sm-1 col-xs-12 item form-group">
+                        <label for="">Ajouter à la liste : </label>
+                          <a onclick="" id="addline" type="" class="btn btn-primary btn-block"><i class="fa fa-check"></i></a>
+                      </div>
+
+                      <textarea id="message" type="hidden" name="obj" required="required" class="form-control hidden" name="message" placeholder="Obj">
+                      </textarea>
+              </div>
+
+
+              <label for="">Detail produits :</label>
+              <div id="jsGrid"></div>
+              <div class="" align="right">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
+
+            </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /form input mask -->
+
+    </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Prière de saisir les champs  &hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+<% include footer.ejs %>
+
+
+<script type="text/javascript">
+var tab = [];
+$(document).ready(function() {
+  $("#jsGrid").jsGrid({
+      width: "100%",
+      height: "400px",
+
+      /*filtering: true,
+      autoload: true,
+      inserting: false,
+      editing: true,
+      sorting: true,
+      paging: true,*/
+
+      filtering: false,
+      editing: true,
+      sorting: true,
+      paging: true,
+      autoload: true,
+
+      controller: {
+        loadData: function(filter) {
+            return $.grep(tab, function(obj) {
+                return (!filter.prodcode || obj.prodcode.indexOf(filter.prodcode) > -1)
+                && (!filter.prodname || obj.prodname.indexOf(filter.prodname) > -1)
+                && (!filter.prodqte || obj.prodqte == filter.prodqte)
+                && (!filter.produnite || obj.produnite.indexOf(filter.produnite) > -1)
+                && (!filter.prodexpdate || obj.prodexpdate.indexOf(filter.prodexpdate) > -1)
+                && (!filter.prixachat || obj.prixachat.indexOf(filter.prixachat) > -1)
+                && (!filter.prixvente || obj.prixvente.indexOf(filter.prixvente) > -1);
+            });
+        },
+
+        insertItem: function(insertingClient) {
+
+        },
+
+        updateItem: function(updatingClient) {
+
+        },
+
+        deleteItem: function(deletingClient) {
+
+        }
+      },
+
+      data: tab,
+
+      fields: [
+          { name: "prodcode", type: "text", title: "Code produit", width: 150, validate: "required", editing: false },
+          { name: "prodname", type: "text", title: "Nom produit", width: 300 , editing: false },
+          { name: "prodqte", type: "number", title: "Quantité", width: 100 },
+          { name: "produnite", type: "text", title: "Unité", width: 100 },
+          //{ name: "prodexpdate", type: "text", items: countries, valueField: "Id", textField: "Name" },
+
+          { name: "prodexpdate", type: "text", title: "Date d'expiration", width: 200, editing: false },
+          { name: "prixachat", type: "number", title: "Prix Achat", width: 100 },
+          { name: "prixvente", type: "number", title: "Prix Vente", width: 100 },
+          { type: "control" }
+      ]
+    });
+
+
+    $("#addline").click(function() {
+      //console.log($("#prodinfo").val().split("|")[0]);
+      //console.log(tab);
+       if($('#progs').val() !== "Choisir un Programme" && $('#prodinfo').val() !== "" && $('#prodqte').val() !== "" && $('#prodexpdate').val() !== "" ){
+         //$('#detail tbody').append('<tr class="odd pointer"><td class=" ">'+$("#prodinfo").val().split("|")[0] +'</td><td class=" ">'+$("#prodinfo").val().split("|")[1] +'</td><td class=" ">'+$('#prodqte').val()+'</td><td class=" ">'+$('#prodexpdate').val()+'</td><td class=" last"> <a onclick="$(this).parent().parent().remove()" class="removelink" ><i class="fa fa-close"></i></a> </td></tr>');
+
+        // $('#progname').text($('#progs').val());
+         $('#progname-val').val($('#progs').val());
+
+         tab.push({
+           prodid: $("#prodinfo").val().split("|")[0],
+           prodcode: $("#prodinfo").val().split("|")[1],
+           prodname: $("#prodinfo").val().split("|")[2],
+           prodqte: $('#prodqte').val(),
+           produnite: $('#unitegroupe').val(),
+           prodexpdate: $('#prodexpdate').val(),
+           prixachat: $('#prixachat').val(),
+           prixvente: $('#prixvente').val()
+          });
+
+         $('#message').val(JSON.stringify(tab));
+
+         $('#prodinfo').val('');
+         $('#prodqte').val('');
+         $('#prodexpdate').val('');
+          $('#prixachat').val('');
+           $('#prodexpdate').val('');
+         $('#progs').attr('disabled','disabled');
+
+       }else{
+         $('#myModal').modal('show');
+
+       }
+       $("#jsGrid").jsGrid({
+
+           onItemUpdated: function() {
+           //console.log("row updated");
+           $('#message').val(JSON.stringify(tab));
+           },
+
+           onItemDeleted: function(arg) {
+
+           tab.splice(arg.itemIndex, 1);
+           $('#message').val(JSON.stringify(tab));
+
+           },
+           onItemInserted: function() {
+           //console.log("row deleted");
+           $('#message').val(JSON.stringify(tab));
+           }
+       });
+
+
+    });
+
+
+
+});
+</script>
+
+
+
+
+<!-- bootstrap-daterangepicker -->
+<script>
+  $(document).ready(function() {
+    var cb = function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+      $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    };
+
+    var optionSet1 = {
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment(),
+      minDate: '01/01/2012',
+      maxDate: '12/31/2015',
+      dateLimit: {
+        days: 60
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      opens: 'right',
+      buttonClasses: ['btn btn-default'],
+      applyClass: 'btn-small btn-primary',
+      cancelClass: 'btn-small',
+      format: 'MM/DD/YYYY',
+      separator: ' to ',
+      locale: {
+        applyLabel: 'Submit',
+        cancelLabel: 'Clear',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        firstDay: 1
+      }
+    };
+
+    $('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+    $('#reportrange_right').daterangepicker(optionSet1, cb);
+
+    $('#reportrange_right').on('show.daterangepicker', function() {
+      console.log("show event fired");
+    });
+    $('#reportrange_right').on('hide.daterangepicker', function() {
+      console.log("hide event fired");
+    });
+    $('#reportrange_right').on('apply.daterangepicker', function(ev, picker) {
+      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+    });
+    $('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
+      console.log("cancel event fired");
+    });
+
+    $('#options1').click(function() {
+      $('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
+    });
+
+    $('#options2').click(function() {
+      $('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
+    });
+
+    $('#destroy').click(function() {
+      $('#reportrange_right').data('daterangepicker').remove();
+    });
+
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    var cb = function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    };
+
+    var optionSet1 = {
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment(),
+      minDate: '01/01/2012',
+      maxDate: '12/31/2015',
+      dateLimit: {
+        days: 60
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      opens: 'left',
+      buttonClasses: ['btn btn-default'],
+      applyClass: 'btn-small btn-primary',
+      cancelClass: 'btn-small',
+      format: 'MM/DD/YYYY',
+      separator: ' to ',
+      locale: {
+        applyLabel: 'Submit',
+        cancelLabel: 'Clear',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        firstDay: 1
+      }
+    };
+    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+    $('#reportrange').daterangepicker(optionSet1, cb);
+    $('#reportrange').on('show.daterangepicker', function() {
+      console.log("show event fired");
+    });
+    $('#reportrange').on('hide.daterangepicker', function() {
+      console.log("hide event fired");
+    });
+    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+    });
+    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+      console.log("cancel event fired");
+    });
+    $('#options1').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+    });
+    $('#options2').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+    });
+    $('#destroy').click(function() {
+      $('#reportrange').data('daterangepicker').remove();
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#single_cal1').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_1"
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+    $('#single_cal2').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_2"
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+    $('#single_cal3').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_3"
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+    $('#single_cal4').daterangepicker({
+      singleDatePicker: true,
+      calender_style: "picker_4"
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#reservation').daterangepicker(null, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+    });
+  });
+</script>
+<!-- /bootstrap-daterangepicker -->
+
+
+
+
+<!-- jquery.inputmask -->
+<script>
+  $(document).ready(function() {
+    $(":input").inputmask();
+  });
+</script>
+
+<script>
+ $(document).ready(function(){
+ //	var date_input=$('input[name="date"]'); //our date input has the name "date"
+   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+     $('#prodexpdate').datepicker({
+     format: 'dd/mm/yyyy',
+     container: container,
+     todayHighlight: true,
+     autoclose: true,
+   })
+
+   $('#dateachat').datepicker({
+   format: 'dd/mm/yyyy',
+   container: container,
+   todayHighlight: true,
+   autoclose: true,
+ })
+
+ })
+</script>
+<!-- /jquery.inputmask -->

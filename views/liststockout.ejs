@@ -1,0 +1,105 @@
+<% include header.ejs %>
+
+<!-- page content -->
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+
+
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Liste des sorties du stock <small>Gestion de Stock</small></h2>
+              <div class="pull-right">
+
+              </div>
+
+
+
+              <div class="clearfix"></div>
+          </div>
+
+          <div class="x_content">
+            <div class="table-responsive">
+              <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
+                <thead>
+                  <tr class="headings">
+                    <th>
+                      <input type="checkbox" id="check-all" class="flat">
+                    </th>
+                    <th class="column-title">Date opération </th>
+                    <th class="column-title">Quantité </th>
+                    <th class="column-title">Motif </th>
+                    <th class="column-title">Numéro facture | Client </th>
+                    <th class="column-title no-link last"><span class="nobr">Action</span>
+                    </th>4
+                    <th class="bulk-actions" colspan="7">
+                      <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <% for(var i=0; i < stockin.out.length; i++) { %>
+                    <tr class="even pointer">
+                      <td class="a-center ">
+                        <input type="checkbox" class="flat" name="table_records">
+                      </td>
+                      <td class=" "><%= stockin.out[i].dateout %></td>
+                      <td class=" "><%= stockin.out[i].qteout %></td>
+                      <td class=" "><%= stockin.out[i].motifout %></td>
+                      <td class=" "><%= stockin.out[i].factnum %></td>
+                      <td class="last"  align='right' width='120px;'>
+                        <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/deletestockout/?id=<%= stockin._id %>&outid=<%= stockin.out[i]._id %>&outqte=<%= stockin.out[i].qteout %>');" href="/liststockout/<%= stockin._id %>"><i class="fa fa-trash-o"></i> Delete </a>
+                      </td>
+                    </tr>
+                  <% } %>
+                  </tbody>
+                </table>
+          <!--    <table class="table table-striped jambo_table bulk_action"> -->
+
+              </div>
+              <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listinout/<%= stockin.prodid %>'">Liste Etat stock</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /page content -->
+
+  <!-- /page content -->
+
+  <!-- myModal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">About</h4>
+        </div>
+        <div class="modal-body">
+          <p id="test">test</p>
+          <p>Thanks for you interest.</p>
+          <quote>I hope this tool will help you.</quote>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script src="../build/js/Helper.js"></script>
+
+
+  <% include footer.ejs %>

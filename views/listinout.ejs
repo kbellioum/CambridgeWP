@@ -1,6 +1,18 @@
 <% include header.ejs %>
 
 <!-- page content -->
+<script>
+function ConvertToUnit(qte, unittype){
+
+    if (unittype == "Boîte"){
+      return Number(qte) * 21;
+    }else if (unittype == "Caisse"){
+      return Number(qte) * 6 * 21;
+    }else if(unittype == "Unité"){
+      return Number(qte);
+    }
+}
+</script>
 
 <div class="right_col" role="main">
   <div class="">
@@ -11,30 +23,35 @@
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <span class="section">Liste des I/O </span>
+          <div class="x_title">
+    <h2>Liste des Entrées / Sorties<small>Gestion de Stock</small></h2>
+      <div class="pull-right">
+
+        <button id="retour" type="button" class="btn btn-success" onclick="window.location.href='/listprod'">Liste des produits</button>
+      </div>
+
+
+
+    <div class="clearfix"></div>
+  </div>
 
           <div class="x_content">
 
 <div class="table-responsive">
 <!--    <table class="table table-striped jambo_table bulk_action"> -->
-  <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
+  <table id="datatable-checkbox" class="table table-striped table-bordered dataTable no-footer">
     <thead>
       <tr class="headings">
-        <th>
-          <input type="checkbox" id="check-all" class="flat">
-        </th>
-        <th class="column-title">Dépôt Name</th>
 
-        <th class="column-title">Product Code</th>
-
-        <th class="column-title">Unité</th>
-
-        <th class="column-title">Quantité init</th>
-
-        <th class="column-title">Quantité movement</th>
-
-        <th class="column-title">Date d'expiration</th>
-
+        <th class="column-title">Dépôt</th>
+        <th class="column-title">Code produit</th>
+        <th class="column-title">Désignation produit</th>
+        <th class="column-title">Date Achat</th>
+        <th class="column-title">Stock initial</th>
+        <th class="column-title">Total Sortie(U)</th>
+        <th class="column-title">Stock actuel(U)</th>
+        <th class="column-title">Date expiration</th>
+        <th class="column-title">Date Saisie</th>
 
 
         <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -44,36 +61,45 @@
         </th>
       </tr>
     </thead>
-
     <tbody>
 
-      <% for (var i = 0; i < depots.length; i++) {%>
-        <% for (var j = 0; j< depots[i].inout.length; j++) {%>
+      <% for (var i = 0; i < inout.length; i++) {%>
 
-      <tr class="even pointer">
-        <td class="a-center ">
-          <input type="checkbox" class="flat" name="table_records">
-        </td>
-        <td class=" "><%= depots[i].depotname %></td>
+<tr class="even pointer">
 
-        <td class=" "><%= depots[i].inout[j].prodcode %></td>
+  <td class=" "><%= inout[i].depotname %></td>
+  <td class=" "><%= inout[i].prodcode %></td>
+  <td class=" "><%= inout[i].prodname %></td>
+  <td class=" "><%= inout[i].dateachat %></td>
+  <td class=" " style="color:#0000FF"><%= inout[i].prodqteinit %> <%= inout[i].produnite %> <script> if ("<%= inout[i].produnite %>"!=="Unité") {
+    document.write("(" + ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>")+ " Unités)" );  }
+    </script>
+  </td>
+  <% var totalqteout=0;  for(j=0; j < inout[i].out.length; j++){
+    totalqteout=totalqteout + Number(inout[i].out[j].qteout);
+  }%>
+  <td class=" " align="center"><a style="color:#DF0101" href="/liststockout/<%= inout[i]._id %>"><%= totalqteout %></a></td>
+<!--
+    <script>
+          document.write(ConvertToUnit(<%= inout[i].prodqteinit %>, "<%= inout[i].produnite %>") - Number("<%=inout[i].prodqtemv %>") + '  Unités');
+    </script>
+  </td>--><!--quantité totale sortie-->
+  <td class=" " style="color:#04B431" align="center"><b><%= inout[i].prodqtemv %></td><!--quantité restante en stock-->
+  <td class=" "><%= inout[i].dateexp  %></td>
+  <td class=" "><%= inout[i].datein %></td>
 
-        <td class=" "><%= depots[i].inout[j].produnite %></td>
+<td class=" last"  align='right' width='200px;'>
 
-        <td class=" "><%= depots[i].inout[j].prodqteinit %></td>
+    <a class="btn btn-primary btn-xs" href="/editstockin/<%= inout[i]._id %>" role="button"><i class="fa fa-folder"></i> Edit </a>
+    <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer la ligne sélectionnée ?')) supprimer('/listinout/<%= inout[i]._id%>');" href="/listinout/<%= inout[i].prodid%>"><i class="fa fa-trash-o"></i> Delete </a>
+    <% if (inout[i].prodqtemv ===0){%>
+      <a class="btn btn-warning btn-xs" role="button" disabled="disabled"><i class="fa fa-minus"></i>   Sortie </a>
+    <%} else {%>
+      <a class="btn btn-warning btn-xs" href="/stockout/<%= inout[i]._id %>" role="button"><i class="fa fa-minus"></i>   Sortie </a>
+    <%}%>
 
-        <td class=" "><%= depots[i].inout[j].prodqtemv %></td>
-
-        <td class=" "><%= depots[i].inout[j].dateexp %></td>
-
-
-        <td class=" last">
-          <a class="" href="#" role="button"> Edit transaction</a>
-
-        </td>
-      </tr>
-        <% } %>
-      <% } %>
+</td>
+  <% } %>
 
     </tbody>
   </table>
@@ -92,6 +118,10 @@
 
 
 <script src="../build/js/Helper.js"></script>
+
+
+
+
 
 
 <% include footer.ejs %>

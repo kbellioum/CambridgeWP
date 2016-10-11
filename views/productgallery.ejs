@@ -1,0 +1,136 @@
+<% include header.ejs %>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Widget Designs</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    
+<div class="row">
+    <% for(i=0; i < 35; i++){%>
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+    <div class="tile-stats">
+                              <div class="icon"><i class="fa fa-check-square-o"></i>
+                              </div>
+                              <div class="count"><%= 100 - (i*3)  %></div>
+
+                              <h3>New Sign ups</h3>
+                              <p>Lorem ipsum psdea itgum rixt.</p>
+                              <div class="progress">
+                                <% if (i<12){%>
+                                    <div class="progress-bar progress-bar-success" data-transitiongoal="<%= 100 - (i*3)  %>" aria-valuenow="0" style="width: 0%;"></div>
+                                <%} else {%>
+                                    <div class="progress-bar progress-bar-warning" data-transitiongoal="<%= 100 - (i*3)  %>" aria-valuenow="0" style="width: 0%;"></div>
+                                <%}%>
+
+                      </div>
+                            </div>
+                      </div>
+<%}%>
+</div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="">
+          <div class="x_content">
+
+
+
+
+
+
+            <br />
+
+
+            <div class="row">
+
+
+
+
+
+
+
+              <% for(i=0; i < 5; i++){%>
+
+
+
+
+              <div class="col-md-3 col-xs-12 widget widget_tally_box">
+                <div class="x_panel fixed_height_390">
+                  <div class="x_content">
+
+                    <div class="flex">
+                      <ul class="list-inline widget_profile_box">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li>
+                            <img  src="images/media.jpg" alt="..." class="img-circle profile_img">
+                        </li>
+                        <li></li>
+                      </ul>
+                    </div>
+
+                    <h3 class="name">Musimbi</h3>
+
+                    <div class="flex">
+                      <ul class="list-inline count2">
+                        <li>
+                          <h3>123</h3>
+                          <span>Articles</span>
+                        </li>
+                        <li>
+                          <h3>1234</h3>
+                          <span>Followers</span>
+                        </li>
+                        <li>
+                          <h3>123</h3>
+                          <span>Following</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <p>
+                      If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
+                    </p>
+                  </div>
+                </div>
+              </div>
+  <%}%>
+
+
+
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+
+<% include footer.ejs %>

@@ -11,7 +11,16 @@
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <span class="section">Liste des programmes </span>
+          <div class="x_title">
+    <h2>Liste des programmes <small>Gestion des programmes</small></h2>
+      <div class="pull-right">
+        <a class="btn btn-success btn-md" href="/addprog" role="button"><i class="fa fa-plus"></i>   Nouveau programme</a>
+      </div>
+
+
+
+    <div class="clearfix"></div>
+  </div>
 
           <div class="x_content">
 
@@ -35,7 +44,7 @@
           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
         </th>
       </tr>
-    </thead>
+    </thead><li><a href="/addprog">Ajout Programme</a></li>
 
     <tbody>
       <% for(var i=0; i < progs.length; i++) { %>
@@ -50,7 +59,9 @@
 
         <td class="text-right"><%= progs[i].progprice.toFixed(2) %></td>
 
-        <td class=" last "><div class="pull-right"><a class="btn btn-info btn-xs" href="/editprogone/<%= progs[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a><a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce programme ?')) supprimer('/listprog/<%= progs[i]._id %>'); else alert('OK')" href="/listprog"><i class="fa fa-trash-o"></i> Delete </a>
+        <td class=" last ">
+          <div class="pull-right"><a class="btn btn-info btn-xs" href="/editprogone/<%= progs[i]._id %>" role="button"><i class="fa fa-pencil"></i> Edit </a>
+            <a class="btn btn-danger btn-xs" onclick="if (confirm('Voulez vous vraiment supprimer ce programme ?')) supprimer('/listprog/<%= progs[i]._id %>');" href="/listprog"><i class="fa fa-trash-o"></i> Delete </a>
         </div>
       </tr>
 

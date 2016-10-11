@@ -17,6 +17,9 @@ module.exports = mongoose.model('Patient',{
 	dob: String,
 	statu: String,
 	numdossier: String,
+	question1: String,
+	question2: String,
+	question3: String,
 	visites: [
 		        {
 							daterdv: String,

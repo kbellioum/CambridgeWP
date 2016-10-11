@@ -63,7 +63,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12 has-feedback-left" for="prog">Programme <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <select id="progs" type="text" name="prog" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
+                  <select id="progs" type="text" name="program" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
                     <option>Choisir un Programme</option>
                     <% for(i=0; i < progs.length; i++ ){%>
                        <option><%= progs[i].progname %></option>
@@ -103,7 +103,7 @@
 
             <div id="progname" name="">
 
-              <input id="progname-val" type="hidden" class="form-control" name="progname" value="" placeholder="Nom prog" >
+              <input id="progname-val" type="hidden" class="form-control" name="prog" value="" placeholder="Nom prog" >
             </div>
 
             <div class="clearfix"></div>
@@ -177,7 +177,7 @@
 <% include footer.ejs %>
 
 
-<script type="text/javascript">
+<script>
 var tab = [];
 $(document).ready(function() {
   $("#jsGrid").jsGrid({
@@ -252,7 +252,7 @@ $(document).ready(function() {
          $('#prodinfo').val('');
          $('#prodqte').val('');
          $('#prodexpdate').val('');
-         $('#progs').attr('readonly','true');
+         $('#progs').attr('disabled','disabled');
        }else{
          $('#myModal').modal('show');
 
