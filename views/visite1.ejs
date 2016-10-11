@@ -66,7 +66,7 @@
                   <select id="progs" type="text" name="program" required="required" data-validate-length-range="5,20" class="form-control col-md-7 col-xs-12" placeholder="">
                     <option>Choisir un Programme</option>
                     <% for(i=0; i < progs.length; i++ ){%>
-                       <option><%= progs[i].progname %></option>
+                       <option value="<%= progs[i].progname %>"><%= progs[i].progname %></option>
                     <%}%>
                   </select>
                 </div>
@@ -91,7 +91,6 @@
             <div class="col-md-2 col-sm-2 item form-group has-feedback">
                 <label for="">Quantité : </label>
                 <input id="prodqte"class="form-control" data-validate-length-range="6" data-validate-words="1" name="" placeholder="Nom produit" type="text" >
-                <!-- <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
             </div>
             <label for="">Valider la ligne : </label>
             <div class="col-md-5 col-sm-5 col-xs-12 item form-group has-feedback">
@@ -177,7 +176,7 @@
 <% include footer.ejs %>
 
 
-<script>
+<script type="text/javascript">
 var tab = [];
 $(document).ready(function() {
   $("#jsGrid").jsGrid({
@@ -253,6 +252,7 @@ $(document).ready(function() {
          $('#prodqte').val('');
          $('#prodexpdate').val('');
          $('#progs').attr('disabled','disabled');
+
        }else{
          $('#myModal').modal('show');
 
@@ -264,8 +264,9 @@ $(document).ready(function() {
            $('#message').val(JSON.stringify(tab));
            },
 
-           onItemDeleted: function() {
+           onItemDeleted: function(arg) {
            //console.log("row deleted");
+           tab.splice(arg.itemIndex, 1);
            $('#message').val(JSON.stringify(tab));
            },
            onItemInserted: function() {
